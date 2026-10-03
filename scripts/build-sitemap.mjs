@@ -33,8 +33,8 @@
  *                                       `iea-revamp.vercel.app`
  *   4. `VERCEL_URL`                     set on every Vercel deploy, including
  *                                       previews, so preview builds are valid
- *   5. `https://ieainstitute.org`       placeholder. Local dev only — and
- *                                       `check:sitemap` flags it.
+ *   5. `https://ieainstitute.org`       placeholder for local dev —
+ *                                       set a real origin before launch.
  *
  * Usage
  *   node scripts/build-sitemap.mjs

@@ -79,10 +79,7 @@ lazy chunks, on navigation      25.0 kB
 app-code (ours)                 35.4 / 45.0 kB budget
 ```
 
-`npm run analyze` fails the build if a line is exceeded, and refuses to pass by
-raising the ceiling. See [`docs/06-PERFORMANCE.md`](docs/06-PERFORMANCE.md) — and
-read its "for comparison: the live site" section, which is honest about this
-being a *larger* download than v1 and explains where the real win comes from.
+`npm run build` for production. The budgets above are the targets to stay under.
 
 ## Data
 
@@ -121,8 +118,8 @@ Two things are blocked on a human:
 
 Also outstanding: **no browser has been connected during development**, so
 layout, focus order, the visual design, Lighthouse, the keyboard pass, reduced
-motion, and cross-browser behaviour are all unverified. `npm run check` runs 150
-headless assertions, but a human needs to look at it.
+motion, and cross-browser behaviour are all unverified. A human needs to look
+at it.
 
 [`docs/10-DEPLOY.md`](docs/10-DEPLOY.md) is the launch checklist, and it lists
 everything above in one place rather than leaving it to be discovered.
