@@ -1,0 +1,16 @@
+# SPA rewrite — Netlify / Cloudflare Pages.
+#
+# Without this, refreshing /rankings or /school/16 returns a 404 from the host,
+# because only index.html and assets/ exist on disk. Every path that is not a
+# real file is served the app, which then routes it client-side.
+#
+# The order matters: real files win, because `try_files`-style fallbacks are
+# evaluated left to right. `/assets/*` is listed first so a hashed chunk is
+# never swallowed by the catch-all.
+
+/assets/*  /assets/:splat  200
+/fonts/*   /fonts/:splat   200
+/favicon.svg               200
+/robots.txt                200
+/sitemap.xml               200
+/*         /index.html     200

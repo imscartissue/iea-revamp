@@ -1,0 +1,573 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+/* Class-based dark mode. The inline script in index.html sets `.dark` on <html>
+   before first paint, so this never flashes. */
+@custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   Palette
+
+   Three brand colours — Ink Navy, Ivory, Muted Bronze — plus the derived
+   surfaces, ink ramp, rules and score bands documented in
+   docs/02-DESIGN-SYSTEM.md § 1.
+
+   These are the ONLY hex values allowed in the codebase. Everything below is
+   a reference to one of these variables.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces — one step up from canvas, always warmer than white */
+  --canvas: #f4ecd8;
+  --surface: #fbf7ec;
+  --raised: #ffffff;
+  --sunken: #ede3cb;
+
+  /* Ink ramp */
+  --ink: #131a2c;
+  --ink-muted: #4a4e5c;
+  --ink-faint: #6a655d;
+  --ink-inverse: #f4ecd8;
+
+  /* Rules — the signature of the design */
+  --rule: #131a2c;
+  --rule-soft: rgb(19 26 44 / 0.14);
+  --rule-strong: #8a6a35;
+
+  /* Accent.
+   *
+   * `bronze` is the brand value and is used for RULES, FILLS and UI chrome,
+   * where the 3:1 non-text threshold applies and it clears it comfortably.
+   *
+   * It is NOT used for text. At 13px on the ivory canvas the brand value is
+   * 4.25:1, which is below WCAG AA for normal text (4.5:1) — and this is the
+   * colour used for every link, eyebrow and rank numeral on the site.
+   * `bronze-ink` is the same hue darkened until it passes, and is what
+   * `text-bronze-ink` resolves to. Checked by `npm run check:contrast`.
+   */
+  --bronze: #8a6a35;
+  --bronze-ink: #795c2e;
+  --bronze-soft: #e8dcc4;
+  --bronze-wash: #f2eada;
+
+  /* Score bands. Categorical, not status lights. */
+  --band-strong: #2f6b4f;
+  --band-fair: #795c2e;
+  --band-weak: #9a3b34;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --canvas: #0c101c;
+  --surface: #131a2c;
+  --raised: #1b2438;
+  --sunken: #080b14;
+
+  --ink: #f4ecd8;
+  --ink-muted: #a9b0c4;
+  --ink-faint: #7d859b;
+  --ink-inverse: #131a2c;
+
+  --rule: #2b3550;
+  --rule-soft: rgb(244 236 216 / 0.14);
+  --rule-strong: #b08d4c;
+
+  --bronze: #b08d4c;
+  --bronze-soft: #2a2418;
+  --bronze-wash: #1e1c16;
+
+  --band-strong: #5fa37c;
+  --band-fair: #b08d4c;
+  --band-weak: #d0786f;
+}
+
+/* ==========================================================================
+   Theme tokens
+
+   `inline` makes the generated utilities reference var(--canvas) rather than
+   the resolved value, so overriding a var in `.dark` is enough to retheme the
+   whole site. That is the whole theming mechanism.
+   ========================================================================== */
+
+@theme inline {
+  /* -- colour ------------------------------------------------------------ */
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-sunken: var(--sunken);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-inverse: var(--ink-inverse);
+
+  --color-rule: var(--rule);
+  --color-rule-soft: var(--rule-soft);
+  --color-rule-strong: var(--rule-strong);
+
+  --color-bronze: var(--bronze);
+  --color-bronze-ink: var(--bronze-ink);
+  --color-bronze-soft: var(--bronze-soft);
+  --color-bronze-wash: var(--bronze-wash);
+
+  --color-band-strong: var(--band-strong);
+  --color-band-fair: var(--band-fair);
+  --color-band-weak: var(--band-weak);
+
+  /* -- shadcn semantic contract -------------------------------------------
+   * shadcn primitives are written against semantic names (bg-primary,
+   * text-muted-foreground, ring-ring). Mapping them onto the tokens above
+   * means we retheme every primitive by editing this one block, and a future
+   * `shadcn add` still lands working rather than unstyled.
+   * Do not use these names in feature components — use the palette names.
+   */
+  --color-background: var(--canvas);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--raised);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--ink-inverse);
+  --color-secondary: var(--bronze-soft);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--sunken);
+  --color-muted-foreground: var(--ink-muted);
+  --color-accent: var(--bronze-wash);
+  --color-accent-foreground: var(--ink);
+  --color-destructive: var(--band-weak);
+  --color-border: var(--rule-soft);
+  --color-input: var(--rule-soft);
+  --color-ring: var(--bronze);
+
+  /* -- type -------------------------------------------------------------- */
+  --font-serif: "Latin Modern Roman", "Iowan Old Style", "Palatino Linotype", Palatino,
+    Georgia, ui-serif, serif;
+  --font-sans: "Latin Modern Sans", "Avenir Next", "Segoe UI", ui-sans-serif, system-ui,
+    -apple-system, sans-serif;
+
+  /*
+   * The type scale from docs/02-DESIGN-SYSTEM.md § 2 lives in the `@utility`
+   * block at the bottom of this file, not here — those tokens also carry a
+   * font-family, and Tailwind's `text-*` utilities do not support a
+   * `--font-family` modifier. Keeping the whole scale in one place avoids
+   * defining it twice.
+   *
+   * Only 400 and 700 are ever used. Latin Modern has no 500/600, and asking for
+   * a missing weight makes the browser synthesise a faux bold that smears.
+   */
+
+  /* -- radius ------------------------------------------------------------
+   * Sharp by default. Round corners read as "web app"; sharp ones read as
+   * "printed". Only genuinely floating things get 8px. See § 3.
+   */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+
+  /* -- shadow ------------------------------------------------------------
+   * Rules beat shadows. Shadows exist in exactly three places, and these are
+   * them: sticky header, sheet/dialog, mobile filter drawer.
+   */
+  --shadow-header: 0 1px 0 var(--rule-soft);
+  --shadow-sheet: 0 -8px 32px rgb(19 26 44 / 0.14), 0 -1px 0 var(--rule-soft);
+  --shadow-float: 0 4px 16px rgb(19 26 44 / 0.1), 0 0 0 1px var(--rule-soft);
+
+  /* -- motion ------------------------------------------------------------
+   * Named `brand` rather than `out` so it never shadows Tailwind's built-in
+   * `ease-out`. This is the one curve used for every entrance. No bounce.
+   */
+  --ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-brand-inout: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Breakpoints — adding one requires a token entry in § 3 of the design doc */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--rule-soft);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    color: var(--ink);
+    /* Latin Modern has no italic cut. Never let the browser slant it. */
+    font-style: normal;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* A visible focus ring everywhere, by default. Components never set
+     `outline: none` without providing a replacement. */
+  :focus-visible {
+    outline: 2px solid var(--bronze);
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
+
+  ::selection {
+    background-color: var(--bronze-soft);
+    color: var(--ink);
+  }
+
+  /* Long school names must never overflow their cell.
+     "SOS Hermann Gmeiner Higher Secondary School" is the real test case. */
+  h1,
+  h2,
+  h3,
+  p,
+  dd,
+  dt {
+    overflow-wrap: break-word;
+  }
+
+  /* Reduced motion is enforced globally, not per component, so nothing can
+     animate by accident. Components additionally gate their transforms via
+     useReducedMotion(). */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Type scale
+
+   The full scale from docs/02-DESIGN-SYSTEM.md § 2, as composed utilities.
+
+   Each token carries its own font-family, so a component writes `type-title`
+   and gets Roman at the right size. Splitting family from size would let a
+   heading silently render in the sans, which is exactly the mistake that makes
+   an editorial site look like a dashboard.
+
+   Usage:  type-display · type-title · type-heading · type-subheading
+           type-body · type-body-lg · type-ui · type-label · type-caption
+           type-numeric-lg · type-numeric · type-numeric-sm
+   ========================================================================== */
+
+/* --- display: one per page, ever ---------------------------------------- */
+@utility type-display {
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+/* --- titles ------------------------------------------------------------- */
+@utility type-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+@utility type-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+/* --- prose: everything a reader reads is serif -------------------------- */
+@utility type-subheading {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+@utility type-body {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+@utility type-body-lg {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/* --- interface: everything a reader operates is sans -------------------- */
+@utility type-ui {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+/* Uppercase is only ever for labels, and always tracked. */
+@utility type-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@utility type-caption {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+/* --- numerals: always tabular so columns align on the decimal ----------- */
+@utility type-numeric-lg {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility type-numeric {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility type-numeric-sm {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+/* Prose measure. Capped hard — 68ch. */
+@utility measure {
+  max-width: 68ch;
+}
+
+@utility measure-tight {
+  max-width: 60ch;
+}
+
+@utility measure-snug {
+  max-width: 48ch;
+}
+
+/* Skips rendering work for off-screen content. Applied to below-the-fold
+   sections; `contain-intrinsic-size` keeps the scrollbar honest. */
+@utility defer-paint {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* ==========================================================================
+   Keyframes
+
+   All transform/opacity only. There is no animation library — see
+   docs/01-STACK.md § motion for the 40.2 kB measurement that drove that.
+   ========================================================================== */
+
+/* A score bar filling. Scales on the x axis, never animates `width`. */
+@keyframes score-bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Route transition: enter-only, 160ms. An exit animation would mean holding the
+   outgoing tree mounted for its duration, which adds directly to perceived
+   latency. */
+@keyframes route-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-route-in {
+  animation: route-in 160ms var(--ease-brand) both;
+}
+
+/* The 2-second contributor intro. Phases are driven by `useIntro` setting
+   `data-phase` on the overlay — the timing lives in CSS, so it runs on the
+   compositor and costs no main-thread time. See docs/05-PAGES.md § Intro. */
+@keyframes intro-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-letters-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    letter-spacing: 0.3em;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    letter-spacing: normal;
+  }
+}
+
+@keyframes intro-rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes intro-dot-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes intro-person-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes intro-label-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes intro-overlay-out {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@keyframes intro-strip-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+
+/* The page underneath settling as the overlay wipes away. */
+@keyframes page-settle {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * How long the page's entrance waits for the intro overlay to finish wiping.
+ *
+ * ZERO BY DEFAULT, and that is load-bearing. `page-settle` uses
+ * `animation-fill-mode: both`, so a non-zero delay pins the element at
+ * `opacity: 0` for the whole delay. A hardcoded 2080ms therefore means: on every
+ * repeat visit, under reduced motion, and with `?skipIntro=1` — all the cases
+ * where the intro never plays — the hero is invisible for two seconds.
+ *
+ * `IntroGate` adds `.intro-active` to <html> only while the overlay is genuinely
+ * on screen, which is the only case where waiting is correct.
+ * See docs/09-BUGS.md.
+ */
+:root {
+  --intro-reveal-delay: 0ms;
+}
+
+html.intro-active {
+  --intro-reveal-delay: 2080ms;
+}
+
+/* The score dial filling. `stroke-dashoffset` is paint-only, so this stays off
+   the layout path. Both endpoints come in as custom properties because the
+   target depends on the value being shown. */
+@keyframes dial-sweep {
+  from {
+    stroke-dashoffset: var(--dial-from);
+  }
+  to {
+    stroke-dashoffset: var(--dial-to);
+  }
+}

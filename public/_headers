@@ -1,0 +1,61 @@
+# Cache and security headers.
+#
+# Netlify / Cloudflare Pages read this verbatim. Vercel reads `vercel.json`
+# instead — see the `headers` array there, which mirrors this file rule for rule.
+# nginx and Apache have no repo config; docs/10-DEPLOY.md § Host configuration
+# has the equivalents.
+#
+# THE ONE LINE THAT IS NOT OPTIONAL
+# The SPA rewrite in `_redirects`. Without it, refreshing /rankings or
+# /school/16 returns a 404 from the host, because the only HTML file on disk is
+# index.html. This is a client-routed site: three real files, 46 reachable URLs.
+#
+# THE ORDERING MATTERS AND IS PROVED, NOT ASSUMED
+# Netlify applies the FIRST matching rule, so the specific rules come first and
+# the catch-all comes last. That is the opposite of how a naive reading of
+# "most specific wins" would order them, so it is worth stating.
+#
+# After deploying, confirm with:
+#   curl -sI https://your-domain/           | grep -i cache-control  # no-cache
+#   curl -sI https://your-domain/assets/…js | grep -i cache-control  # immutable
+# If the second says no-cache, the order below is wrong for your host.
+
+# Fingerprinted by Vite from a content hash, so the URL changes whenever the
+# bytes do. Safe to cache forever.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# NOT fingerprinted. Vite copies public/ verbatim, so these URLs are stable even
+# if the bytes change — which means `immutable` here would pin returning visitors
+# to a stale font for a year after anyone re-ran `npm run fonts`.
+# Revalidated weekly instead: a week of free repeat loads, and a changed font
+// reaches people within a week rather than never.
+# The real fix is to fingerprint them, which means moving them out of public/ —
+# see docs/10-DEPLOY.md § The font cache trap.
+/fonts/*
+  Cache-Control: public, max-age=604800, must-revalidate
+  Access-Control-Allow-Origin: *
+
+# The document must never be cached, or a deploy is invisible to anyone already
+# holding a copy. no-cache means "revalidate", not "don't store".
+#
+# This is a catch-all rather than a rule for /index.html, and that is the whole
+# point. A reader requests `/` or `/rankings`, not `/index.html` — so a rule
+# scoped to the filename matches the one URL nobody asks for, and the URL that
+# matters falls through to the host default, which on most CDNs is cacheable.
+# The catch-all has to come AFTER /assets and /fonts so those keep their
+# long-lived caching.
+/*
+  Cache-Control: no-cache
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Cross-Origin-Opener-Policy: same-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+
+# No Content-Security-Policy, on purpose. The 2-second splash, the 3-4s ranking
+# chunk and the font set are not security-sensitive, and there is no user input,
+# no cookies and no third-party origin on this site. A wrong CSP is the fastest
+# way to break a working deploy, and a strict one buys almost nothing here.
+# If one is added later, `default-src 'self'` is the correct baseline: every
+# value in this repo is same-origin, so nothing else needs allowing.
