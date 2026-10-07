@@ -1,4 +1,4 @@
-import { meta, totalSchools } from "@/lib/data";
+import { totalSchools } from "@/lib/data";
 import { formatCount } from "@/lib/format";
 import type { School } from "@/lib/types";
 
@@ -58,7 +58,7 @@ export const SEO = {
   // length check in check-a11y.mjs exempts "/" for exactly this reason.
   home: build(
     SUFFIX,
-    `Rankings of ${totalSchools} Nepali +2 schools, built from ${formatCount(meta.totalResponses)} anonymous student responses. Four scored dimensions, no sponsors.`,
+    "An independent examination of Nepali schools, grounded in verified student testimony, field inquiry, and credible public sources, undertaken to illuminate the institutions entrusted with educating the next generation.",
   ),
   rankings: build(
     "Rankings",
