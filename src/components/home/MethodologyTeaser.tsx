@@ -45,8 +45,8 @@ export function MethodologyTeaser() {
       <SectionHeader eyebrow="Method" title="How this was built" />
 
       <ol className="mt-10 flex flex-col gap-3">
-        {steps.map((step, i) => (
-          <MethodStep key={step.n} step={step} defaultOpen={i === 0} />
+        {steps.map((step) => (
+          <MethodStep key={step.n} step={step} />
         ))}
       </ol>
     </section>
@@ -62,12 +62,10 @@ export function MethodologyTeaser() {
  */
 function MethodStep({
   step,
-  defaultOpen = false,
 }: {
   step: { n: string; title: string; body: string };
-  defaultOpen?: boolean;
 }) {
-  const [open, setOpen] = useState(defaultOpen);
+  const [open, setOpen] = useState(false);
 
   return (
     <li className="border-b border-rule-soft last:border-b-0">

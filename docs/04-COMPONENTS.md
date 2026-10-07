@@ -63,6 +63,6 @@ hex. Class names go through `cn()` (`src/lib/utils.ts`).
 
 - Home sections: `Hero` (masthead + stats + top/bottom lists), `TopTen`
   (numbered leaderboard), `HowToRead` (dimension legend with medians),
-  `MethodologyTeaser` (3 collapsible steps, reused on `/methodology`).
+  `MethodologyTeaser` (3 collapsed steps, reused on `/methodology`).
 - Intro splash: `IntroGate` (overlay manager), `IntroMonogram` (animated name),
   `ContributorStrip` (8 reserved contributor slots via `introSlots()`).
