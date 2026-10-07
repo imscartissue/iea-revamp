@@ -144,11 +144,15 @@ function setLink(rel: string, href: string) {
  * `EISDIR`. See docs/09-BUGS.md § C3.
  */
 export function headTags(seo: Seo, path: string, origin: string): HeadTag[] {
+  const image = new URL("/og-image.jpg", origin).toString();
   const tags: HeadTag[] = [
     { tag: "title", text: seo.title },
     { tag: "meta", attr: "name", key: "description", content: seo.description },
     { tag: "meta", attr: "property", key: "og:title", content: seo.title },
     { tag: "meta", attr: "property", key: "og:description", content: seo.description },
+    { tag: "meta", attr: "property", key: "og:image", content: image },
+    { tag: "meta", attr: "name", key: "twitter:card", content: "summary_large_image" },
+    { tag: "meta", attr: "name", key: "twitter:image", content: image },
   ];
 
   // The home page is the origin itself, so a canonical there would be a
