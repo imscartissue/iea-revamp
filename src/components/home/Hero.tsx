@@ -53,13 +53,13 @@ export function Hero() {
           </div>
 
           <div className="flex flex-col gap-3 justify-self-start md:justify-self-end">
-            <Button asChild size="lg" variant="outline" className="shrink-0">
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
               <Link to="/reports">Annual report</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="shrink-0">
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
               <Link to="/methodology">Methodology</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="shrink-0">
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
               <Link to="/about">About us</Link>
             </Button>
           </div>
@@ -79,7 +79,7 @@ export function Hero() {
         top three, which is what the page is for.
       */}
       <div className="grid gap-10 pt-8 md:grid-cols-2 md:gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] lg:gap-12">
-        <div className="flex flex-wrap items-start gap-x-10 gap-y-6">
+        <div className="grid grid-cols-3 gap-4 md:flex md:items-start md:gap-10">
           <StatBlock value={formatCount(totalSchools)} label="schools" />
           <StatBlock value={formatCount(meta.totalResponses)} label="responses" />
           <StatBlock value={formatDate(meta.publicationDate)} label="published" />

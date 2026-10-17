@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils";
 /**
  * One figure, with a label above it and an optional qualifier below.
  *
- * Separated from its neighbour by a vertical hairline rather than a card
- * border — the numbers read as one related group, not three separate widgets.
+ * Spaced from its neighbours by a wide gap rather than a card border — the
+ * numbers read as one related group, not three separate widgets.
  */
 export function StatBlock({
   value,

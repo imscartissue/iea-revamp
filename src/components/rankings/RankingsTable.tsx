@@ -51,7 +51,7 @@ export function RankingsTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[46rem] border-collapse">
+      <table className="w-full min-w-[42rem] border-collapse">
         <caption className="sr-only">
           Nepali +2 school rankings. {rows.length} schools, sorted by {currentSortLabel(sort)}.
         </caption>

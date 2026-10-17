@@ -59,13 +59,13 @@ export function SchoolListRow({ school }: { school: School }) {
           >
             {school.overallScore.toFixed(1)}
           </span>
-          <ScoreBar value={school.overallScore} size="sm" className="w-14" />
+          <ScoreBar value={school.overallScore} size="sm" className="w-16" />
         </span>
       </Link>
 
       {/* The four metrics, compactly. Present on mobile because the table
           cannot be, and a rank without its breakdown is not comparable. */}
-      <dl className="grid grid-cols-4 gap-2 pb-4 pl-[3.75rem] pr-0">
+      <dl className="grid grid-cols-4 gap-2 pb-4 pl-[4.75rem] pr-0">
         <Metric label="Env." value={school.categories.environment} />
         <Metric label="Infra" value={school.categories.infrastructure} />
         <Metric label="Cost" value={school.categories.cost} />

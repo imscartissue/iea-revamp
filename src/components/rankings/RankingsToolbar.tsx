@@ -190,7 +190,7 @@ export function RankingsToolbar({
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="md">
+              <Button variant="outline" size="lg" className="h-11">
                 <SlidersHorizontal aria-hidden="true" />
                 Filters
               </Button>

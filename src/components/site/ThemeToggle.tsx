@@ -21,7 +21,7 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       title={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      className="relative text-ink-muted hover:text-ink"
+      className="relative size-11 text-ink-muted hover:text-ink md:size-10"
     >
       {/* Both icons render and stack; only one is visible. This keeps the
           button's box stable across a theme change and avoids a remount. */}

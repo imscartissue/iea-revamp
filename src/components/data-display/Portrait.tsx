@@ -38,7 +38,7 @@ export function Portrait({
     shape === "circle" ? "rounded-full" : "rounded-md",
     size === "sm" && (shape === "circle" ? "size-10" : "h-14 w-11"),
     size === "md" && (shape === "circle" ? "size-16" : "h-36 w-27"),
-    size === "lg" && (shape === "circle" ? "size-20" : "h-52 w-39"),
+    size === "lg" && (shape === "circle" ? "size-20" : "aspect-[4/5] w-full"),
     className,
   );
 

@@ -38,15 +38,15 @@ export function TopTen() {
             )}
           >
             {school.rank <= 3 ? (
-              <AccentRule className="absolute left-0 top-0 w-10" />
+              <AccentRule className="absolute left-1 top-0 w-6" />
             ) : null}
 
             <Link
               to={`/school/${school.id}`}
-              className="flex items-center gap-4 py-4 pl-1 pr-2"
+              className="flex items-center gap-3 py-4 pl-1 pr-2"
               aria-label={`${school.name}, rank ${school.rank}, overall ${school.overallScore.toFixed(1)}`}
             >
-              <span className="w-8 shrink-0 text-right font-serif text-numeric-sm text-bronze-ink">
+              <span className="w-6 shrink-0 text-right font-serif text-numeric-sm text-bronze-ink">
                 {school.rank}
               </span>
 

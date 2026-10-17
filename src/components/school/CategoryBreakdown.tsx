@@ -94,7 +94,9 @@ function Reading({
           </span>
         ) : null}
       </dd>
-      <ScoreBar value={value} size="sm" label={`${label}: ${value.toFixed(1)}`} />
+      <div className="hidden sm:block">
+          <ScoreBar value={value} size="sm" label={`${label}: ${value.toFixed(1)}`} />
+        </div>
       <p className="type-caption text-ink-faint">{hint}</p>
     </div>
   );

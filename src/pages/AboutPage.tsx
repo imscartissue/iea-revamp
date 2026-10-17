@@ -219,7 +219,7 @@ export function AboutPage() {
 function Datum({ term, value, iso }: { term: string; value: string; iso?: string }) {
   return (
     <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1 border-b border-rule-soft pb-3">
-      <dt className="type-label min-w-[12rem] text-ink-faint">{term}</dt>
+      <dt className="type-label w-24 shrink-0 text-ink-faint md:w-48">{term}</dt>
       <dd className="type-ui text-ink">{iso ? <time dateTime={isoDate(iso)}>{value}</time> : value}</dd>
     </div>
   );
@@ -277,11 +277,11 @@ function ContributorGrid() {
   if (!contributors.length) {
     return (
       <div className="mt-8 flex flex-col gap-6">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-4">
           {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
             <div key={i} className="flex flex-col gap-3">
               {/* Reserved slot, same size as a real portrait. */}
-              <div aria-hidden="true" className="h-52 w-39 rounded-md border border-rule-soft bg-sunken" />
+              <div aria-hidden="true" className="aspect-[4/5] w-full rounded-md border border-rule-soft bg-sunken" />
               <div aria-hidden="true" className="h-3 w-24 rounded-sm bg-sunken" />
               <div aria-hidden="true" className="h-3 w-16 rounded-sm bg-sunken" />
             </div>

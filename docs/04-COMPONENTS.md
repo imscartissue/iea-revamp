@@ -21,10 +21,10 @@ hex. Class names go through `cn()` (`src/lib/utils.ts`).
 | Use this | For |
 |----------|-----|
 | `Container` | Page width rhythm — `size: wide` (1200px) / `prose` (68ch) / `standfirst` (60ch) |
-| `Masthead` | Sticky header: wordmark, nav (Methodology/Reports/Ranking/About), theme toggle; solidifies after 8px scroll |
+| `Masthead` | Sticky header: wordmark, nav (Methodology/Reports/Ranking/About), theme toggle; solidifies after 8px scroll. Below `sm` the inline nav collapses to a hamburger that toggles a full-width dropdown panel with the same links stacked vertically |
 | `Wordmark` | Type-only "IEA" brand mark, `size: sm \| md \| lg` |
 | `Rule` / `AccentRule` | 1px hairline dividers / 28×2px bronze eyebrow rule (`orientation`, `tone`) |
-| `ThemeToggle` | Light↔dark ghost icon button |
+| `ThemeToggle` | Light↔dark ghost icon button; `size-11` on mobile (44px touch target), `size-10` on desktop |
 | `ErrorBoundary` | Route-level error fallback with retry; `resetKey` clears on navigation |
 
 ## `data-display/` — shared data visuals (use anywhere a number or person appears)
@@ -33,17 +33,17 @@ hex. Class names go through `cn()` (`src/lib/utils.ts`).
 |----------|-----|-----------|
 | `ScoreBar` | 0–100 bar, no chart lib | `value`, `max=100`, `size: sm \| md \| lg`, `tone?` (defaults to band), `label?` for a11y, `delayMs?` stagger |
 | `Monogram` | Initials-in-circle avatar, deterministic colour | `name`, `label?` override, `size: sm \| md \| lg \| xl`, `blank?` to reserve space |
-| `Portrait` | Contributor photo → named monogram → blank slot (same size, no shift) | `contributor`, `size: sm \| md \| lg`, `shape: circle \| rect` |
-| `StatBlock` / `StatRow` | Big figure + label; hairline-divided row | `value`, `label`, `sublabel?` |
+| `Portrait` | Contributor photo → named monogram → blank slot (same size, no shift); `lg` rect uses `aspect-[4/5] w-full` so it fills any grid cell | `contributor`, `size: sm \| md \| lg`, `shape: circle \| rect` |
+| `StatBlock` / `StatRow` | Big figure + label; wide-gap-separated row | `value`, `label`, `sublabel?` |
 | `SectionHeader` | Eyebrow + `h2` + lede + action | `eyebrow?`, `title`, `lede?`, `action?` |
 
 ## `rankings/` — the `/rankings` table system
 
 | Use this | For |
 |----------|-----|
-| `RankingsToolbar` | Search (debounced) + view toggle + Sort/Columns menus + mobile filter sheet + live result count + active-filter badges |
-| `RankingsTable` | Accessible desktop table: sortable headers (`aria-sort`), memoized rows, guarded row-click navigation |
-| `SchoolListRow` | Mobile stacked row (separate component, not a responsive table) |
+| `RankingsToolbar` | Search (debounced) + view toggle + Sort/Columns menus + mobile filter sheet (44px trigger) + live result count + active-filter badges |
+| `RankingsTable` | Accessible desktop table: sortable headers (`aria-sort`), memoized rows, guarded row-click navigation; `min-w-[42rem]` so it fits the `md` content box without horizontal scroll |
+| `SchoolListRow` | Mobile stacked row (separate component, not a responsive table); `gap-3` between identity elements, `w-16` score bar, metrics indented `pl-[4.75rem]` to align under the name |
 | `SchoolCell` / `RankCell` | Row identity: monogram + linked name, bronze serif rank |
 | `ScoreCell` / `OverallCell` | Band-coloured metric with optional bar; `invert` marks the cost column |
 | `EmptyState` | Filter-no-match fallback with reset |
@@ -54,15 +54,17 @@ hex. Class names go through `cn()` (`src/lib/utils.ts`).
 |----------|-----|
 | `SchoolHero` | Breadcrumb, monogram, rank, type·grades·location, `h1`, score dial |
 | `ScoreDial` | Hand-rolled SVG 270° gauge — `value`, `size=200` |
-| `CategoryBreakdown` | 2×2 `MetricCard` grid + raw readings list |
+| `CategoryBreakdown` | 2×2 `MetricCard` grid + raw readings list; reading `ScoreBar`s hidden below `sm` to reduce vertical scroll |
 | `MetricCard` | One dimension: band rule, score, bar, blurb, weight note; unscored renders text, never "0" |
 | `NeighboursTable` | Rank-adjacent schools with gap sentence |
 | `SchoolNavArrows` | Prev/next-by-rank buttons (hidden at the ends) |
 
 ## `home/` and `intro/`
 
-- Home sections: `Hero` (masthead + stats + top/bottom lists), `TopTen`
-  (numbered leaderboard), `HowToRead` (dimension legend with medians),
-  `MethodologyTeaser` (3 collapsed steps, reused on `/methodology`).
+- Home sections: `Hero` (masthead + stats + top/bottom lists; stats are a
+  3-column grid on mobile, buttons are full-width), `TopTen` (numbered
+  leaderboard; accent rule `w-6` aligns with the rank numeral), `HowToRead`
+  (dimension legend with medians), `MethodologyTeaser` (3 collapsed steps
+  with `type-numeric` step numerals, reused on `/methodology`).
 - Intro splash: `IntroGate` (overlay manager), `IntroMonogram` (animated name),
   `ContributorStrip` (8 reserved contributor slots via `introSlots()`).

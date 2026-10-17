@@ -4,8 +4,9 @@
 
 `main.tsx` mounts `<App/>` under `StrictMode`. `App` wraps everything in
 `ThemeProvider` + `BrowserRouter`; `Shell` renders `SiteChrome` around lazy
-routes. `SiteChrome` = `IntroGate` (splash) + skip link + `Masthead` +
-`<main>` (with `ErrorBoundary`, reset per route) + `SiteFooter`.
+routes. `SiteChrome` = `IntroGate` (splash) + skip link + `Masthead` (inline nav on
+`sm+`, hamburger dropdown panel below) + `<main>` (with `ErrorBoundary`,
+reset per route) + `SiteFooter`.
 
 Route changes: scroll resets to top on push/replace (back/forward left to the
 browser), and focus moves to the new page's `<h1>` (every `h1` has

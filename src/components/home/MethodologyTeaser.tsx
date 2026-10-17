@@ -75,7 +75,7 @@ function MethodStep({
         aria-expanded={open}
         className="flex w-full items-baseline gap-4 rounded-sm py-4 text-left transition-colors duration-[120ms] hover:bg-bronze-wash focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
       >
-        <span className="font-serif text-numeric-lg leading-none text-bronze-ink">{step.n}</span>
+        <span className="font-serif type-numeric leading-none text-bronze-ink">{step.n}</span>
         <span className="type-heading flex-1 text-ink">{step.title}</span>
         <span
           aria-hidden="true"

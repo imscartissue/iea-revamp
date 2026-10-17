@@ -58,11 +58,20 @@ Helpers: `measure` (68ch), `measure-tight` (60ch), `measure-snug` (48ch),
 
 - Radius: `sm 2px`, `md 4px`, `lg 8px`. Sharp by default; only floating
   surfaces get 8px.
-- Only three shadows: sticky header, sheet/dialog, mobile filter drawer.
+- Only three shadows: sticky header, sheet/dialog, mobile nav panel + filter
+  drawer.
 - Motion is transform/opacity-only CSS: `--ease-brand
   cubic-bezier(0.16,1,0.3,1)`. No animation library. A global
   `prefers-reduced-motion` rule disables animation; `useReducedMotion()` lets
   components skip (not shorten) things like the intro.
+
+## Touch targets
+
+Every interactive element is at least 44×44 px on mobile. This is enforced
+consistently: `Input` is `h-11`, `Toggle` is `h-11` below `md`, the masthead
+hamburger and theme toggle are `size-11`, and the mobile Filters button is
+`h-11`. Desktop may use smaller targets (`md:h-9` for toggles, `size-10` for
+icon buttons) where precision input is assumed.
 
 ## Dark mode and fonts
 
