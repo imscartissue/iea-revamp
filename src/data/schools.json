@@ -60,18 +60,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 90,
-        "infrastructure": 92,
-        "cost": 43.3,
-        "netBenefit": 94
+        "schoolEnvironment": 81.4,
+        "infrastructure": 83.4,
+        "cost": 9.0,
+        "netBenefit": 85.4
       },
       "responses": 3,
       "overallScore": 84.9,
       "categories": {
-        "environment": 90,
-        "infrastructure": 92,
-        "cost": 56.7,
-        "benefit": 94,
+        "environment": 81.4,
+        "infrastructure": 83.4,
+        "cost": 91.0,
+        "benefit": 85.4,
         "complaint": null
       },
       "rank": 1,
@@ -88,49 +88,21 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 88,
-        "infrastructure": 86,
-        "cost": 47.5,
-        "netBenefit": 93
+        "schoolEnvironment": 82.1,
+        "infrastructure": 80.1,
+        "cost": 23.8,
+        "netBenefit": 87.1
       },
       "responses": 4,
       "overallScore": 82.0,
       "categories": {
-        "environment": 88,
-        "infrastructure": 86,
-        "cost": 52.5,
-        "benefit": 93,
+        "environment": 82.1,
+        "infrastructure": 80.1,
+        "cost": 76.2,
+        "benefit": 87.1,
         "complaint": null
       },
       "rank": 2,
-      "band": "strong"
-    },
-    {
-      "id": 1,
-      "name": "Budhanilkantha School",
-      "shortName": "BNKS",
-      "initials": "BN",
-      "logoColor": "#1a365d",
-      "type": "Public",
-      "gradeRange": "+2",
-      "location": "Kathmandu Valley",
-      "complaint": null,
-      "metrics": {
-        "schoolEnvironment": 86,
-        "infrastructure": 88,
-        "cost": 56.7,
-        "netBenefit": 91
-      },
-      "responses": 0,
-      "overallScore": 79.4,
-      "categories": {
-        "environment": 86,
-        "infrastructure": 88,
-        "cost": 43.3,
-        "benefit": 91,
-        "complaint": null
-      },
-      "rank": 3,
       "band": "strong"
     },
     {
@@ -144,22 +116,50 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 96,
-        "infrastructure": 98,
-        "cost": 85,
-        "netBenefit": 95
+        "schoolEnvironment": 78.1,
+        "infrastructure": 80.1,
+        "cost": 13.3,
+        "netBenefit": 77.1
       },
       "responses": 0,
-      "overallScore": 76.9,
+      "overallScore": 79.9,
       "categories": {
-        "environment": 96,
-        "infrastructure": 98,
-        "cost": 15,
-        "benefit": 95,
+        "environment": 78.1,
+        "infrastructure": 80.1,
+        "cost": 86.7,
+        "benefit": 77.1,
+        "complaint": null
+      },
+      "rank": 3,
+      "band": "strong"
+    },
+    {
+      "id": 1,
+      "name": "Budhanilkantha School",
+      "shortName": "BNKS",
+      "initials": "BN",
+      "logoColor": "#1a365d",
+      "type": "Public",
+      "gradeRange": "+2",
+      "location": "Kathmandu Valley",
+      "complaint": null,
+      "metrics": {
+        "schoolEnvironment": 79.1,
+        "infrastructure": 81.1,
+        "cost": 29.2,
+        "netBenefit": 84.1
+      },
+      "responses": 0,
+      "overallScore": 79.4,
+      "categories": {
+        "environment": 79.1,
+        "infrastructure": 81.1,
+        "cost": 70.8,
+        "benefit": 84.1,
         "complaint": null
       },
       "rank": 4,
-      "band": "fair"
+      "band": "strong"
     },
     {
       "id": 5,
@@ -172,22 +172,22 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 75,
-        "infrastructure": 78,
-        "cost": 32.5,
-        "netBenefit": 82
+        "schoolEnvironment": 80.2,
+        "infrastructure": 83.2,
+        "cost": 53.4,
+        "netBenefit": 87.2
       },
       "responses": 0,
-      "overallScore": 72.7,
+      "overallScore": 76.2,
       "categories": {
-        "environment": 75,
-        "infrastructure": 78,
-        "cost": 67.5,
-        "benefit": 82,
+        "environment": 80.2,
+        "infrastructure": 83.2,
+        "cost": 46.6,
+        "benefit": 87.2,
         "complaint": null
       },
       "rank": 5,
-      "band": "fair"
+      "band": "strong"
     },
     {
       "id": 34,
@@ -200,18 +200,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 52.2,
-        "infrastructure": 83.3,
-        "cost": 13.3,
-        "netBenefit": 73.3
+        "schoolEnvironment": 62.9,
+        "infrastructure": 94.0,
+        "cost": 56.2,
+        "netBenefit": 84.0
       },
       "responses": 3,
       "overallScore": 71.6,
       "categories": {
-        "environment": 52.2,
-        "infrastructure": 83.3,
-        "cost": 86.7,
-        "benefit": 73.3,
+        "environment": 62.9,
+        "infrastructure": 94.0,
+        "cost": 43.8,
+        "benefit": 84.0,
         "complaint": null
       },
       "rank": 6,
@@ -228,18 +228,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 55,
-        "infrastructure": 90,
-        "cost": 40,
-        "netBenefit": 80
+        "schoolEnvironment": 53.2,
+        "infrastructure": 88.2,
+        "cost": 32.8,
+        "netBenefit": 78.2
       },
       "responses": 4,
       "overallScore": 70.5,
       "categories": {
-        "environment": 55,
-        "infrastructure": 90,
-        "cost": 60,
-        "benefit": 80,
+        "environment": 53.2,
+        "infrastructure": 88.2,
+        "cost": 67.2,
+        "benefit": 78.2,
         "complaint": null
       },
       "rank": 7,
@@ -256,18 +256,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 72,
-        "infrastructure": 75,
-        "cost": 43.3,
-        "netBenefit": 72
+        "schoolEnvironment": 63.8,
+        "infrastructure": 66.8,
+        "cost": 10.6,
+        "netBenefit": 63.8
       },
       "responses": 3,
       "overallScore": 69.5,
       "categories": {
-        "environment": 72,
-        "infrastructure": 75,
-        "cost": 56.7,
-        "benefit": 72,
+        "environment": 63.8,
+        "infrastructure": 66.8,
+        "cost": 89.4,
+        "benefit": 63.8,
         "complaint": null
       },
       "rank": 8,
@@ -284,18 +284,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 62.2,
-        "infrastructure": 85.5,
-        "cost": 40,
-        "netBenefit": 70
+        "schoolEnvironment": 65.1,
+        "infrastructure": 88.4,
+        "cost": 51.6,
+        "netBenefit": 72.9
       },
       "responses": 3,
       "overallScore": 68.8,
       "categories": {
-        "environment": 62.2,
-        "infrastructure": 85.5,
-        "cost": 60,
-        "benefit": 70,
+        "environment": 65.1,
+        "infrastructure": 88.4,
+        "cost": 48.4,
+        "benefit": 72.9,
         "complaint": null
       },
       "rank": 9,
@@ -312,18 +312,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 51.6,
-        "infrastructure": 77.5,
-        "cost": 45,
-        "netBenefit": 85
+        "schoolEnvironment": 51.9,
+        "infrastructure": 77.8,
+        "cost": 46.3,
+        "netBenefit": 85.3
       },
       "responses": 4,
       "overallScore": 67.5,
       "categories": {
-        "environment": 51.6,
-        "infrastructure": 77.5,
-        "cost": 55,
-        "benefit": 85,
+        "environment": 51.9,
+        "infrastructure": 77.8,
+        "cost": 53.7,
+        "benefit": 85.3,
         "complaint": null
       },
       "rank": 10,
@@ -340,18 +340,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 53.3,
-        "infrastructure": 75,
-        "cost": 45,
-        "netBenefit": 85
+        "schoolEnvironment": 52.3,
+        "infrastructure": 74.0,
+        "cost": 40.9,
+        "netBenefit": 84.0
       },
       "responses": 2,
       "overallScore": 67.5,
       "categories": {
-        "environment": 53.3,
-        "infrastructure": 75,
-        "cost": 55,
-        "benefit": 85,
+        "environment": 52.3,
+        "infrastructure": 74.0,
+        "cost": 59.1,
+        "benefit": 84.0,
         "complaint": null
       },
       "rank": 11,
@@ -368,18 +368,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 60,
-        "infrastructure": 87.5,
-        "cost": 35,
-        "netBenefit": 62.5
+        "schoolEnvironment": 60.7,
+        "infrastructure": 88.2,
+        "cost": 37.9,
+        "netBenefit": 63.2
       },
       "responses": 4,
-      "overallScore": 67.3,
+      "overallScore": 67.2,
       "categories": {
-        "environment": 60,
-        "infrastructure": 87.5,
-        "cost": 65,
-        "benefit": 62.5,
+        "environment": 60.7,
+        "infrastructure": 88.2,
+        "cost": 62.1,
+        "benefit": 63.2,
         "complaint": null
       },
       "rank": 12,
@@ -396,18 +396,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 41.1,
-        "infrastructure": 83.3,
-        "cost": 33.3,
-        "netBenefit": 80
+        "schoolEnvironment": 41.9,
+        "infrastructure": 84.1,
+        "cost": 36.5,
+        "netBenefit": 80.8
       },
       "responses": 3,
       "overallScore": 66.3,
       "categories": {
-        "environment": 41.1,
-        "infrastructure": 83.3,
-        "cost": 66.7,
-        "benefit": 80,
+        "environment": 41.9,
+        "infrastructure": 84.1,
+        "cost": 63.5,
+        "benefit": 80.8,
         "complaint": null
       },
       "rank": 13,
@@ -424,21 +424,161 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 55,
-        "infrastructure": 80,
-        "cost": 40,
-        "netBenefit": 70
+        "schoolEnvironment": 51.6,
+        "infrastructure": 76.6,
+        "cost": 26.4,
+        "netBenefit": 66.6
       },
       "responses": 0,
       "overallScore": 65.5,
       "categories": {
-        "environment": 55,
-        "infrastructure": 80,
-        "cost": 60,
-        "benefit": 70,
+        "environment": 51.6,
+        "infrastructure": 76.6,
+        "cost": 73.6,
+        "benefit": 66.6,
         "complaint": null
       },
       "rank": 14,
+      "band": "fair"
+    },
+    {
+      "id": 33,
+      "name": "Nisarga Batika School",
+      "shortName": "Nisarga",
+      "initials": "NB",
+      "logoColor": "#16a34a",
+      "type": "Private",
+      "gradeRange": "+2",
+      "location": "Kathmandu Valley",
+      "complaint": null,
+      "metrics": {
+        "schoolEnvironment": 57.6,
+        "infrastructure": 81.0,
+        "cost": 53.8,
+        "netBenefit": 73.4
+      },
+      "responses": 4,
+      "overallScore": 64.7,
+      "categories": {
+        "environment": 57.6,
+        "infrastructure": 81.0,
+        "cost": 46.2,
+        "benefit": 73.4,
+        "complaint": null
+      },
+      "rank": 15,
+      "band": "fair"
+    },
+    {
+      "id": 35,
+      "name": "Ace Institute of Management",
+      "shortName": "Ace IM",
+      "initials": "AI",
+      "logoColor": "#6d28d9",
+      "type": "Private",
+      "gradeRange": "+2",
+      "location": "Kathmandu Valley",
+      "complaint": null,
+      "metrics": {
+        "schoolEnvironment": 52.6,
+        "infrastructure": 80.4,
+        "cost": 31.4,
+        "netBenefit": 63.6
+      },
+      "responses": 3,
+      "overallScore": 64.6,
+      "categories": {
+        "environment": 52.6,
+        "infrastructure": 80.4,
+        "cost": 68.6,
+        "benefit": 63.6,
+        "complaint": null
+      },
+      "rank": 16,
+      "band": "fair"
+    },
+    {
+      "id": 30,
+      "name": "DAV School",
+      "shortName": "DAV",
+      "initials": "DA",
+      "logoColor": "#dc2626",
+      "type": "Private",
+      "gradeRange": "+2",
+      "location": "Kathmandu Valley",
+      "complaint": null,
+      "metrics": {
+        "schoolEnvironment": 51.3,
+        "infrastructure": 88.0,
+        "cost": 51.9,
+        "netBenefit": 70.5
+      },
+      "responses": 4,
+      "overallScore": 63.7,
+      "categories": {
+        "environment": 51.3,
+        "infrastructure": 88.0,
+        "cost": 48.1,
+        "benefit": 70.5,
+        "complaint": null
+      },
+      "rank": 17,
+      "band": "fair"
+    },
+    {
+      "id": 9,
+      "name": "Graded English Medium School",
+      "shortName": "GEMS",
+      "initials": "GE",
+      "logoColor": "#2563eb",
+      "type": "Private",
+      "gradeRange": "+2",
+      "location": "Kathmandu Valley",
+      "complaint": null,
+      "metrics": {
+        "schoolEnvironment": 45.3,
+        "infrastructure": 78.7,
+        "cost": 24.9,
+        "netBenefit": 63.7
+      },
+      "responses": 0,
+      "overallScore": 63.5,
+      "categories": {
+        "environment": 45.3,
+        "infrastructure": 78.7,
+        "cost": 75.1,
+        "benefit": 63.7,
+        "complaint": null
+      },
+      "rank": 18,
+      "band": "fair"
+    },
+    {
+      "id": 18,
+      "name": "Euro School",
+      "shortName": "Euro",
+      "initials": "ES",
+      "logoColor": "#0284c7",
+      "type": "Private",
+      "gradeRange": "+2",
+      "location": "Kathmandu Valley",
+      "complaint": null,
+      "metrics": {
+        "schoolEnvironment": 50.8,
+        "infrastructure": 86.2,
+        "cost": 35.2,
+        "netBenefit": 56.2
+      },
+      "responses": 3,
+      "overallScore": 62.3,
+      "categories": {
+        "environment": 50.8,
+        "infrastructure": 86.2,
+        "cost": 64.8,
+        "benefit": 56.2,
+        "complaint": null
+      },
+      "rank": 19,
       "band": "fair"
     },
     {
@@ -466,146 +606,6 @@
         "benefit": 60,
         "complaint": null
       },
-      "rank": 15,
-      "band": "fair"
-    },
-    {
-      "id": 33,
-      "name": "Nisarga Batika School",
-      "shortName": "Nisarga",
-      "initials": "NB",
-      "logoColor": "#16a34a",
-      "type": "Private",
-      "gradeRange": "+2",
-      "location": "Kathmandu Valley",
-      "complaint": null,
-      "metrics": {
-        "schoolEnvironment": 51.6,
-        "infrastructure": 75,
-        "cost": 30,
-        "netBenefit": 67.5
-      },
-      "responses": 4,
-      "overallScore": 64.7,
-      "categories": {
-        "environment": 51.6,
-        "infrastructure": 75,
-        "cost": 70,
-        "benefit": 67.5,
-        "complaint": null
-      },
-      "rank": 16,
-      "band": "fair"
-    },
-    {
-      "id": 35,
-      "name": "Ace Institute of Management",
-      "shortName": "Ace IM",
-      "initials": "AI",
-      "logoColor": "#6d28d9",
-      "type": "Private",
-      "gradeRange": "+2",
-      "location": "Kathmandu Valley",
-      "complaint": null,
-      "metrics": {
-        "schoolEnvironment": 52.2,
-        "infrastructure": 80,
-        "cost": 30,
-        "netBenefit": 63.3
-      },
-      "responses": 3,
-      "overallScore": 64.6,
-      "categories": {
-        "environment": 52.2,
-        "infrastructure": 80,
-        "cost": 70,
-        "benefit": 63.3,
-        "complaint": null
-      },
-      "rank": 17,
-      "band": "fair"
-    },
-    {
-      "id": 30,
-      "name": "DAV School",
-      "shortName": "DAV",
-      "initials": "DA",
-      "logoColor": "#dc2626",
-      "type": "Private",
-      "gradeRange": "+2",
-      "location": "Kathmandu Valley",
-      "complaint": null,
-      "metrics": {
-        "schoolEnvironment": 48.3,
-        "infrastructure": 85,
-        "cost": 40,
-        "netBenefit": 67.5
-      },
-      "responses": 4,
-      "overallScore": 63.7,
-      "categories": {
-        "environment": 48.3,
-        "infrastructure": 85,
-        "cost": 60,
-        "benefit": 67.5,
-        "complaint": null
-      },
-      "rank": 18,
-      "band": "fair"
-    },
-    {
-      "id": 9,
-      "name": "Graded English Medium School",
-      "shortName": "GEMS",
-      "initials": "GE",
-      "logoColor": "#2563eb",
-      "type": "Private",
-      "gradeRange": "+2",
-      "location": "Kathmandu Valley",
-      "complaint": null,
-      "metrics": {
-        "schoolEnvironment": 51.6,
-        "infrastructure": 85,
-        "cost": 50,
-        "netBenefit": 70
-      },
-      "responses": 0,
-      "overallScore": 63.5,
-      "categories": {
-        "environment": 51.6,
-        "infrastructure": 85,
-        "cost": 50,
-        "benefit": 70,
-        "complaint": null
-      },
-      "rank": 19,
-      "band": "fair"
-    },
-    {
-      "id": 18,
-      "name": "Euro School",
-      "shortName": "Euro",
-      "initials": "ES",
-      "logoColor": "#0284c7",
-      "type": "Private",
-      "gradeRange": "+2",
-      "location": "Kathmandu Valley",
-      "complaint": null,
-      "metrics": {
-        "schoolEnvironment": 51.1,
-        "infrastructure": 86.6,
-        "cost": 36.6,
-        "netBenefit": 56.6
-      },
-      "responses": 3,
-      "overallScore": 62.3,
-      "categories": {
-        "environment": 51.1,
-        "infrastructure": 86.6,
-        "cost": 63.4,
-        "benefit": 56.6,
-        "complaint": null
-      },
       "rank": 20,
       "band": "fair"
     },
@@ -620,18 +620,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 55.4,
-        "infrastructure": 45,
-        "cost": 40,
-        "netBenefit": 78
+        "schoolEnvironment": 60.2,
+        "infrastructure": 49.8,
+        "cost": 59.4,
+        "netBenefit": 82.8
       },
       "responses": 0,
-      "overallScore": 61,
+      "overallScore": 61.0,
       "categories": {
-        "environment": 55.4,
-        "infrastructure": 45,
-        "cost": 60,
-        "benefit": 78,
+        "environment": 60.2,
+        "infrastructure": 49.8,
+        "cost": 40.6,
+        "benefit": 82.8,
         "complaint": null
       },
       "rank": 21,
@@ -676,18 +676,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 38.2,
-        "infrastructure": 80,
-        "cost": 35,
-        "netBenefit": 65
+        "schoolEnvironment": 40.6,
+        "infrastructure": 82.4,
+        "cost": 44.7,
+        "netBenefit": 67.4
       },
       "responses": 1,
-      "overallScore": 60,
+      "overallScore": 60.0,
       "categories": {
-        "environment": 38.2,
-        "infrastructure": 80,
-        "cost": 65,
-        "benefit": 65,
+        "environment": 40.6,
+        "infrastructure": 82.4,
+        "cost": 55.3,
+        "benefit": 67.4,
         "complaint": null
       },
       "rank": 23,
@@ -704,18 +704,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 60,
-        "infrastructure": 55,
-        "cost": 35,
-        "netBenefit": 60
+        "schoolEnvironment": 63.6,
+        "infrastructure": 58.6,
+        "cost": 49.6,
+        "netBenefit": 63.6
       },
       "responses": 2,
-      "overallScore": 60,
+      "overallScore": 60.0,
       "categories": {
-        "environment": 60,
-        "infrastructure": 55,
-        "cost": 65,
-        "benefit": 60,
+        "environment": 63.6,
+        "infrastructure": 58.6,
+        "cost": 50.4,
+        "benefit": 63.6,
         "complaint": null
       },
       "rank": 24,
@@ -732,18 +732,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 43.3,
-        "infrastructure": 66.6,
-        "cost": 40,
-        "netBenefit": 66.6
+        "schoolEnvironment": 43.1,
+        "infrastructure": 66.4,
+        "cost": 39.3,
+        "netBenefit": 66.4
       },
       "responses": 3,
       "overallScore": 58.3,
       "categories": {
-        "environment": 43.3,
-        "infrastructure": 66.6,
-        "cost": 60,
-        "benefit": 66.6,
+        "environment": 43.1,
+        "infrastructure": 66.4,
+        "cost": 60.7,
+        "benefit": 66.4,
         "complaint": null
       },
       "rank": 25,
@@ -760,18 +760,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 43.3,
-        "infrastructure": 73.3,
-        "cost": 26.7,
-        "netBenefit": 53.3
+        "schoolEnvironment": 45.1,
+        "infrastructure": 75.1,
+        "cost": 34.1,
+        "netBenefit": 55.1
       },
       "responses": 3,
       "overallScore": 58.3,
       "categories": {
-        "environment": 43.3,
-        "infrastructure": 73.3,
-        "cost": 73.3,
-        "benefit": 53.3,
+        "environment": 45.1,
+        "infrastructure": 75.1,
+        "cost": 65.9,
+        "benefit": 55.1,
         "complaint": null
       },
       "rank": 26,
@@ -788,18 +788,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 42.2,
-        "infrastructure": 60,
-        "cost": 33.3,
-        "netBenefit": 60
+        "schoolEnvironment": 46.6,
+        "infrastructure": 64.4,
+        "cost": 50.8,
+        "netBenefit": 64.4
       },
       "responses": 3,
-      "overallScore": 56,
+      "overallScore": 56.0,
       "categories": {
-        "environment": 42.2,
-        "infrastructure": 60,
-        "cost": 66.7,
-        "benefit": 60,
+        "environment": 46.6,
+        "infrastructure": 64.4,
+        "cost": 49.2,
+        "benefit": 64.4,
         "complaint": null
       },
       "rank": 27,
@@ -816,18 +816,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 36.6,
-        "infrastructure": 60,
-        "cost": 26.6,
-        "netBenefit": 60
+        "schoolEnvironment": 36.8,
+        "infrastructure": 60.2,
+        "cost": 27.6,
+        "netBenefit": 60.2
       },
       "responses": 3,
       "overallScore": 55.7,
       "categories": {
-        "environment": 36.6,
-        "infrastructure": 60,
-        "cost": 73.4,
-        "benefit": 60,
+        "environment": 36.8,
+        "infrastructure": 60.2,
+        "cost": 72.4,
+        "benefit": 60.2,
         "complaint": null
       },
       "rank": 28,
@@ -844,18 +844,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 51.6,
-        "infrastructure": 45,
-        "cost": 20,
-        "netBenefit": 50
+        "schoolEnvironment": 58.8,
+        "infrastructure": 52.2,
+        "cost": 48.9,
+        "netBenefit": 57.2
       },
       "responses": 2,
       "overallScore": 55.5,
       "categories": {
-        "environment": 51.6,
-        "infrastructure": 45,
-        "cost": 80,
-        "benefit": 50,
+        "environment": 58.8,
+        "infrastructure": 52.2,
+        "cost": 51.1,
+        "benefit": 57.2,
         "complaint": null
       },
       "rank": 29,
@@ -872,18 +872,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 43.3,
-        "infrastructure": 54,
-        "cost": 30,
-        "netBenefit": 58
+        "schoolEnvironment": 43.5,
+        "infrastructure": 54.2,
+        "cost": 30.7,
+        "netBenefit": 58.2
       },
       "responses": 5,
       "overallScore": 55.2,
       "categories": {
-        "environment": 43.3,
-        "infrastructure": 54,
-        "cost": 70,
-        "benefit": 58,
+        "environment": 43.5,
+        "infrastructure": 54.2,
+        "cost": 69.3,
+        "benefit": 58.2,
         "complaint": null
       },
       "rank": 30,
@@ -900,18 +900,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 48.3,
-        "infrastructure": 55,
-        "cost": 45,
-        "netBenefit": 60
+        "schoolEnvironment": 50.2,
+        "infrastructure": 56.9,
+        "cost": 52.5,
+        "netBenefit": 61.9
       },
       "responses": 4,
       "overallScore": 54.5,
       "categories": {
-        "environment": 48.3,
-        "infrastructure": 55,
-        "cost": 55,
-        "benefit": 60,
+        "environment": 50.2,
+        "infrastructure": 56.9,
+        "cost": 47.5,
+        "benefit": 61.9,
         "complaint": null
       },
       "rank": 31,
@@ -928,18 +928,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 37.5,
-        "infrastructure": 62.5,
-        "cost": 35,
-        "netBenefit": 55
+        "schoolEnvironment": 41.4,
+        "infrastructure": 66.4,
+        "cost": 50.4,
+        "netBenefit": 58.8
       },
       "responses": 4,
-      "overallScore": 53.3,
+      "overallScore": 53.2,
       "categories": {
-        "environment": 37.5,
-        "infrastructure": 62.5,
-        "cost": 65,
-        "benefit": 55,
+        "environment": 41.4,
+        "infrastructure": 66.4,
+        "cost": 49.6,
+        "benefit": 58.8,
         "complaint": null
       },
       "rank": 32,
@@ -956,18 +956,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 38.8,
-        "infrastructure": 66.6,
-        "cost": 26.6,
-        "netBenefit": 43.3
+        "schoolEnvironment": 43.6,
+        "infrastructure": 71.4,
+        "cost": 45.8,
+        "netBenefit": 48.1
       },
       "responses": 2,
       "overallScore": 52.6,
       "categories": {
-        "environment": 38.8,
-        "infrastructure": 66.6,
-        "cost": 73.4,
-        "benefit": 43.3,
+        "environment": 43.6,
+        "infrastructure": 71.4,
+        "cost": 54.2,
+        "benefit": 48.1,
         "complaint": null
       },
       "rank": 33,
@@ -984,18 +984,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 44.4,
-        "infrastructure": 46.6,
-        "cost": 46.6,
-        "netBenefit": 63.3
+        "schoolEnvironment": 46.0,
+        "infrastructure": 48.2,
+        "cost": 52.9,
+        "netBenefit": 64.9
       },
       "responses": 3,
       "overallScore": 52.3,
       "categories": {
-        "environment": 44.4,
-        "infrastructure": 46.6,
-        "cost": 53.4,
-        "benefit": 63.3,
+        "environment": 46.0,
+        "infrastructure": 48.2,
+        "cost": 47.1,
+        "benefit": 64.9,
         "complaint": null
       },
       "rank": 34,
@@ -1012,18 +1012,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 41.3,
-        "infrastructure": 50,
-        "cost": 30,
-        "netBenefit": 48
+        "schoolEnvironment": 48.8,
+        "infrastructure": 57.4,
+        "cost": 59.8,
+        "netBenefit": 55.4
       },
       "responses": 5,
       "overallScore": 50.8,
       "categories": {
-        "environment": 41.3,
-        "infrastructure": 50,
-        "cost": 70,
-        "benefit": 48,
+        "environment": 48.8,
+        "infrastructure": 57.4,
+        "cost": 40.2,
+        "benefit": 55.4,
         "complaint": null
       },
       "rank": 35,
@@ -1040,18 +1040,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 43.3,
-        "infrastructure": 60,
-        "cost": 40,
-        "netBenefit": 43.3
+        "schoolEnvironment": 45.4,
+        "infrastructure": 62.1,
+        "cost": 48.5,
+        "netBenefit": 45.4
       },
       "responses": 3,
-      "overallScore": 50,
+      "overallScore": 50.0,
       "categories": {
-        "environment": 43.3,
-        "infrastructure": 60,
-        "cost": 60,
-        "benefit": 43.3,
+        "environment": 45.4,
+        "infrastructure": 62.1,
+        "cost": 51.5,
+        "benefit": 45.4,
         "complaint": null
       },
       "rank": 36,
@@ -1068,18 +1068,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 27.6,
-        "infrastructure": 50,
-        "cost": 15,
-        "netBenefit": 45
+        "schoolEnvironment": 34.4,
+        "infrastructure": 56.8,
+        "cost": 42.4,
+        "netBenefit": 51.8
       },
       "responses": 0,
       "overallScore": 48.8,
       "categories": {
-        "environment": 27.6,
-        "infrastructure": 50,
-        "cost": 85,
-        "benefit": 45,
+        "environment": 34.4,
+        "infrastructure": 56.8,
+        "cost": 57.6,
+        "benefit": 51.8,
         "complaint": null
       },
       "rank": 37,
@@ -1096,18 +1096,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 35.6,
-        "infrastructure": 70,
-        "cost": 40,
-        "netBenefit": 40
+        "schoolEnvironment": 36.0,
+        "infrastructure": 70.4,
+        "cost": 41.7,
+        "netBenefit": 40.4
       },
       "responses": 0,
       "overallScore": 48.7,
       "categories": {
-        "environment": 35.6,
-        "infrastructure": 70,
-        "cost": 60,
-        "benefit": 40,
+        "environment": 36.0,
+        "infrastructure": 70.4,
+        "cost": 58.3,
+        "benefit": 40.4,
         "complaint": null
       },
       "rank": 38,
@@ -1124,18 +1124,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 38.3,
-        "infrastructure": 60,
-        "cost": 25,
-        "netBenefit": 30
+        "schoolEnvironment": 44.5,
+        "infrastructure": 66.2,
+        "cost": 49.9,
+        "netBenefit": 36.2
       },
       "responses": 2,
       "overallScore": 47.5,
       "categories": {
-        "environment": 38.3,
-        "infrastructure": 60,
-        "cost": 75,
-        "benefit": 30,
+        "environment": 44.5,
+        "infrastructure": 66.2,
+        "cost": 50.1,
+        "benefit": 36.2,
         "complaint": null
       },
       "rank": 39,
@@ -1152,18 +1152,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 38.3,
-        "infrastructure": 55,
-        "cost": 35,
-        "netBenefit": 32.5
+        "schoolEnvironment": 41.5,
+        "infrastructure": 58.2,
+        "cost": 47.8,
+        "netBenefit": 35.7
       },
       "responses": 4,
       "overallScore": 45.2,
       "categories": {
-        "environment": 38.3,
-        "infrastructure": 55,
-        "cost": 65,
-        "benefit": 32.5,
+        "environment": 41.5,
+        "infrastructure": 58.2,
+        "cost": 52.2,
+        "benefit": 35.7,
         "complaint": null
       },
       "rank": 40,
@@ -1180,18 +1180,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 36,
-        "infrastructure": 46,
-        "cost": 40,
-        "netBenefit": 38
+        "schoolEnvironment": 36.9,
+        "infrastructure": 46.9,
+        "cost": 43.6,
+        "netBenefit": 38.9
       },
       "responses": 0,
       "overallScore": 43.4,
       "categories": {
-        "environment": 36,
-        "infrastructure": 46,
-        "cost": 60,
-        "benefit": 38,
+        "environment": 36.9,
+        "infrastructure": 46.9,
+        "cost": 56.4,
+        "benefit": 38.9,
         "complaint": null
       },
       "rank": 41,
@@ -1208,18 +1208,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 41.1,
-        "infrastructure": 36.6,
-        "cost": 30,
-        "netBenefit": 26.6
+        "schoolEnvironment": 43.8,
+        "infrastructure": 39.2,
+        "cost": 40.6,
+        "netBenefit": 29.2
       },
       "responses": 3,
       "overallScore": 41.6,
       "categories": {
-        "environment": 41.1,
-        "infrastructure": 36.6,
-        "cost": 70,
-        "benefit": 26.6,
+        "environment": 43.8,
+        "infrastructure": 39.2,
+        "cost": 59.4,
+        "benefit": 29.2,
         "complaint": null
       },
       "rank": 42,
@@ -1236,18 +1236,18 @@
       "location": "Kathmandu Valley",
       "complaint": null,
       "metrics": {
-        "schoolEnvironment": 32.5,
-        "infrastructure": 35,
-        "cost": 27.5,
-        "netBenefit": 30
+        "schoolEnvironment": 37.5,
+        "infrastructure": 40.0,
+        "cost": 47.4,
+        "netBenefit": 35.0
       },
       "responses": 4,
-      "overallScore": 40.3,
+      "overallScore": 40.2,
       "categories": {
-        "environment": 32.5,
-        "infrastructure": 35,
-        "cost": 72.5,
-        "benefit": 30,
+        "environment": 37.5,
+        "infrastructure": 40.0,
+        "cost": 52.6,
+        "benefit": 35.0,
         "complaint": null
       },
       "rank": 43,
