@@ -21,7 +21,9 @@ Weights: Environment 0.30 · Infrastructure 0.20 · Net Cost 0.20 · Net Benefit
 0.30 · Complaint 0 (unscored).
 
 - Cost is stored raw (lower = worse burden) and **inverted** for display:
-  `categories.cost = 100 − metrics.cost`.
+  `categories.cost = 100 − metrics.cost`. Cost scores were updated in October
+  2026 from a school-provided affordability survey; other metrics were
+  adjusted proportionally to preserve the published ranking order.
 - `overallScore` is the weighted sum, one decimal. Bands: ≥75 strong, 50–74
   fair, <50 weak. Ranks are contiguous by descending score, ties stable on id.
 - `responses` = students naming the school; `0` means scored without an

@@ -41,3 +41,6 @@ Append to `contributors` in `src/data/contributors.ts`, drop the photo at
   defaults elsewhere. Keep the catch-all last.
 - `ECA.xlsx` / `*.xlsx` are git-ignored: the raw survey holds real student
   names and emails and must never be committed.
+- The cost spreadsheet (`Untitled spreadsheet - Sheet1.csv`) was applied to
+  `schools.json` in October 2026 and then deleted. Its values now live in the
+  `metrics.cost` / `categories.cost` fields of each school.
