@@ -1,6 +1,6 @@
 import raw from "@/data/schools.json";
 
-import type { Dataset, School, SchoolType } from "@/lib/types";
+import type { Dataset, RedFlag, School, SchoolType } from "@/lib/types";
 
 /**
  * The only module in the app that imports the data file.
@@ -28,7 +28,16 @@ export const meta = data.meta;
 /** All schools, in rank order ascending. Keep this order when editing the data. */
 export const schools: readonly School[] = data.schools;
 
+/**
+ * The curated red-flag list, in the order it was supplied.
+ *
+ * Not a subset of `schools`: a flagged school may not be in the ranked roster.
+ * The `/rankings` red-flags view renders these by name, with no rank or score.
+ */
+export const redFlags: readonly RedFlag[] = data.redFlags;
+
 const byId = new Map<number, School>(schools.map((s) => [s.id, s]));
+const redFlagById = new Map(redFlags.map((r) => [r.id, r]));
 
 /** "Ullens School" -> "ullens-school" */
 export function slugify(name: string): string {
@@ -58,6 +67,15 @@ export function getSchool(id: string | number | undefined | null): School | unde
 /** Lookup by name slug. Used by the sitemap and by tests. */
 export function getSchoolBySlug(slug: string): School | undefined {
   return bySlug.get(slug);
+}
+
+/**
+ * Resolve a `/red-flag/:id` param. Returns `undefined` for an unknown id, so
+ * the page renders the 404 in place rather than redirecting.
+ */
+export function getRedFlag(id: string | undefined | null): RedFlag | undefined {
+  if (!id) return undefined;
+  return redFlagById.get(id);
 }
 
 /** The top N schools. `schools` is already rank-ordered, so this is a slice. */

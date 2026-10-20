@@ -39,7 +39,7 @@ export function useRankings() {
     [searchParams],
   );
 
-  const rows = useMemo(() => selectSchools(filters, sort, view), [filters, sort, view]);
+  const rows = useMemo(() => selectSchools(filters, sort), [filters, sort]);
 
   const commit = useCallback(
     (nextFilters: Filters, nextSort: SortKey, nextColumns: ColumnKey[], nextView: View) => {

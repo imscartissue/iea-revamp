@@ -7,10 +7,11 @@ import { RankingsTable } from "@/components/rankings/RankingsTable";
 import { RankingsToolbar } from "@/components/rankings/RankingsToolbar";
 import { SchoolListRow } from "@/components/rankings/SchoolListRow";
 import { EmptyState } from "@/components/rankings/EmptyState";
+import { RedFlagList } from "@/components/red-flags/RedFlagList";
 import { useRankings } from "@/hooks/useRankings";
 import { meta } from "@/lib/data";
 import { SEO, applySeo } from "@/lib/seo";
-import { formatDate } from "@/lib/format";
+import { formatCountPlus, formatDate } from "@/lib/format";
 
 /**
  * The full ranking. The most important page in the product.
@@ -32,7 +33,7 @@ export function RankingsPage() {
       <div className="animate-route-in">
         <header className="pt-12 md:pt-20">
           <h1 tabIndex={-1} className="type-title text-ink outline-none">
-            Rankings
+            {view === "redflags" ? "Red flag schools" : "Rankings"}
           </h1>
 
           <dl className="type-caption mt-6 flex flex-wrap gap-x-8 gap-y-1 text-ink-faint">
@@ -44,7 +45,7 @@ export function RankingsPage() {
             </div>
             <div className="flex gap-2">
               <dt>Responses</dt>
-              <dd className="text-ink-muted">{meta.totalResponses}</dd>
+              <dd className="text-ink-muted">{formatCountPlus(meta.totalResponses)}</dd>
             </div>
             <div className="flex gap-2">
               <dt>Source</dt>
@@ -76,7 +77,11 @@ export function RankingsPage() {
 
         <Rule />
 
-        {rows.length === 0 ? (
+        {view === "redflags" ? (
+          /* The curated red-flag list. No rank, no score, shuffled on load —
+             see RedFlagList for why it is not a filtered table. */
+          <RedFlagList />
+        ) : rows.length === 0 ? (
           <EmptyState query={filters.q || undefined} onReset={reset} />
         ) : (
           <>

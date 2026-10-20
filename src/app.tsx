@@ -28,6 +28,7 @@ const SchoolPage = lazy(() => import("@/pages/SchoolPage").then((m) => ({ defaul
 const AboutPage = lazy(() => import("@/pages/AboutPage").then((m) => ({ default: m.AboutPage })));
 const MethodologyPage = lazy(() => import("@/pages/MethodologyPage").then((m) => ({ default: m.MethodologyPage })));
 const AnnualReportPage = lazy(() => import("@/pages/AnnualReportPage").then((m) => ({ default: m.AnnualReportPage })));
+const RedFlagPage = lazy(() => import("@/pages/RedFlagPage").then((m) => ({ default: m.RedFlagPage })));
 
 /**
  * The app shell.
@@ -64,6 +65,7 @@ function Shell() {
           <Route path="/" element={<HomePage />} />
           <Route path="/rankings" element={<RankingsPage />} />
           <Route path="/school/:id" element={<SchoolPage />} />
+          <Route path="/red-flag/:id" element={<RedFlagPage />} />
           <Route path="/methodology" element={<MethodologyPage />} />
           <Route path="/reports" element={<AnnualReportPage />} />
           <Route path="/about" element={<AboutPage />} />

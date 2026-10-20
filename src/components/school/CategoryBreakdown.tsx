@@ -1,19 +1,19 @@
 import { MetricCard } from "@/components/school/MetricCard";
-import { ScoreBar } from "@/components/data-display/ScoreBar";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { meta } from "@/lib/data";
-import { bandColor } from "@/lib/scoring";
 import type { CategoryKey, School } from "@/lib/types";
 
 /**
- * The four scored dimensions, as cards, plus the raw readings.
+ * The four scored dimensions, as cards.
  *
- * Two layers on purpose, because they answer different questions:
+ * Each card gives a dimension's score, its meaning and its weight, so a reader
+ * can see *where* the overall score comes from and what each part contributes.
  *
- * 1. The **cards** give each dimension a score, its meaning, and its weight.
- * 2. The **readings** below show the underlying metric value, including cost
- *    *before* inversion — otherwise a reader cannot work out what "56.7 on
- *    Net Cost" actually means in rupees.
+ * Every score is read from `categories.*`, including Net Cost. That is the
+ * inverted desirability score, so it is consistent with the rankings table and
+ * the rest of the site — the raw pre-inversion cost is deliberately not shown
+ * here, because it reads as a different number under a label that says
+ * "Net Cost".
  *
  * All values are precomputed at build time; this component only arranges them.
  */
@@ -36,68 +36,6 @@ export function CategoryBreakdown({ school }: { school: School }) {
           );
         })}
       </div>
-
-      <div className="mt-10">
-        <h3 className="type-heading text-ink">The raw readings</h3>
-        <p className="type-caption measure-tight mt-2 text-ink-muted">
-          What students actually answered. Cost is shown as they rated it, before it was
-          inverted for scoring.
-        </p>
-
-        <dl className="mt-6 grid gap-x-10 gap-y-5 sm:grid-cols-2 lg:grid-cols-4">
-          <Reading
-            label="School Environment"
-            value={school.metrics.schoolEnvironment}
-            hint="Atmosphere, culture, student life"
-          />
-          <Reading
-            label="Infrastructure"
-            value={school.metrics.infrastructure}
-            hint="Classrooms, labs, library, sports"
-          />
-          <Reading
-            label="Net Cost"
-            value={school.metrics.cost}
-            hint="Lower is better — inverted for scoring"
-            lowerIsBetter
-          />
-          <Reading
-            label="Net Benefit"
-            value={school.metrics.netBenefit}
-            hint="Outcomes after graduating"
-          />
-        </dl>
-      </div>
     </section>
-  );
-}
-
-function Reading({
-  label,
-  value,
-  hint,
-  lowerIsBetter = false,
-}: {
-  label: string;
-  value: number;
-  hint: string;
-  lowerIsBetter?: boolean;
-}) {
-  return (
-    <div className="flex flex-col gap-2">
-      <dt className="type-caption text-ink-faint">{label}</dt>
-      <dd className="flex items-baseline gap-2">
-        <span className={bandColor(value)}>{value.toFixed(1)}</span>
-        {lowerIsBetter ? (
-          <span className="text-[0.625rem] tracking-[0.12em] text-ink-faint uppercase">
-            lower better
-          </span>
-        ) : null}
-      </dd>
-      <div className="hidden sm:block">
-          <ScoreBar value={value} size="sm" label={`${label}: ${value.toFixed(1)}`} />
-        </div>
-      <p className="type-caption text-ink-faint">{hint}</p>
-    </div>
   );
 }

@@ -1,6 +1,6 @@
 import { totalSchools } from "@/lib/data";
 import { formatCount } from "@/lib/format";
-import type { School } from "@/lib/types";
+import type { RedFlag, School } from "@/lib/types";
 
 /**
  * Per-route document title, meta description and canonical URL.
@@ -99,6 +99,25 @@ export function schoolSeo(school: School): Seo {
   return {
     title: `${school.name} — rank ${school.rank}, ${school.overallScore.toFixed(1)}/100`,
     description: `${school.name} ranks ${school.rank} of ${totalSchools} in the IEA Institute survey with an overall score of ${school.overallScore.toFixed(1)} out of 100. ${where}`,
+  };
+}
+
+/**
+ * Per-red-flag SEO.
+ *
+ * A flagged school has no rank or score, so the title and description are built
+ * from the name and the first published reason instead. A generic title across
+ * the list would make the pages indistinguishable in search results.
+ */
+export function redFlagSeo(redFlag: RedFlag): Seo {
+  const summary =
+    redFlag.reasons.length > 0
+      ? `Flagged for: ${redFlag.reasons[0]}${redFlag.reasons.length > 1 ? `, and ${redFlag.reasons.length - 1} more.` : "."}`
+      : "Listed on the IEA Institute red-flag list.";
+
+  return {
+    title: `${redFlag.name} — red flag`,
+    description: `${redFlag.name} is on the IEA Institute red-flag list. ${summary} Read the published reasons and how to respond.`,
   };
 }
 

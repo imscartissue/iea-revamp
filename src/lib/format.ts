@@ -30,6 +30,15 @@ export function formatCount(n: number): string {
   return String(n);
 }
 
+/**
+ * "200" -> "200+". For a count that is a floor rather than a census — the
+ * survey collected *at least* this many responses, so the headline advertises a
+ * lower bound instead of an exact figure.
+ */
+export function formatCountPlus(n: number): string {
+  return `${n}+`;
+}
+
 /** "1 school" / "42 schools" */
 export function plural(n: number, singular: string, pluralForm = `${singular}s`): string {
   return `${n} ${n === 1 ? singular : pluralForm}`;

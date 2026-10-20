@@ -41,12 +41,21 @@ hex. Class names go through `cn()` (`src/lib/utils.ts`).
 
 | Use this | For |
 |----------|-----|
-| `RankingsToolbar` | Search (debounced) + view toggle + Sort/Columns menus + mobile filter sheet (44px trigger) + live result count + active-filter badges |
+| `RankingsToolbar` | Search (debounced) + view toggle + Sort/Columns menus + mobile filter sheet (44px trigger) + live result count + active-filter badges. On the red-flags view it renders only the toggle |
 | `RankingsTable` | Accessible desktop table: sortable headers (`aria-sort`), memoized rows, guarded row-click navigation; `min-w-[42rem]` so it fits the `md` content box without horizontal scroll |
 | `SchoolListRow` | Mobile stacked row (separate component, not a responsive table); `gap-3` between identity elements, `w-16` score bar, metrics indented `pl-[4.75rem]` to align under the name |
 | `SchoolCell` / `RankCell` | Row identity: monogram + linked name, bronze serif rank |
 | `ScoreCell` / `OverallCell` | Band-coloured metric with optional bar; `invert` marks the cost column |
 | `EmptyState` | Filter-no-match fallback with reset |
+
+## `red-flags/` — the curated red-flag list
+
+| Use this | For |
+|----------|-----|
+| `RedFlagList` | The `/rankings` red-flags view: a responsive grid of school cards (1 / 2 / 3 columns), **no rank and no score**, shuffled on every load. Not a filtered table |
+
+`/red-flag/:id` is a page, not a component — see `src/pages/RedFlagPage.tsx`.
+It renders the school's published reasons and a dispute email at the bottom.
 
 ## `school/` — `/school/:id` detail
 
@@ -54,17 +63,17 @@ hex. Class names go through `cn()` (`src/lib/utils.ts`).
 |----------|-----|
 | `SchoolHero` | Breadcrumb, monogram, rank, type·grades·location, `h1`, score dial |
 | `ScoreDial` | Hand-rolled SVG 270° gauge — `value`, `size=200` |
-| `CategoryBreakdown` | 2×2 `MetricCard` grid + raw readings list; reading `ScoreBar`s hidden below `sm` to reduce vertical scroll |
+| `CategoryBreakdown` | 2×2 `MetricCard` grid. Scores come from `categories.*`, so Net Cost is the **inverted desirability score** (consistent with the table), not the pre-inversion rating |
 | `MetricCard` | One dimension: band rule, score, bar, blurb, weight note; unscored renders text, never "0" |
 | `NeighboursTable` | Rank-adjacent schools with gap sentence |
 | `SchoolNavArrows` | Prev/next-by-rank buttons (hidden at the ends) |
 
 ## `home/` and `intro/`
 
-- Home sections: `Hero` (masthead + stats + top/bottom lists; stats are a
-  3-column grid on mobile, buttons are full-width), `TopTen` (numbered
-  leaderboard; accent rule `w-6` aligns with the rank numeral), `HowToRead`
-  (dimension legend with medians), `MethodologyTeaser` (3 collapsed steps
-  with `type-numeric` step numerals, reused on `/methodology`).
+- Home sections: `Hero` (masthead + stats + a red-flag teaser + the top three;
+  stats are a 3-column grid on mobile, buttons are full-width), `TopTen`
+  (numbered leaderboard; accent rule `w-6` aligns with the rank numeral),
+  `HowToRead` (dimension legend with medians), `MethodologyTeaser` (3 collapsed
+  steps with `type-numeric` step numerals, reused on `/methodology`).
 - Intro splash: `IntroGate` (overlay manager), `IntroMonogram` (animated name),
   `ContributorStrip` (8 reserved contributor slots via `introSlots()`).

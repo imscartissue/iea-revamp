@@ -101,9 +101,27 @@ export type Meta = {
   disclaimer: string;
 };
 
+/**
+ * A school carried on the red-flag list.
+ *
+ * Deliberately NOT a `School`: it has no score, no rank and no band, and it may
+ * not exist in the ranked roster at all (e.g. CCRC College and Kavya). The
+ * red-flag page is a separate curated list, not a filtered view of the table.
+ */
+export type RedFlag = {
+  /** Stable identifier, also the URL slug: `/red-flag/:id`. */
+  id: string;
+  /** Display name, as supplied in the source document. */
+  name: string;
+  /** The published reasons for flagging. May be empty while a school awaits detail. */
+  reasons: string[];
+};
+
 export type Dataset = {
   meta: Meta;
   schools: School[];
+  /** The curated red-flag list. Order is the source order; the UI shuffles it. */
+  redFlags: RedFlag[];
 };
 
 /**

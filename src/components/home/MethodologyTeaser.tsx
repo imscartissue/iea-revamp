@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { SectionHeader } from "@/components/data-display/SectionHeader";
-import { formatCount } from "@/lib/format";
+import { formatCountPlus } from "@/lib/format";
 import { meta } from "@/lib/data";
 
 /**
@@ -26,7 +26,7 @@ export function MethodologyTeaser() {
     {
       n: "01",
       title: "Students answered anonymously",
-      body: `${formatCount(meta.totalResponses)} students across the ${meta.location} rated the school they or their peers attended. No school submitted its own numbers, and no name is published.`,
+      body: `${formatCountPlus(meta.totalResponses)} students across the ${meta.location} rated the school they or their peers attended. No school submitted its own numbers, and no name is published.`,
     },
     {
       n: "02",

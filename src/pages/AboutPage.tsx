@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { contributors } from "@/data/contributors";
 import { SEO, applySeo } from "@/lib/seo";
 import { bandCounts, meanResponses, meta, totalSchools } from "@/lib/data";
-import { formatCount, formatDate, isoDate } from "@/lib/format";
+import { formatCount, formatCountPlus, formatDate, isoDate } from "@/lib/format";
 
 /**
  * The project, the method, the limitations, and the people.
@@ -55,7 +55,7 @@ export function AboutPage() {
               sublabel={`${formatDate(meta.publicationDate)}`}
             />
             <StatBlock
-              value={formatCount(meta.totalResponses)}
+              value={formatCountPlus(meta.totalResponses)}
               label="students answered"
               sublabel={`mean ${meanResponses} per school`}
             />
@@ -82,7 +82,7 @@ export function AboutPage() {
             {[
               {
                 title: "Who answered",
-                body: `${formatCount(meta.totalResponses)} students across the ${meta.location}, reached through student networks rather than schools. Each rated the school they or their peers attended.`,
+                body: `${formatCountPlus(meta.totalResponses)} students across the ${meta.location}, reached through student networks rather than schools. Each rated the school they or their peers attended.`,
               },
               {
                 title: "What was asked",
@@ -166,7 +166,7 @@ export function AboutPage() {
                     <ul className="flex flex-col gap-3">
                       {[
                         "It is not an accreditation, and no school body has approved it.",
-                        "Samples are small — a mean of about 2.5 responses per school. Some schools have none at all.",
+                        `Samples are small — a mean of about ${meanResponses} responses per school. Some schools have none at all.`,
                         "It is self-reported, so it reflects who felt able to answer and how they felt on the day.",
                         "A single score hides tradeoffs. A school strong on benefit and weak on cost is a real school, not a bug.",
                         "It is not a fit score for your child. That depends on what they need and what you can afford.",
@@ -187,7 +187,7 @@ export function AboutPage() {
                   <Datum term="Published" value={formatDate(meta.publicationDate)} iso={meta.publicationDate} />
                   <Datum term="Source" value={meta.source} />
                   <Datum term="Scope" value={`${meta.location}, ${meta.gradeRange}`} />
-                  <Datum term="Responses" value={formatCount(meta.totalResponses)} />
+                  <Datum term="Responses" value={formatCountPlus(meta.totalResponses)} />
                   <Datum term="Attributed to a school" value={formatCount(meta.attributedResponses)} />
                   <Datum term="Unattributable" value={formatCount(meta.unattributedResponses)} />
                 </dl>

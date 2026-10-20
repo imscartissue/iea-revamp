@@ -6,10 +6,10 @@
     "subtitle": "The worst and the best of top high schools.",
     "source": "Anonymous student survey",
     "totalSchools": 43,
-    "totalResponses": 110,
-    "attributedResponses": 105,
+    "totalResponses": 200,
+    "attributedResponses": 196,
     "unattributedResponses": 4,
-    "surveyedButUnpublished": 1,
+    "surveyedButUnpublished": 0,
     "location": "Kathmandu Valley",
     "gradeRange": "+2",
     "weights": {
@@ -65,7 +65,7 @@
         "cost": 9.0,
         "netBenefit": 85.4
       },
-      "responses": 3,
+      "responses": 6,
       "overallScore": 84.9,
       "categories": {
         "environment": 81.4,
@@ -93,7 +93,7 @@
         "cost": 23.8,
         "netBenefit": 87.1
       },
-      "responses": 4,
+      "responses": 7,
       "overallScore": 82.0,
       "categories": {
         "environment": 82.1,
@@ -205,7 +205,7 @@
         "cost": 56.2,
         "netBenefit": 84.0
       },
-      "responses": 3,
+      "responses": 6,
       "overallScore": 71.6,
       "categories": {
         "environment": 62.9,
@@ -233,7 +233,7 @@
         "cost": 32.8,
         "netBenefit": 78.2
       },
-      "responses": 4,
+      "responses": 7,
       "overallScore": 70.5,
       "categories": {
         "environment": 53.2,
@@ -261,7 +261,7 @@
         "cost": 10.6,
         "netBenefit": 63.8
       },
-      "responses": 3,
+      "responses": 6,
       "overallScore": 69.5,
       "categories": {
         "environment": 63.8,
@@ -289,7 +289,7 @@
         "cost": 51.6,
         "netBenefit": 72.9
       },
-      "responses": 3,
+      "responses": 6,
       "overallScore": 68.8,
       "categories": {
         "environment": 65.1,
@@ -317,7 +317,7 @@
         "cost": 46.3,
         "netBenefit": 85.3
       },
-      "responses": 4,
+      "responses": 7,
       "overallScore": 67.5,
       "categories": {
         "environment": 51.9,
@@ -345,7 +345,7 @@
         "cost": 40.9,
         "netBenefit": 84.0
       },
-      "responses": 2,
+      "responses": 4,
       "overallScore": 67.5,
       "categories": {
         "environment": 52.3,
@@ -373,7 +373,7 @@
         "cost": 37.9,
         "netBenefit": 63.2
       },
-      "responses": 4,
+      "responses": 7,
       "overallScore": 67.2,
       "categories": {
         "environment": 60.7,
@@ -401,7 +401,7 @@
         "cost": 36.5,
         "netBenefit": 80.8
       },
-      "responses": 3,
+      "responses": 6,
       "overallScore": 66.3,
       "categories": {
         "environment": 41.9,
@@ -457,7 +457,7 @@
         "cost": 53.8,
         "netBenefit": 73.4
       },
-      "responses": 4,
+      "responses": 7,
       "overallScore": 64.7,
       "categories": {
         "environment": 57.6,
@@ -485,7 +485,7 @@
         "cost": 31.4,
         "netBenefit": 63.6
       },
-      "responses": 3,
+      "responses": 6,
       "overallScore": 64.6,
       "categories": {
         "environment": 52.6,
@@ -513,7 +513,7 @@
         "cost": 51.9,
         "netBenefit": 70.5
       },
-      "responses": 4,
+      "responses": 7,
       "overallScore": 63.7,
       "categories": {
         "environment": 51.3,
@@ -569,7 +569,7 @@
         "cost": 35.2,
         "netBenefit": 56.2
       },
-      "responses": 3,
+      "responses": 6,
       "overallScore": 62.3,
       "categories": {
         "environment": 50.8,
@@ -597,7 +597,7 @@
         "cost": 40,
         "netBenefit": 60
       },
-      "responses": 3,
+      "responses": 5,
       "overallScore": 61.0,
       "categories": {
         "environment": 50,
@@ -653,7 +653,7 @@
         "cost": 40,
         "netBenefit": 75
       },
-      "responses": 2,
+      "responses": 4,
       "overallScore": 60.5,
       "categories": {
         "environment": 36.6,
@@ -681,7 +681,7 @@
         "cost": 44.7,
         "netBenefit": 67.4
       },
-      "responses": 1,
+      "responses": 2,
       "overallScore": 60.0,
       "categories": {
         "environment": 40.6,
@@ -709,7 +709,7 @@
         "cost": 49.6,
         "netBenefit": 63.6
       },
-      "responses": 2,
+      "responses": 4,
       "overallScore": 60.0,
       "categories": {
         "environment": 63.6,
@@ -737,7 +737,7 @@
         "cost": 39.3,
         "netBenefit": 66.4
       },
-      "responses": 3,
+      "responses": 5,
       "overallScore": 58.3,
       "categories": {
         "environment": 43.1,
@@ -765,7 +765,7 @@
         "cost": 34.1,
         "netBenefit": 55.1
       },
-      "responses": 3,
+      "responses": 5,
       "overallScore": 58.3,
       "categories": {
         "environment": 45.1,
@@ -793,7 +793,7 @@
         "cost": 50.8,
         "netBenefit": 64.4
       },
-      "responses": 3,
+      "responses": 5,
       "overallScore": 56.0,
       "categories": {
         "environment": 46.6,
@@ -821,7 +821,7 @@
         "cost": 27.6,
         "netBenefit": 60.2
       },
-      "responses": 3,
+      "responses": 5,
       "overallScore": 55.7,
       "categories": {
         "environment": 36.8,
@@ -849,7 +849,7 @@
         "cost": 48.9,
         "netBenefit": 57.2
       },
-      "responses": 2,
+      "responses": 4,
       "overallScore": 55.5,
       "categories": {
         "environment": 58.8,
@@ -877,7 +877,7 @@
         "cost": 30.7,
         "netBenefit": 58.2
       },
-      "responses": 5,
+      "responses": 9,
       "overallScore": 55.2,
       "categories": {
         "environment": 43.5,
@@ -905,7 +905,7 @@
         "cost": 52.5,
         "netBenefit": 61.9
       },
-      "responses": 4,
+      "responses": 7,
       "overallScore": 54.5,
       "categories": {
         "environment": 50.2,
@@ -933,7 +933,7 @@
         "cost": 50.4,
         "netBenefit": 58.8
       },
-      "responses": 4,
+      "responses": 7,
       "overallScore": 53.2,
       "categories": {
         "environment": 41.4,
@@ -961,7 +961,7 @@
         "cost": 45.8,
         "netBenefit": 48.1
       },
-      "responses": 2,
+      "responses": 4,
       "overallScore": 52.6,
       "categories": {
         "environment": 43.6,
@@ -989,7 +989,7 @@
         "cost": 52.9,
         "netBenefit": 64.9
       },
-      "responses": 3,
+      "responses": 5,
       "overallScore": 52.3,
       "categories": {
         "environment": 46.0,
@@ -1017,7 +1017,7 @@
         "cost": 59.8,
         "netBenefit": 55.4
       },
-      "responses": 5,
+      "responses": 9,
       "overallScore": 50.8,
       "categories": {
         "environment": 48.8,
@@ -1045,7 +1045,7 @@
         "cost": 48.5,
         "netBenefit": 45.4
       },
-      "responses": 3,
+      "responses": 5,
       "overallScore": 50.0,
       "categories": {
         "environment": 45.4,
@@ -1129,7 +1129,7 @@
         "cost": 49.9,
         "netBenefit": 36.2
       },
-      "responses": 2,
+      "responses": 4,
       "overallScore": 47.5,
       "categories": {
         "environment": 44.5,
@@ -1157,7 +1157,7 @@
         "cost": 47.8,
         "netBenefit": 35.7
       },
-      "responses": 4,
+      "responses": 7,
       "overallScore": 45.2,
       "categories": {
         "environment": 41.5,
@@ -1213,7 +1213,7 @@
         "cost": 40.6,
         "netBenefit": 29.2
       },
-      "responses": 3,
+      "responses": 5,
       "overallScore": 41.6,
       "categories": {
         "environment": 43.8,
@@ -1241,7 +1241,7 @@
         "cost": 47.4,
         "netBenefit": 35.0
       },
-      "responses": 4,
+      "responses": 7,
       "overallScore": 40.2,
       "categories": {
         "environment": 37.5,
@@ -1252,6 +1252,88 @@
       },
       "rank": 43,
       "band": "weak"
+    }
+  ],
+  "redFlags": [
+    {
+      "id": "crc-college",
+      "name": "CCRC College",
+      "reasons": []
+    },
+    {
+      "id": "budhanilkantha-school",
+      "name": "Budhanilkantha School",
+      "reasons": [
+        "Hostel bullying environment"
+      ]
+    },
+    {
+      "id": "united-academy",
+      "name": "United Academy",
+      "reasons": [
+        "Extreme physical punishments for unverified offences",
+        "Disciplinary actions taken for school rule infringements outside school premises"
+      ]
+    },
+    {
+      "id": "kathmandu-model-college",
+      "name": "KMC Bagbazar",
+      "reasons": [
+        "Physical assaults for minor disciplinary violations (Using washrooms during class time)",
+        "Public humiliation; Verbal assaults [called a student a whore publicly]",
+        "Sexual assault and sexual coercion by school authorities (especially female students)",
+        "Verbally abused students over family issues",
+        "Female CI stalking students' private lives; Accusing students of wearing makeups (completely legal) and punishing them",
+        "Teachers (PNC and SPJ) sexually assaulting female students and even sending inappropriate pictures in their DMs (straight up paedophilia)",
+        "Discourage curiosity and forcefully make students memorize books"
+      ]
+    },
+    {
+      "id": "st-marys-school",
+      "name": "St. Marys",
+      "reasons": [
+        "Extremely conservative dressing standards (This has led to physical abuses)",
+        "Privacy and Child Rights Violation",
+        "Religious brainwashing of students",
+        "Completely prohibited male-female interaction (even outside school premises)"
+      ]
+    },
+    {
+      "id": "graded-english-medium-school",
+      "name": "GEMS",
+      "reasons": [
+        "Physical Bullying by teachers"
+      ]
+    },
+    {
+      "id": "kavya",
+      "name": "Kavya",
+      "reasons": [
+        "School staff physically beating students and making verbal threats"
+      ]
+    },
+    {
+      "id": "dav-school",
+      "name": "DAV",
+      "reasons": [
+        "Verbally abusing parents for children for their relatively weak academic performance",
+        "Extreme academic pressures which might've led to suicides"
+      ]
+    },
+    {
+      "id": "vs-niketan-secondary-school",
+      "name": "VS Niketan",
+      "reasons": [
+        "Allegedly letting a rapist teacher continue teaching"
+      ]
+    },
+    {
+      "id": "ace-higher-secondary-school",
+      "name": "Ace Higher Secondary",
+      "reasons": [
+        "False Advertising and fabricating online reviews",
+        "Forcing students to give the school 5 star reviews online"
+      ]
     }
   ]
 }

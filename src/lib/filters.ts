@@ -59,24 +59,15 @@ export const DEFAULT_FILTERS: Filters = { q: "", type: "all", band: "all" };
 /**
  * Which pool of schools the table shows.
  *
- * `redflags` is the bottom three by overall rank — the same three the home
- * page shows under "Red flag schools". It is the default view: a reader who
- * opens `/rankings` cold sees the warning first, and toggles to the full
- * table. `all` is everything, with the existing search/sort/filters on top.
+ * `redflags` now renders the curated red-flag list (see `src/lib/data.ts`) — a
+ * separate set of schools with no rank or score, not the bottom of the table.
+ * `all` is the full ranked table, with search/sort/filters on top.
  */
 export type View = "redflags" | "all";
 
 export const DEFAULT_VIEW: View = "redflags";
 
-/** How many schools count as red flags. Three, matching the home page. */
-export const RED_FLAG_COUNT = 3;
-
 const VIEWS = new Set<string>(["redflags", "all"]);
-
-/** The red-flag pool: the lowest-ranked schools, in rank order. */
-export function redFlagSchools(): School[] {
-  return schools.slice(-RED_FLAG_COUNT);
-}
 
 /**
  * Sort keys. The `cost` key sorts on the INVERTED desirability score, not the
@@ -252,16 +243,12 @@ export function applySort(list: readonly School[], key: SortKey): School[] {
 /**
  * Filter then sort, in one call. The order matters: sort the smaller set.
  *
- * `view` scopes the pool first: `redflags` starts from the bottom three by
- * rank and applies the search/sort/filters within them, so sorting by name in
- * the red-flags view sorts those three rather than escaping the view. It
- * defaults to `"all"` so existing callers — and the tests that pin the
- * full-table behaviour — are unaffected; the app always passes the parsed URL
- * view, whose own default is `redflags`.
+ * The pool is always the full roster. The red-flags view is a separate curated
+ * list (`src/lib/data.ts`) and does not go through the table at all, so there is
+ * no view parameter here anymore.
  */
-export function selectSchools(filters: Filters, sort: SortKey, view: View = "all"): School[] {
-  const pool = view === "redflags" ? redFlagSchools() : schools;
-  return applySort(applyFilters(pool, filters), sort);
+export function selectSchools(filters: Filters, sort: SortKey): School[] {
+  return applySort(applyFilters(schools, filters), sort);
 }
 
 /* -------------------------------------------------------------------------- */

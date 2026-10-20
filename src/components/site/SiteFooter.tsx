@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { Container } from "@/components/site/Container";
 import { Rule } from "@/components/site/Rule";
 import { Wordmark } from "@/components/site/Wordmark";
-import { formatCount, formatDate } from "@/lib/format";
+import { formatCount, formatCountPlus, formatDate } from "@/lib/format";
 import { meta, totalSchools } from "@/lib/data";
 
 /**
@@ -38,7 +38,7 @@ export function SiteFooter() {
             <h2 className="type-label text-ink-inverse/50">Data</h2>
             <dl className="mt-4 space-y-2">
               <Datum term="Schools" value={formatCount(totalSchools)} />
-              <Datum term="Responses" value={formatCount(meta.totalResponses)} />
+              <Datum term="Responses" value={formatCountPlus(meta.totalResponses)} />
               <Datum term="Published" value={formatDate(meta.publicationDate)} />
             </dl>
           </div>

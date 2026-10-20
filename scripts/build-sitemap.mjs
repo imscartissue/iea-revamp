@@ -127,6 +127,13 @@ export function buildSitemap(origin) {
       priority: s.rank <= 10 ? "0.8" : "0.6",
       changefreq: "monthly",
     })),
+    // The curated red-flag list. A flagged school may not be in the ranked
+    // roster, so these URLs come from their own array.
+    ...data.redFlags.map((r) => ({
+      loc: `${origin}/red-flag/${r.id}`,
+      priority: "0.5",
+      changefreq: "monthly",
+    })),
   ];
 
   const body = urls
@@ -166,7 +173,7 @@ function main() {
   writeFileSync(join(ROOT, "public/sitemap.xml"), sitemap);
   writeFileSync(join(ROOT, "public/robots.txt"), robots);
 
-  console.log(`\n  ✓ public/sitemap.xml  — ${urls.length} URLs (${STATIC_ROUTES.length} routes + ${data.schools.length} schools)`);
+  console.log(`\n  ✓ public/sitemap.xml  — ${urls.length} URLs (${STATIC_ROUTES.length} routes + ${data.schools.length} schools + ${data.redFlags.length} red flags)`);
   console.log(`  ✓ public/robots.txt   — sitemap: ${origin}/sitemap.xml`);
   console.log(`    origin               ${origin}  (from ${source})`);
   console.log(`    lastmod              ${lastmod}\n`);

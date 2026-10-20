@@ -22,6 +22,18 @@ school's keys to the documented shape (`05-DATA.md`).
 Append to `contributors` in `src/data/contributors.ts`, drop the photo at
 `public/people/<id>.jpg`, and flip `SHOW_INTRO_PORTRAITS` once photos are ready.
 
+## Editing the red-flag list
+
+Edit the `redFlags` array in `src/data/schools.json` directly. Each entry is
+`{ id, name, reasons[] }`. The `id` is the URL slug — keep it stable once
+published, or the URL will 404. The `/rankings` red-flags view and the Home
+page teaser read this array; the order in the file is the source order, but the
+list is shuffled on every load so no order is presented as meaningful.
+
+The dispute email is the `RED_FLAG_EMAIL` constant at the top of
+`src/pages/RedFlagPage.tsx`. It is currently a placeholder — set a real address
+before launch.
+
 ## Adding a page
 
 1. Create `src/pages/XPage.tsx` (set SEO via `SEO.*` / `schoolSeo` + `applySeo`).

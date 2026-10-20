@@ -58,8 +58,8 @@ Helpers: `measure` (68ch), `measure-tight` (60ch), `measure-snug` (48ch),
 
 - Radius: `sm 2px`, `md 4px`, `lg 8px`. Sharp by default; only floating
   surfaces get 8px.
-- Only three shadows: sticky header, sheet/dialog, mobile nav panel + filter
-  drawer.
+- Only these shadows: sticky header, sheet/dialog, mobile nav panel, mobile
+  filter drawer.
 - Motion is transform/opacity-only CSS: `--ease-brand
   cubic-bezier(0.16,1,0.3,1)`. No animation library. A global
   `prefers-reduced-motion` rule disables animation; `useReducedMotion()` lets

@@ -7,9 +7,10 @@ A rebuild of [ieainstitute.org](https://ieainstitute.org/): a ranking of Nepali
 no sponsors.
 
 - **43 schools** in `src/data/schools.json`, ranked by overall score
-- **110 student responses**, attributed per school as a `responses` count
+- **200+ student responses**, attributed per school as a `responses` count
 - **4 scored dimensions**: School Environment, Infrastructure, Net Cost, Net Benefit
 - **1 unscored dimension**: Complaint (collected as text, never scored)
+- **10 red-flag schools** in a separate curated list, each with published reasons
 
 ## Who it is for
 
@@ -22,12 +23,13 @@ accreditation — the `/about` page and the data disclaimer say so explicitly.
 | Path | Page | Notes |
 |------|------|-------|
 | `/` | Home | `Hero`, top-10 list, how-to-read guide; the only route with the intro splash |
-| `/rankings` | Rankings | Search, sort, filter, full table (desktop) / stacked list (mobile) |
+| `/rankings` | Rankings | Red-flag list (default, shuffled, no rank) or the full table (desktop / mobile) |
 | `/school/:id` | School detail | Rank, score dial, category breakdown, neighbouring schools |
+| `/red-flag/:id` | Red flag detail | The published reasons a school is flagged, plus a dispute email |
 | `/methodology` | Methodology | How scores are built, shared sections with Home |
 | `/reports` | Annual report | Placeholder "coming soon" page, no dead links |
 | `/about` | About | Project, method, limitations, contributors, FAQs |
-| `*` | 404 | Styled page, also rendered in place for unknown school ids |
+| `*` | 404 | Styled page, also rendered in place for unknown school or red-flag ids |
 
 ## Design pillars
 

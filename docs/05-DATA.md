@@ -3,17 +3,28 @@
 ## `src/data/schools.json`
 
 The single data file the app imports. Top level: `{ "meta": {...}, "schools":
-[...] }` — 43 schools, rank-ordered ascending.
+[...], "redFlags": [...] }` — 43 schools rank-ordered ascending, plus a curated
+red-flag list.
 
 **`meta`**: `publicationDate`, `edition`, `title`, `subtitle`, `source`,
 `totalSchools`, `totalResponses`, `attributedResponses`,
 `unattributedResponses`, `surveyedButUnpublished`, `location`, `gradeRange`,
 `weights`, `categories[]` (`{key, label, blurb}`), `disclaimer`.
 
+`totalResponses` is a **floor, not a census** — the survey collected at least
+that many, so it is displayed as "200+" via `formatCountPlus` (`src/lib/format.ts`).
+The per-school `responses` counts scale to `attributedResponses`, so
+`meanResponses` stays consistent with the headline.
+
 **One school**: `id`, `rank`, `name`, `shortName`, `initials`, `logoColor`
 (legacy accent), `type` (`Public`/`Private`), `gradeRange`, `location`,
 `complaint` (text or `null`), `metrics`, `responses`, `overallScore`,
 `categories`, `band`.
+
+**One red flag**: `id` (also the URL slug), `name`, `reasons[]`. A flagged
+school is deliberately **not** a `School`: it has no score, rank or band, and it
+may not exist in the ranked roster (CCRC College and Kavya do not). An empty
+`reasons` array renders a "no reasons published yet" note.
 
 ## Scoring model
 
@@ -32,7 +43,8 @@ Weights: Environment 0.30 · Infrastructure 0.20 · Net Cost 0.20 · Net Benefit
 Display helpers live in `src/lib/scoring.ts` (`band`, `formatScore`,
 `formatWeight`, `categoryWeight`, `bandColor`, `monogramColor`); selection
 helpers in `src/lib/data.ts` (`getSchool`, `getSchoolBySlug`, `topSchools`,
-`neighbours`, `slugify`, `bandCounts`, `meanResponses`).
+`neighbours`, `getRedFlag`, `redFlags`, `slugify`, `bandCounts`,
+`meanResponses`).
 
 ## Contributors (`src/data/contributors.ts`)
 

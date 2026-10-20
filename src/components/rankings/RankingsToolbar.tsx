@@ -108,6 +108,30 @@ export function RankingsToolbar({
     return () => clearTimeout(id);
   }, [text, filters.q, onQuery]);
 
+  /*
+    The red-flags view is a curated list with no table, so the search / sort /
+    column / filter controls — which all operate on the ranked table — do not
+    apply there. Only the view toggle is shown. Hooks above always run, so
+    this early return is safe.
+  */
+  if (view === "redflags") {
+    return (
+      <div className="flex flex-col gap-4">
+        <ToggleGroup
+          type="single"
+          variant="outline"
+          value={view}
+          onValueChange={(v) => v && onView(v as View)}
+          aria-label="Choose which schools to show"
+          className="w-fit"
+        >
+          <ToggleGroupItem value="redflags">Red flags</ToggleGroupItem>
+          <ToggleGroupItem value="all">All schools</ToggleGroupItem>
+        </ToggleGroup>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-4">
       {/*
