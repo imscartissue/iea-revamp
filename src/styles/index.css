@@ -334,14 +334,14 @@
 /* --- interface: everything a reader operates is sans -------------------- */
 @utility type-ui {
   font-family: var(--font-sans);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
 /* Uppercase is only ever for labels, and always tracked. */
 @utility type-label {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   line-height: 1.4;
   letter-spacing: 0.14em;
   font-weight: 700;
@@ -350,7 +350,7 @@
 
 @utility type-caption {
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   line-height: 1.5;
 }
 
@@ -375,7 +375,7 @@
 
 @utility type-numeric-sm {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   line-height: 1.4;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -488,11 +488,11 @@
 @keyframes intro-person-in {
   from {
     opacity: 0;
-    transform: scale(0.7);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: none;
   }
 }
 
@@ -570,4 +570,164 @@ html.intro-active {
   to {
     stroke-dashoffset: var(--dial-to);
   }
+}
+
+/* ==========================================================================
+   Reveal on scroll
+
+   Sections and text blocks fade and rise into place as they enter the viewport.
+   Driven by `Reveal` / `useReveal()` toggling a class, so it is a CSS
+   transition (not an animation library). Runs on the compositor, and is
+   collapsed to instant by the global `prefers-reduced-motion` rule.
+   Elements that are already in viewport on load reveal immediately.
+   ========================================================================== */
+
+@keyframes text-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  transition:
+    opacity 800ms var(--ease-brand),
+    transform 800ms var(--ease-brand);
+}
+
+@utility reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@utility animate-text-in {
+  animation: text-in 800ms var(--ease-brand) both;
+}
+
+/* ==========================================================================
+   Valley map
+
+   The hero's stylised map of the Kathmandu Valley. Two motions, both subtle:
+   the school points pulse, and the whole field drifts so it reads as alive
+   without moving the geography a reader is trying to read. Both are
+   transform/opacity only.
+   ========================================================================== */
+
+@keyframes map-point-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* The soft halo behind each school point. Kept dimmer than the point itself so
+   the halos read as a field of light rather than 43 copies of one dot. */
+@keyframes map-point-halo {
+  0%,
+  100% {
+    opacity: 0.08;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes map-drift {
+  from {
+    transform: scale(1.02) translateY(0);
+  }
+  50% {
+    transform: scale(1.06) translateY(-10px);
+  }
+  to {
+    transform: scale(1.02) translateY(0);
+  }
+}
+
+/* The valley breathing: the centre glow swells and fades. */
+@keyframes map-breathe {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* Contour rings swelling outward, then settling back. */
+@keyframes map-ring {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.14;
+  }
+  50% {
+    transform: scale(1.07);
+    opacity: 0.05;
+  }
+}
+
+/* Pulse rings expanding from the valley's centre, fading as they travel. */
+@keyframes map-pulse-expand {
+  0% {
+    transform: scale(0.25);
+    opacity: 0.35;
+  }
+  70% {
+    opacity: 0.16;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* The river's dashed flow. `stroke-dashoffset` is paint-only. */
+@keyframes map-flow {
+  to {
+    stroke-dashoffset: -240;
+  }
+}
+
+@utility animate-map-point {
+  animation: map-point-pulse 3.2s ease-in-out infinite;
+}
+
+@utility animate-map-halo {
+  animation: map-point-halo 3.2s ease-in-out infinite;
+}
+
+@utility animate-map-drift {
+  animation: map-drift 20s var(--ease-brand-inout) infinite;
+  transform-origin: center;
+}
+
+@utility animate-map-breathe {
+  animation: map-breathe 7s ease-in-out infinite;
+}
+
+@utility animate-map-ring {
+  animation: map-ring 16s var(--ease-brand-inout) infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@utility animate-map-pulse-expand {
+  animation: map-pulse-expand 5.2s var(--ease-brand) infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@utility animate-map-flow {
+  animation: map-flow 9s linear infinite;
 }

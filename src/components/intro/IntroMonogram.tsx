@@ -21,14 +21,13 @@ import { cn } from "@/lib/utils";
 export function IntroMonogram({ phase }: { phase: IntroPhase }) {
   const WORDS = "Institute for Educational Accountability".split(" ");
 
-  // The last letter must start by ~1200ms so its 600ms rise finishes inside the
-  // 2000ms hold. Count letters, not words, so the timing survives rewording.
-  // Flat-mapped up front so the render below is a pure function of the index —
-  // no counter mutated mid-render.
+  // The last letter must start early enough that its 600ms rise finishes well
+  // before contributors begin at t=1200. 600ms total for all letters keeps the
+  // monogram phase clean and avoids letters still animating during the wipe.
   const LETTERS = WORDS.flatMap((word, wi) =>
     word.split("").map((letter, li) => ({ key: `${wi}-${li}`, letter })),
   );
-  const STAGGER = Math.min(60, Math.floor(1200 / LETTERS.length));
+  const STAGGER = Math.min(15, Math.floor(600 / LETTERS.length));
 
   // Word boundaries, so each word renders as one unbreakable unit.
   const STARTS: number[] = WORDS.map((_, wi) => WORDS.slice(0, wi).join("").length);
@@ -74,7 +73,7 @@ export function IntroMonogram({ phase }: { phase: IntroPhase }) {
       />
 
       {phase === "contributors" || phase === "exiting" ? (
-        <p className="mt-1 text-[0.625rem] tracking-[0.24em] text-ink-inverse/45 uppercase">
+        <p className="mt-1 text-[0.66rem] tracking-[0.24em] text-ink-inverse/45 uppercase">
           Built by the people who answered
         </p>
       ) : null}

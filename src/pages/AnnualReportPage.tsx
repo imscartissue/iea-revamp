@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import { Container } from "@/components/site/Container";
+import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
 import { SEO, applySeo } from "@/lib/seo";
 
@@ -19,19 +20,21 @@ export function AnnualReportPage() {
     <Container>
       <div className="animate-route-in">
         <header className="pt-12 md:pt-20">
-          <span className="type-label text-bronze-ink">2026</span>
-          <h1 tabIndex={-1} className="type-title measure-tight mt-5 text-ink outline-none">
-            Annual report
-          </h1>
+          <Reveal staggerMs={60}>
+            <span className="type-label text-bronze-ink">2026</span>
+            <h1 tabIndex={-1} className="type-title measure-tight mt-5 text-ink outline-none">
+              Annual report
+            </h1>
+          </Reveal>
         </header>
 
         <Rule tone="rule" className="mt-10" />
 
-        <section className="py-16 md:py-24">
+        <Reveal className="py-16 md:py-24" delayMs={60}>
           <p className="type-body-lg measure text-ink-muted">
             Coming soon — the full report on the 2026 survey is being prepared.
           </p>
-        </section>
+        </Reveal>
       </div>
     </Container>
   );

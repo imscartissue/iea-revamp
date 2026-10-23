@@ -59,7 +59,7 @@ export function HowToRead() {
                 <dt className="type-heading text-ink">
                   {category.label}
                   {category.invert ? (
-                    <span className="ml-2 align-middle text-[0.625rem] tracking-[0.12em] text-bronze-ink uppercase">
+                    <span className="ml-2 align-middle text-[0.66rem] tracking-[0.12em] text-bronze-ink uppercase">
                       inverted ↓
                     </span>
                   ) : null}

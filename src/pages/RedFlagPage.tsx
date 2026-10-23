@@ -1,18 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { Link, useParams } from "react-router";
 
 import { Container } from "@/components/site/Container";
+import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
+import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { applySeo, redFlagSeo } from "@/lib/seo";
 import { getRedFlag } from "@/lib/data";
 import type { RedFlag } from "@/lib/types";
-
-/**
- * The inbox for a red-flag dispute. A placeholder until a real address is
- * published — see `docs/06-WORKFLOWS.md`.
- */
-const RED_FLAG_EMAIL = "mail@ieainstitute.org";
 
 /**
  * One flagged school and the reasons for it.
@@ -38,8 +34,9 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
   return (
     <Container>
       <div className="animate-route-in">
-        <header className="pt-12 md:pt-20">
-          <nav aria-label="Breadcrumb" className="type-caption text-ink-faint">
+        <header className="pt-12 md:pt-24">
+          <Reveal staggerMs={60}>
+            <nav aria-label="Breadcrumb" className="type-caption text-ink-faint">
             <Link
               to="/rankings?view=redflags"
               className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
@@ -52,49 +49,93 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
             <span aria-current="page">{redFlag.name}</span>
           </nav>
 
-          <h1 tabIndex={-1} className="type-title measure-tight mt-6 text-ink outline-none">
-            {redFlag.name}
-          </h1>
+          <div className="mt-8 md:mt-10">
+            <h1 tabIndex={-1} className="type-title measure-tight text-ink outline-none">
+              {redFlag.name}
+            </h1>
+          </div>
+          </Reveal>
         </header>
 
-        <Rule tone="rule" className="mt-10" />
+        <Rule tone="rule" className="mt-12 md:mt-16" />
 
-        <section className="py-12 md:py-16">
-          <h2 className="type-label text-bronze-ink">Why this school is flagged</h2>
+        <Reveal className="py-12 md:py-16" delayMs={60}>
+          <SectionHeader
+            eyebrow="Red flag"
+            title="Why this school is flagged"
+            className="mb-8 md:mb-10"
+          />
 
           {redFlag.reasons.length === 0 ? (
-            <p className="type-body measure mt-4 text-ink-muted">
+            <p className="type-body-lg measure text-ink-muted">
               No specific reasons have been published for this school yet.
             </p>
           ) : (
-            <ul className="mt-6 flex flex-col">
-              {redFlag.reasons.map((reason) => (
+            <ol className="mt-6 flex flex-col gap-4">
+              {redFlag.reasons.map((reason, i) => (
                 <li
                   key={reason}
-                  className="flex items-start gap-4 border-b border-rule-soft py-4 last:border-b-0"
+                  className="grid gap-x-8 gap-y-2 border-b border-rule-soft py-6 last:border-b-0 last:pb-0 md:grid-cols-[3rem_minmax(0,1fr)]"
                 >
-                  <span aria-hidden="true" className="mt-[0.85em] h-0.5 w-5 shrink-0 bg-rule-soft" />
-                  <span className="type-body measure-snug text-ink">{reason}</span>
+                  <span
+                    aria-hidden="true"
+                    className="font-serif text-numeric-sm leading-6 text-bronze-ink"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="type-body-lg measure-snug font-bold text-ink leading-1.6">
+                    {reason}
+                  </p>
                 </li>
               ))}
-            </ul>
+            </ol>
           )}
-        </section>
+        </Reveal>
 
-        <Rule />
+        <Rule tone="rule" className="mt-16 md:mt-20" />
 
-        <section className="py-12 md:py-16">
-          <p className="type-body measure text-ink-muted">
-            If you disagree with any of this, mail us:{" "}
+        <Reveal className="py-12 md:py-16" delayMs={120}>
+          <SectionHeader
+            eyebrow="About this flag"
+            title="Where this comes from"
+            className="mb-8 md:mb-10"
+          />
+          <p className="type-body-lg measure text-ink-muted">
+            IEA received reports of these abuses from student surveys and a
+            detailed research of publicly available data.
+          </p>
+          <p className="type-body-lg measure mt-6 text-ink-muted">
+            If you have any queries, please contact us at{" "}
             <a
-              href={`mailto:${RED_FLAG_EMAIL}`}
+              href="mailto:ins.edu.ac@gmail.com"
               className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
             >
-              {RED_FLAG_EMAIL}
+              ins.edu.ac@gmail.com
             </a>
+            .
           </p>
-        </section>
+        </Reveal>
+
+        <Rule className="mt-16 md:mt-20 mb-10" />
+
+        <Reveal delayMs={180}>
+          <div className="flex flex-wrap gap-x-6 gap-y-3">
+            <ButtonLink to="/rankings?view=redflags">See all flagged schools</ButtonLink>
+            <ButtonLink to="/">Back to the home page</ButtonLink>
+          </div>
+        </Reveal>
       </div>
     </Container>
+  );
+}
+
+function ButtonLink({ to, children }: { to: string; children: ReactNode }) {
+  return (
+    <Link
+      to={to}
+      className="type-ui font-bold text-bronze-ink underline underline-offset-4 hover:decoration-2"
+    >
+      {children}
+    </Link>
   );
 }

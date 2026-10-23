@@ -26,9 +26,9 @@ function shuffled<T>(list: readonly T[]): T[] {
  * repeat visitor should not see the same school first every time.
  *
  * Rendered on the `/rankings` red-flags view as a responsive grid of cards —
- * one column on a phone, two on `sm`, three on `lg`. The 1px `gap-px` over a
- * `rule-soft` background draws the hairline dividers between cells, matching
- * the site's printed look.
+ * one column on a phone, two on `sm`, three on `lg`. Each card is a bordered
+ * box with canvas-coloured gaps between them, so an incomplete last row never
+ * leaves a dark void behind.
  */
 export function RedFlagList() {
   // Shuffled once per mount. A full page reload is a new mount, so the order
@@ -36,20 +36,20 @@ export function RedFlagList() {
   const list = useMemo(() => shuffled(redFlags), []);
 
   return (
-    <ul className="grid grid-cols-1 gap-px border border-rule-soft bg-rule-soft sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid grid-cols-1 gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-3">
       {list.map((redFlag) => (
-        <li key={redFlag.id} className="bg-canvas">
+        <li key={redFlag.id}>
           <Link
             to={`/red-flag/${redFlag.id}`}
-            className="flex h-full flex-col gap-3 p-5 transition-colors hover:bg-bronze-wash"
+            className="block h-full p-6 border border-rule-soft bg-canvas transition-colors hover:bg-bronze-wash"
           >
             <div className="flex items-center gap-3">
-              <Monogram name={redFlag.name} size="md" />
-              <span className="min-w-0 flex-1 truncate font-serif text-[0.9375rem] font-bold text-ink hover:underline">
+              <Monogram name={redFlag.name} size="lg" />
+              <span className="min-w-0 flex-1 truncate font-serif text-[1rem] font-bold text-ink hover:underline">
                 {redFlag.name}
               </span>
             </div>
-            <span className="type-caption text-ink-faint">
+            <span className="type-body text-ink-faint">
               {redFlag.reasons.length} reason{redFlag.reasons.length === 1 ? "" : "s"}
             </span>
           </Link>

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router";
 
 import { Container } from "@/components/site/Container";
+import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
 import { SchoolHero } from "@/components/school/SchoolHero";
 import { CategoryBreakdown } from "@/components/school/CategoryBreakdown";
@@ -49,19 +50,21 @@ function SchoolDetail({ school }: { school: School }) {
 
         <Rule tone="rule" className="mt-10 md:mt-14" />
 
-        <div className="py-12 md:py-16">
+        <Reveal className="py-12 md:py-16" delayMs={60}>
           <CategoryBreakdown school={school} />
-        </div>
+        </Reveal>
 
         <Rule />
 
-        <div className="py-12 md:py-16">
+        <Reveal className="py-12 md:py-16" delayMs={120}>
           <NeighboursTable school={school} />
-        </div>
+        </Reveal>
 
         <Rule className="mb-10" />
 
-        <SchoolNavArrows school={school} />
+        <Reveal delayMs={180}>
+          <SchoolNavArrows school={school} />
+        </Reveal>
       </div>
     </Container>
   );

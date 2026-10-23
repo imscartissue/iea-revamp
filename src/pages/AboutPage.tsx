@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 import { Container } from "@/components/site/Container";
+import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
 import { Portrait } from "@/components/data-display/Portrait";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
@@ -33,21 +34,23 @@ export function AboutPage() {
     <Container>
       <div className="animate-route-in">
         <header className="pt-12 md:pt-20">
-          <h1 tabIndex={-1} className="type-title measure-tight text-ink outline-none">
-            About this project
-          </h1>
-          <p className="type-body-lg measure mt-6 text-ink-muted">
-            IEA Institute is an independent, student-sourced ranking of Nepali +2 schools. It
-            exists because choosing a school in Nepal is unusually opaque — brochures are
-            unverifiable, fees are rarely published, and the people with the most direct
-            experience had no way to compare notes.
-          </p>
+          <Reveal staggerMs={60}>
+            <h1 tabIndex={-1} className="type-title measure-tight text-ink outline-none">
+              About this project
+            </h1>
+            <p className="type-body-lg measure mt-6 text-ink-muted">
+              IEA Institute is an independent, student-sourced ranking of Nepali +2 schools. It
+              exists because choosing a school in Nepal is unusually opaque — brochures are
+              unverifiable, fees are rarely published, and the people with the most direct
+              experience had no way to compare notes.
+            </p>
+          </Reveal>
         </header>
 
         <Rule tone="rule" className="mt-10" />
 
         {/* --- the project in numbers ------------------------------------- */}
-        <section className="py-12 md:py-16">
+        <Reveal className="py-12 md:py-16" delayMs={60}>
           <StatRow>
             <StatBlock
               value={formatCount(totalSchools)}
@@ -71,12 +74,12 @@ export function AboutPage() {
             own numbers, no sponsor paid for placement, and no respondent is identifiable in
             anything published here.
           </p>
-        </section>
+        </Reveal>
 
         <Rule />
 
         {/* --- method ------------------------------------------------------ */}
-        <section className="py-12 md:py-16">
+        <Reveal className="py-12 md:py-16" delayMs={120}>
           <SectionHeader eyebrow="Method" title="How the score is calculated" />
           <ol className="mt-8 flex flex-col">
             {[
@@ -115,12 +118,12 @@ export function AboutPage() {
               </li>
             ))}
           </ol>
-        </section>
+        </Reveal>
 
         <Rule />
 
         {/* --- people ------------------------------------------------------ */}
-        <section className="py-12 md:py-16">
+        <Reveal className="py-12 md:py-16" delayMs={180}>
           <SectionHeader
             eyebrow="The people"
             title="Who built this"
@@ -135,12 +138,12 @@ export function AboutPage() {
             who are the reason any of this exists. They are not named here, and their
             individual answers are not published — only the aggregate reaches this page.
           </p>
-        </section>
+        </Reveal>
 
         <Rule />
 
         {/* --- FAQ --------------------------------------------------------- */}
-        <section className="py-12 md:py-16">
+        <Reveal className="py-12 md:py-16" delayMs={220}>
           <SectionHeader eyebrow="FAQ" title="What the score means" />
           <div className="mt-8 flex flex-col gap-3">
             <FaqItem
@@ -194,12 +197,12 @@ export function AboutPage() {
               }
             />
           </div>
-        </section>
+        </Reveal>
 
         <Rule />
 
         {/* --- provenance --------------------------------------------------- */}
-        <section className="py-12 md:py-16">
+        <Reveal className="py-12 md:py-16" delayMs={260}>
           <p className="type-body measure text-ink-muted">{meta.disclaimer}</p>
 
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
@@ -210,7 +213,7 @@ export function AboutPage() {
               <Link to="/">Back to the home page</Link>
             </Button>
           </div>
-        </section>
+        </Reveal>
       </div>
     </Container>
   );

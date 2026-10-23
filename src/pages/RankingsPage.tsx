@@ -2,6 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router";
 
 import { Container } from "@/components/site/Container";
+import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
 import { RankingsTable } from "@/components/rankings/RankingsTable";
 import { RankingsToolbar } from "@/components/rankings/RankingsToolbar";
@@ -32,31 +33,33 @@ export function RankingsPage() {
     <Container>
       <div className="animate-route-in">
         <header className="pt-12 md:pt-20">
-          <h1 tabIndex={-1} className="type-title text-ink outline-none">
-            {view === "redflags" ? "Red flag schools" : "Rankings"}
-          </h1>
+          <Reveal staggerMs={60}>
+            <h1 tabIndex={-1} className="type-title text-ink outline-none">
+              {view === "redflags" ? "Red flag schools" : "Rankings"}
+            </h1>
 
-          <dl className="type-caption mt-6 flex flex-wrap gap-x-8 gap-y-1 text-ink-faint">
-            <div className="flex gap-2">
-              <dt>Published</dt>
-              <dd className="text-ink-muted">
-                <time dateTime={meta.publicationDate}>{formatDate(meta.publicationDate)}</time>
-              </dd>
-            </div>
-            <div className="flex gap-2">
-              <dt>Responses</dt>
-              <dd className="text-ink-muted">{formatCountPlus(meta.totalResponses)}</dd>
-            </div>
-            <div className="flex gap-2">
-              <dt>Source</dt>
-              <dd className="text-ink-muted">{meta.source}</dd>
-            </div>
-          </dl>
+            <dl className="type-caption mt-6 flex flex-wrap gap-x-8 gap-y-1 text-ink-faint">
+              <div className="flex gap-2">
+                <dt>Published</dt>
+                <dd className="text-ink-muted">
+                  <time dateTime={meta.publicationDate}>{formatDate(meta.publicationDate)}</time>
+                </dd>
+              </div>
+              <div className="flex gap-2">
+                <dt>Responses</dt>
+                <dd className="text-ink-muted">{formatCountPlus(meta.totalResponses)}</dd>
+              </div>
+              <div className="flex gap-2">
+                <dt>Source</dt>
+                <dd className="text-ink-muted">{meta.source}</dd>
+              </div>
+            </dl>
+          </Reveal>
         </header>
 
         <Rule tone="rule" className="mt-8 md:mt-10" />
 
-        <div className="py-8 md:py-10">
+        <Reveal className="py-8 md:py-10" delayMs={60}>
           <RankingsToolbar
             filters={filters}
             sort={sort}
@@ -73,45 +76,47 @@ export function RankingsPage() {
             onToggleColumn={toggleColumn}
             onReset={reset}
           />
-        </div>
+        </Reveal>
 
         <Rule />
 
-        {view === "redflags" ? (
-          /* The curated red-flag list. No rank, no score, shuffled on load —
-             see RedFlagList for why it is not a filtered table. */
-          <RedFlagList />
-        ) : rows.length === 0 ? (
-          <EmptyState query={filters.q || undefined} onReset={reset} />
-        ) : (
-          <>
-            {/* Desktop: the real table. */}
-            <div className="hidden md:block">
-              <RankingsTable
-                rows={rows}
-                columns={columns}
-                sort={sort}
-                onSort={setSort}
-                onNavigate={onNavigate}
-              />
-            </div>
+        <Reveal delayMs={120}>
+          {view === "redflags" ? (
+            /* The curated red-flag list. No rank, no score, shuffled on load —
+               see RedFlagList for why it is not a filtered table. */
+            <RedFlagList />
+          ) : rows.length === 0 ? (
+            <EmptyState query={filters.q || undefined} onReset={reset} />
+          ) : (
+            <>
+              {/* Desktop: the real table. */}
+              <div className="hidden md:block">
+                <RankingsTable
+                  rows={rows}
+                  columns={columns}
+                  sort={sort}
+                  onSort={setSort}
+                  onNavigate={onNavigate}
+                />
+              </div>
 
-            {/* Mobile: a stacked list, because a 9-column table on a 360px
-                screen is unusable. See SchoolListRow for why this is a
-                separate component rather than responsive table cells. */}
-            <ul className="md:hidden">
-              {rows.map((school) => (
-                <SchoolListRow key={school.id} school={school} />
-              ))}
-            </ul>
+              {/* Mobile: a stacked list, because a 9-column table on a 360px
+                  screen is unusable. See SchoolListRow for why this is a
+                  separate component rather than responsive table cells. */}
+              <ul className="md:hidden">
+                {rows.map((school) => (
+                  <SchoolListRow key={school.id} school={school} />
+                ))}
+              </ul>
 
-            <p className="type-caption measure mt-10 border-t border-rule-soft pt-6 text-ink-faint">
-              Net Cost is inverted: a school that costs less to attend scores higher, so the
-              column reads like every other one. Overall score is a weighted blend of School
-              Environment (30%), Net Benefit (30%), Infrastructure (20%) and Net Cost (20%).
-            </p>
-          </>
-        )}
+              <p className="type-caption measure mt-10 border-t border-rule-soft pt-6 text-ink-faint">
+                Net Cost is inverted: a school that costs less to attend scores higher, so the
+                column reads like every other one. Overall score is a weighted blend of School
+                Environment (30%), Net Benefit (30%), Infrastructure (20%) and Net Cost (20%).
+              </p>
+            </>
+          )}
+        </Reveal>
       </div>
     </Container>
   );

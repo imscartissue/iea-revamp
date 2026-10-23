@@ -74,7 +74,7 @@ export function ContributorStrip({ phase }: { phase: IntroPhase }) {
                 style={{ animationDelay: `${delay + 40}ms` }}
               >
                 {name ? (
-                  <span className="line-clamp-2 text-center text-[0.625rem] leading-tight tracking-[0.08em] text-ink-inverse/70 uppercase">
+                  <span className="line-clamp-2 text-center text-[0.66rem] leading-tight tracking-[0.08em] text-ink-inverse/70 uppercase">
                     {name}
                   </span>
                 ) : (
@@ -92,7 +92,7 @@ export function ContributorStrip({ phase }: { phase: IntroPhase }) {
 
         {overflow > 0 ? (
           <li
-            className="flex items-center pt-10 text-[0.625rem] tracking-[0.08em] text-ink-inverse/50 uppercase animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+            className="flex items-center pt-10 text-[0.66rem] tracking-[0.08em] text-ink-inverse/50 uppercase animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
             style={{ animationDelay: `${1250 + INTRO_CONTRIBUTOR_SLOTS * 40}ms` }}
           >
             +{overflow}

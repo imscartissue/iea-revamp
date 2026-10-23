@@ -40,7 +40,7 @@ export function Monogram({
       className={cn(
         "inline-flex shrink-0 items-center justify-center rounded-full",
         "font-serif font-bold",
-        size === "sm" && "size-7 text-[0.625rem]",
+        size === "sm" && "size-7 text-[0.66rem]",
         size === "md" && "size-9 text-xs",
         size === "lg" && "size-12 text-sm",
         size === "xl" && "size-16 text-lg",

@@ -52,10 +52,9 @@ hex. Class names go through `cn()` (`src/lib/utils.ts`).
 
 | Use this | For |
 |----------|-----|
-| `RedFlagList` | The `/rankings` red-flags view: a responsive grid of school cards (1 / 2 / 3 columns), **no rank and no score**, shuffled on every load. Not a filtered table |
+| `RedFlagList` | The `/rankings` red-flags view: a responsive grid of bordered school cards (1 / 2 / 3 columns), **no rank and no score**, shuffled on every load. Canvas-coloured gaps between cards mean an incomplete last row never leaves a dark void. Not a filtered table |
 
-`/red-flag/:id` is a page, not a component — see `src/pages/RedFlagPage.tsx`.
-It renders the school's published reasons and a dispute email at the bottom.
+`/red-flag/:id` is a page (`src/pages/RedFlagPage.tsx`) that shows the flagged school's name, its published reasons as a numbered list, a provenance note ("Where this comes from"), the contact email, and navigation back to the list or home. It renders the school's published reasons and a dispute email at the bottom.
 
 ## `school/` — `/school/:id` detail
 
