@@ -1256,83 +1256,78 @@
   ],
   "redFlags": [
     {
-      "id": "crc-college",
-      "name": "CCRC College",
-      "reasons": []
-    },
-    {
       "id": "budhanilkantha-school",
       "name": "Budhanilkantha School",
       "reasons": [
-        "Hostel bullying environment"
+        "Reports of a hostel environment characterized by bullying and intimidation."
       ]
     },
     {
       "id": "united-academy",
       "name": "United Academy",
       "reasons": [
-        "Extreme physical punishments for unverified offences",
-        "Disciplinary actions taken for school rule infringements outside school premises"
+        "Reports of severe physical punishment allegedly imposed for disciplinary offences that had not been verified.",
+        "Reports of disciplinary action for alleged school-rule violations occurring outside school premises."
       ]
     },
     {
       "id": "kathmandu-model-college",
       "name": "KMC Bagbazar",
       "reasons": [
-        "Physical assaults for minor disciplinary violations (Using washrooms during class time)",
-        "Public humiliation; Verbal assaults [called a student a whore publicly]",
-        "Sexual assault and sexual coercion by school authorities (especially female students)",
-        "Verbally abused students over family issues",
-        "Female CI stalking students' private lives; Accusing students of wearing makeups (completely legal) and punishing them",
-        "Teachers (PNC and SPJ) sexually assaulting female students and even sending inappropriate pictures in their DMs (straight up paedophilia)",
-        "Discourage curiosity and forcefully make students memorize books"
+        "Reports of physical punishment for minor disciplinary infractions, including using the washroom during class.",
+        "Reports of public humiliation and verbal abuse, including an allegation that a student was publicly called a “whore.”",
+        "Reports of sexual assault and sexual coercion allegedly involving school authorities, including allegations concerning female students.",
+        "Reports of students being verbally abused over family-related circumstances.",
+        "Reports of intrusive monitoring of students’ private lives and disciplinary action over alleged makeup use.",
+        "Reports of sexual misconduct by teachers, including alleged sexual assault of female students and the sending of inappropriate images through private messages. Allegations involving minors warrant particular scrutiny and appropriate safeguarding action.",
+        "Reports of teaching practices that discourage curiosity and rely heavily on rote memorization."
       ]
     },
     {
       "id": "st-marys-school",
-      "name": "St. Marys",
+      "name": "St. Mary’s",
       "reasons": [
-        "Extremely conservative dressing standards (This has led to physical abuses)",
-        "Privacy and Child Rights Violation",
-        "Religious brainwashing of students",
-        "Completely prohibited male-female interaction (even outside school premises)"
+        "Reports of restrictive dress codes and alleged physical punishment associated with their enforcement.",
+        "Reports of practices raising concerns about student privacy and children’s rights.",
+        "Reports of religious instruction or practices alleged to exert undue influence on students’ beliefs.",
+        "Reports of restrictions on male-female interaction extending beyond school premises."
       ]
     },
     {
       "id": "graded-english-medium-school",
       "name": "GEMS",
       "reasons": [
-        "Physical Bullying by teachers"
+        "Reports of physical bullying or physical mistreatment by teachers."
       ]
     },
     {
       "id": "kavya",
       "name": "Kavya",
       "reasons": [
-        "School staff physically beating students and making verbal threats"
+        "Reports of staff allegedly physically beating students and making verbal threats."
       ]
     },
     {
       "id": "dav-school",
       "name": "DAV",
       "reasons": [
-        "Verbally abusing parents for children for their relatively weak academic performance",
-        "Extreme academic pressures which might've led to suicides"
+        "Reports of parents being verbally abused over their children’s comparatively weak academic performance.",
+        "Reports of severe academic pressure and concerns about its potential effects on student well-being."
       ]
     },
     {
       "id": "vs-niketan-secondary-school",
       "name": "VS Niketan",
       "reasons": [
-        "Allegedly letting a rapist teacher continue teaching"
+        "Reports alleging that a teacher accused of rape was permitted to continue teaching. The circumstances and the school’s response require clarification."
       ]
     },
     {
       "id": "ace-higher-secondary-school",
       "name": "Ace Higher Secondary",
       "reasons": [
-        "False Advertising and fabricating online reviews",
-        "Forcing students to give the school 5 star reviews online"
+        "Concerns regarding potentially misleading advertising and the authenticity of online reviews.",
+        "Reports that students were pressured or required to post five-star reviews of the school online."
       ]
     }
   ]

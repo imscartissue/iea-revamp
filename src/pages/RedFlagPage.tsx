@@ -8,9 +8,9 @@ import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { Monogram } from "@/components/data-display/Monogram";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { applySeo, redFlagSeo } from "@/lib/seo";
-import { getRedFlag } from "@/lib/data";
+import { getRedFlag, schools } from "@/lib/data";
 import { meta } from "@/lib/data";
-import type { RedFlag } from "@/lib/types";
+import type { RedFlag, School } from "@/lib/types";
 
 /**
  * One flagged school and the reasons for it.
@@ -28,6 +28,14 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
   useEffect(() => {
     applySeo(redFlagSeo(redFlag));
   }, [redFlag]);
+
+  // Some flagged schools are also in the ranked roster. Match by name (the
+  // red-flag name may be a short form of the ranked name).
+  const matchedSchool: School | undefined = schools.find((s) => {
+    const a = s.name.toLowerCase();
+    const b = redFlag.name.toLowerCase();
+    return a === b || a.startsWith(b) || b.startsWith(a);
+  });
 
   return (
     <>
@@ -128,6 +136,26 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
             </ol>
           )}
 
+          {matchedSchool ? (
+            <Reveal className="mt-8" delayMs={90}>
+              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-y border-rule-soft py-4">
+                <span className="type-label text-ink-faint">In the ranking</span>
+                <span className="font-serif type-numeric-sm text-bronze-ink">
+                  #{matchedSchool.rank}
+                </span>
+                <span className="type-caption text-ink-muted">
+                  overall {matchedSchool.overallScore.toFixed(1)}
+                </span>
+                <Link
+                  to={`/school/${matchedSchool.id}`}
+                  className="type-caption text-bronze-ink underline underline-offset-4 hover:decoration-2"
+                >
+                  View its ranking profile →
+                </Link>
+              </div>
+            </Reveal>
+          ) : null}
+
           {/* Source well. */}
           <Reveal className="mt-12 md:mt-16" delayMs={120}>
             <div className="border-l-2 border-band-weak bg-sunken px-6 py-6 md:px-8">
@@ -139,10 +167,10 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
               <p className="type-body-lg measure mt-6 text-ink-muted">
                 If you have any queries, please contact us at{" "}
                 <a
-                  href="mailto:ins.edu.ac@gmail.com"
+                  href="mailto:info@ieainstitute.org"
                   className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
                 >
-                  ins.edu.ac@gmail.com
+                  info@ieainstitute.org
                 </a>
                 .
               </p>
@@ -163,7 +191,7 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
               <p className="type-caption mt-6 text-ink-faint">
                 Have information about this school?{" "}
                 <a
-                  href="mailto:ins.edu.ac@gmail.com"
+                  href="mailto:info@ieainstitute.org"
                   className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
                 >
                   Contact IEA

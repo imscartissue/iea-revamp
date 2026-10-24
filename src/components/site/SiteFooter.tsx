@@ -29,7 +29,7 @@ export function SiteFooter() {
             <h2 className="type-label text-ink-inverse/50">Pages</h2>
             <ul className="mt-4 space-y-2">
               <FooterLink to="/">Home</FooterLink>
-              <FooterLink to="/reports">Reports</FooterLink>
+              <FooterLink to="/rankings">Ranking</FooterLink>
               <FooterLink to="/about">About</FooterLink>
             </ul>
           </nav>
