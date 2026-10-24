@@ -161,8 +161,10 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
             <div className="border-l-2 border-band-weak bg-sunken px-6 py-6 md:px-8">
               <p className="type-label text-band-weak">About this flag</p>
               <p className="type-body-lg measure mt-3 text-ink-muted">
-                IEA received reports of these abuses from student surveys and a
-                detailed research of publicly available data.
+                These highlights document student-reported abuses for public awareness and
+                accountability. They reflect information shared with IEA and do not necessarily
+                constitute independently verified things. Publication does not imply that IEA is the
+                originator of the allegations.
               </p>
               <p className="type-body-lg measure mt-6 text-ink-muted">
                 If you have any queries, please contact us at{" "}

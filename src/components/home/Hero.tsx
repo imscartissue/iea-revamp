@@ -22,7 +22,13 @@ import { meta, redFlags, schools, totalSchools } from "@/lib/data";
  */
 export function Hero() {
   const top5 = schools.slice(0, 5);
-  const flaggedPreview = redFlags.slice(0, 4);
+  const flaggedIds = new Set([
+    "ace-higher-secondary-school",
+    "vs-niketan-secondary-school",
+    "st-marys-school",
+    "kathmandu-model-college",
+  ]);
+  const flaggedPreview = redFlags.filter((r) => flaggedIds.has(r.id));
 
   return (
     <section className="pt-12 md:pt-20">
