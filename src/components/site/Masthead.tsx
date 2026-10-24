@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
 
 import { Container } from "@/components/site/Container";
 import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { Wordmark } from "@/components/site/Wordmark";
-import { useScrollShadow } from "@/hooks/useScrollShadow";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils";
 
 /**
- * Four destinations. There are six routes; the other two are the root (the
- * wordmark) and a 404. Adding a fifth nav item needs a reason.
+ * Destinations. The overlay (Harvard-style) carries all of them — there is no
+ * separate inline nav on desktop, so the header stays minimal and the reader's
+ * eye lands on content, not chrome.
  */
 const LINKS = [
   { to: "/methodology", label: "Methodology" },
@@ -20,183 +21,275 @@ const LINKS = [
 ] as const;
 
 /**
- * Sticky header.
+ * Harvard-style masthead.
  *
- * At rest it is transparent over the canvas. After 8px of scroll it gains a
- * solid `--surface` fill, a bottom hairline and a light shadow. That transition
- * happens exactly once, on a `boolean` from `useScrollShadow` — not per frame.
- *
- * On phones the four inline links do not fit beside the wordmark, so they
- * collapse into a hamburger that drops a full-width panel below the bar. The
- * panel is the same links stacked vertically with hairline separators — the
- * editorial pattern, just vertical.
+ * Behaviour mirrors harvard.edu:
+ *   - Sticky header whose brand bar slides up out of view once the reader has
+ *     scrolled past 300px, and slides back down on a 100px scroll-up (or at
+ *     the top of the page).
+ *   - A full-screen overlay nav triggered by the hamburger, with a staggered
+ *     entrance, focus management, ESC-to-close and body scroll lock.
+ *   - Overlay-only navigation on every breakpoint.
  */
 export function Masthead() {
-  const scrolled = useScrollShadow(8);
-  const [navOpen, setNavOpen] = useState(false);
-  const panelRef = useRef<HTMLDivElement>(null);
+  const { pathname } = useLocation();
+  const reducedMotion = useReducedMotion();
 
-  // Close on Escape.
-  useEffect(() => {
-    if (!navOpen) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setNavOpen(false);
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [navOpen]);
+  const [open, setOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [stuck, setStuck] = useState(false);
+  const [revealed, setRevealed] = useState(false);
 
-  // Close on outside click.
-  useEffect(() => {
-    if (!navOpen) return;
-    const onPointerDown = (event: PointerEvent) => {
-      if (panelRef.current?.contains(event.target as Node)) return;
-      setNavOpen(false);
-    };
-    document.addEventListener("pointerdown", onPointerDown);
-    return () => document.removeEventListener("pointerdown", onPointerDown);
-  }, [navOpen]);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const prevOpen = useRef(false);
 
-  // Close when the viewport grows past the mobile breakpoint.
+  // Scroll tracking — rAF-batched, tear-free enough for a boolean UI.
   useEffect(() => {
-    const mql = window.matchMedia("(min-width: 40rem)");
-    const onChange = () => {
-      if (mql.matches) setNavOpen(false);
+    let frame = 0;
+    let lastY = window.scrollY;
+    let stuckState = window.scrollY > 300;
+    let revealedState = false;
+
+    const update = () => {
+      const y = window.scrollY;
+      stuckState = y > 300;
+      if (y <= 0) {
+        revealedState = false;
+      } else if (stuckState) {
+        if (y < lastY - 100) revealedState = true;
+        else if (y > lastY) revealedState = false;
+      } else {
+        revealedState = false;
+      }
+      lastY = y;
+      setScrollY(y);
+      setStuck(stuckState);
+      setRevealed(revealedState);
     };
-    mql.addEventListener("change", onChange);
-    return () => mql.removeEventListener("change", onChange);
+
+    const schedule = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        update();
+      });
+    };
+
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+    };
   }, []);
 
+  // Close on route change. (setState-in-effect is intentional here: the overlay
+  // must close when the route changes via back/forward, not only on link click.)
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpen(false);
+  }, [pathname]);
+
+  // ESC to close.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Body scroll lock + inert on page content while open.
+  useEffect(() => {
+    if (!open) return;
+    const header = document.querySelector("header");
+    const main = document.getElementById("main");
+    const footer = document.querySelector("footer");
+    header?.setAttribute("inert", "");
+    main?.setAttribute("inert", "");
+    footer?.setAttribute("inert", "");
+    document.body.style.overflow = "hidden";
+    return () => {
+      header?.removeAttribute("inert");
+      main?.removeAttribute("inert");
+      footer?.removeAttribute("inert");
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  // Focus management.
+  useEffect(() => {
+    if (open && !prevOpen.current) {
+      const id = requestAnimationFrame(() => firstLinkRef.current?.focus());
+      return () => cancelAnimationFrame(id);
+    }
+    if (!open && prevOpen.current) {
+      triggerRef.current?.focus();
+    }
+    prevOpen.current = open;
+  }, [open]);
+
+  const brandHidden = stuck && !revealed && !open;
+  const scrolled = scrollY > 8;
+
+  const duration = reducedMotion ? "duration-0" : "duration-200";
+
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-40 transition-[background-color,box-shadow] duration-200",
-        scrolled || navOpen
-          ? "bg-surface shadow-header"
-          : "bg-canvas/0",
-      )}
-    >
-      <Container>
-        <div className="flex h-16 items-center justify-between gap-6 md:h-20">
+    <>
+      <header
+        className={cn(
+          "sticky top-0 z-50 transition-transform ease-brand",
+          duration,
+          brandHidden && "-translate-y-full",
+        )}
+      >
+        <div
+          className={cn(
+            "border-b transition-colors duration-200",
+            scrolled || open
+              ? "bg-surface/95 shadow-header backdrop-blur"
+              : "bg-canvas/0",
+            scrolled || open ? "border-rule-soft" : "border-transparent",
+          )}
+        >
+          <Container>
+            <div className="flex h-16 items-center justify-between gap-6 md:h-20">
+              <NavLink
+                to="/"
+                end
+                className="shrink-0 rounded-sm"
+                aria-label="IEA — home"
+              >
+                <Wordmark size="sm" />
+              </NavLink>
+
+              <div className="flex items-center gap-1 md:gap-2">
+                <ThemeToggle />
+                <button
+                  ref={triggerRef}
+                  type="button"
+                  onClick={() => setOpen(true)}
+                  aria-expanded={open}
+                  aria-controls="site-nav"
+                  aria-label="Open navigation"
+                  className="inline-flex size-11 items-center justify-center gap-2 rounded-sm text-ink-muted transition-colors hover:text-ink"
+                >
+                  <Menu aria-hidden="true" className="size-5" />
+                  <span className="hidden font-sans text-sm font-bold uppercase tracking-[0.14em] lg:inline">
+                    Menu
+                  </span>
+                </button>
+              </div>
+            </div>
+          </Container>
+        </div>
+      </header>
+
+      {/* Full-screen overlay nav — always mounted so the exit animation runs. */}
+      <div
+        id="site-nav"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!open}
+        aria-label="Site navigation"
+        className={cn(
+          "fixed inset-0 z-50 flex flex-col bg-ink text-ink-inverse",
+          "transition-[transform,opacity] ease-brand",
+          reducedMotion ? "duration-0" : "duration-[400ms]",
+          open
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-full opacity-0 pointer-events-none",
+        )}
+      >
+        {/* Overlay top bar */}
+        <div className="flex h-16 items-center justify-between border-b border-ink-inverse/10 px-4 md:h-20 md:px-8">
           <NavLink
             to="/"
-            // `end` so the wordmark is not "active" while on every other route,
-            // and a full reset of scroll on click.
             end
             className="shrink-0 rounded-sm"
             aria-label="IEA — home"
+            onClick={() => setOpen(false)}
           >
-            <Wordmark size="sm" />
+            <Wordmark size="sm" className="text-ink-inverse" />
           </NavLink>
 
           <div className="flex items-center gap-1 md:gap-2">
-            {/* Inline nav — desktop only. On phones the hamburger below takes over. */}
-            <div className="hidden sm:block">
-              <SiteNav />
-            </div>
             <ThemeToggle />
-            {/* Hamburger — mobile only. */}
             <button
               type="button"
-              onClick={() => setNavOpen(!navOpen)}
-              aria-expanded={navOpen}
-              aria-controls="mobile-nav"
-              aria-label={navOpen ? "Close navigation" : "Open navigation"}
-              className="inline-flex size-11 items-center justify-center rounded-sm text-ink-muted transition-colors hover:text-ink sm:hidden"
+              onClick={() => setOpen(false)}
+              aria-label="Close navigation"
+              className="inline-flex size-11 items-center justify-center gap-2 rounded-sm text-ink-inverse/70 transition-colors hover:text-ink-inverse"
             >
-              {navOpen ? (
-                <X aria-hidden="true" className="size-5" />
-              ) : (
-                <Menu aria-hidden="true" className="size-5" />
-              )}
+              <X aria-hidden="true" className="size-5" />
+              <span className="hidden font-sans text-sm font-bold uppercase tracking-[0.14em] lg:inline">
+                Close
+              </span>
             </button>
           </div>
         </div>
-      </Container>
 
-      {/* Mobile nav panel — absolute so it overlays content without pushing it. */}
-      {navOpen && (
-        <div
-          id="mobile-nav"
-          ref={panelRef}
-          className="absolute inset-x-0 top-full border-t border-rule-soft bg-surface shadow-float sm:hidden"
+        {/* Nav list */}
+        <nav
+          aria-label="Main"
+          className="flex-1 overflow-y-auto px-4 pb-12 pt-8 md:px-8 md:pt-16"
         >
-          <Container>
-            <nav aria-label="Mobile">
-              <ul className="flex flex-col">
-                {LINKS.map((link) => (
-                  <li
-                    key={link.to}
-                    className="border-b border-rule-soft last:border-b-0"
-                  >
-                    <NavLink
-                      to={link.to}
-                      onClick={() => setNavOpen(false)}
-                      className={({ isActive }) =>
-                        cn(
-                          "flex items-center justify-between py-3.5 type-ui transition-colors",
-                          isActive ? "text-ink" : "text-ink-muted hover:text-ink",
-                        )
-                      }
-                    >
-                      {({ isActive }) => (
-                        <>
-                          {link.label}
-                          {isActive ? (
-                            <span
-                              aria-hidden="true"
-                              className="h-0.5 w-6 bg-bronze"
-                            />
-                          ) : null}
-                        </>
-                      )}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </Container>
-        </div>
-      )}
-    </header>
-  );
-}
+          <ul className="flex flex-col gap-1 md:gap-2">
+            {LINKS.map((link, i) => (
+              <li
+                key={link.to}
+                style={{
+                  transitionDelay: open && !reducedMotion ? `${0.2 + i * 0.05}s` : "0s",
+                }}
+                className={cn(
+                  "transition-[opacity,transform] ease-brand",
+                  reducedMotion ? "duration-0" : "duration-500",
+                  open
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-4 opacity-0",
+                )}
+              >
+                <NavLink
+                  ref={i === 0 ? firstLinkRef : undefined}
+                  to={link.to}
+                  onClick={() => setOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      "group relative inline-flex items-baseline font-serif text-[2.25rem] font-bold leading-[1.1] tracking-[-0.02em] transition-colors md:text-[3rem] xl:text-[3.5rem]",
+                      isActive
+                        ? "text-ink-inverse"
+                        : "text-ink-inverse/70 hover:text-ink-inverse",
+                    )
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {link.label}
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "absolute inset-x-0 -bottom-1 h-px origin-left bg-ink-inverse",
+                          "transition-transform duration-300 ease-brand",
+                          isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+                        )}
+                      />
+                    </>
+                  )}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
 
-function SiteNav() {
-  return (
-    <nav aria-label="Main">
-      <ul className="flex items-center gap-1 md:gap-2">
-        {LINKS.map((link) => (
-          <li key={link.to}>
-            <NavLink
-              to={link.to}
-              className={({ isActive }) =>
-                cn(
-                  "relative inline-flex h-10 items-center rounded-sm px-3",
-                  "font-sans type-ui transition-colors duration-[120ms]",
-                  isActive ? "text-ink" : "text-ink-muted hover:text-ink",
-                )
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  {link.label}
-                  {/* A 2px bronze underline on the active item. `transform`-
-                      only, so it never triggers a layout pass. */}
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute inset-x-3 bottom-1.5 h-0.5 origin-left bg-bronze",
-                      "transition-transform duration-200 ease-brand",
-                      isActive ? "scale-x-100" : "scale-x-0",
-                    )}
-                  />
-                </>
-              )}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-    </nav>
+          {/* Footer-ish meta inside the overlay, Harvard-style */}
+          <div className="mt-12 border-t border-ink-inverse/10 pt-6 md:mt-16">
+            <p className="max-w-prose font-sans text-sm leading-relaxed text-ink-inverse/50">
+              IEA — an independent examination of Nepali schools.
+            </p>
+          </div>
+        </nav>
+      </div>
+    </>
   );
 }
