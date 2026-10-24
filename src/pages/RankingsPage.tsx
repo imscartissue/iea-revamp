@@ -96,8 +96,9 @@ export function RankingsPage() {
             <EmptyState query={filters.q || undefined} onReset={reset} />
           ) : (
             <>
-              {/* Desktop: the real table. */}
-              <div className="hidden md:block">
+              {/* Desktop: the real table. Shown only on large screens so the
+                  eight columns never force a horizontal scroll on a tablet. */}
+              <div className="hidden lg:block">
                 <RankingsTable
                   rows={rows}
                   columns={columns}
@@ -107,10 +108,9 @@ export function RankingsPage() {
                 />
               </div>
 
-              {/* Mobile: a stacked list, because a 9-column table on a 360px
-                  screen is unusable. See SchoolListRow for why this is a
-                  separate component rather than responsive table cells. */}
-              <ul className="md:hidden">
+              {/* Stacked list below `lg`: a 9-column table on a narrow screen
+                  is unusable, so the metrics move into a compact grid. */}
+              <ul className="lg:hidden">
                 {rows.map((school) => (
                   <SchoolListRow key={school.id} school={school} />
                 ))}

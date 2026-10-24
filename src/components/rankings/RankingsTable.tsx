@@ -52,7 +52,7 @@ export function RankingsTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[42rem] border-collapse">
+      <table className="w-full border-collapse">
         <caption className="sr-only">
           Nepali +2 school rankings. {rows.length} schools, sorted by {currentSortLabel(sort)}.
         </caption>
@@ -110,8 +110,8 @@ function HeadCell({
       scope="col"
       aria-sort={active ? (sort.startsWith("-") ? "descending" : "ascending") : "none"}
       className={cn(
-        "sticky top-0 z-20 bg-canvas px-3 py-3 text-left align-bottom first:pl-0 last:pr-0",
-        column === "score" && "text-right",
+        "sticky top-0 z-20 bg-canvas px-2 py-3 text-left align-bottom first:pl-0 last:pr-0",
+        column === "score" && "sticky right-0 z-30 bg-canvas text-right shadow-[-2px_0_6px_-2px_rgb(19_26_44/0.12)]",
         column === "rank" && "sticky left-0 z-30",
         column === "school" && (rankVisible ? "sticky left-[2.25rem] z-30" : "sticky left-0 z-30"),
         (column === "rank" || column === "school") &&
@@ -207,8 +207,8 @@ const SchoolRow = memo(function SchoolRow({
         <td
           key={col}
           className={cn(
-            "px-3 py-3 align-middle first:pl-0 last:pr-0",
-            col === "score" && "text-right",
+            "px-2 py-3 align-middle first:pl-0 last:pr-0",
+            col === "score" && "sticky right-0 z-10 bg-canvas text-right shadow-[-2px_0_6px_-2px_rgb(19_26_44/0.12)]",
             col === "rank" && "sticky left-0 z-10 bg-canvas",
             col === "school" &&
               (columns.includes("rank")
