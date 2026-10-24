@@ -123,7 +123,7 @@ export function AboutPage() {
         <Reveal className="py-12 md:py-16" delayMs={180}>
           <SectionHeader
             eyebrow="The people"
-            title="Who built this"
+            title="The team"
           />
 
           <ContributorGrid />
