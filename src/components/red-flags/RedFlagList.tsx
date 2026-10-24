@@ -49,8 +49,11 @@ export function RedFlagList() {
                 {redFlag.name}
               </span>
             </div>
-            <span className="type-body text-ink-faint">
-              {redFlag.reasons.length} reason{redFlag.reasons.length === 1 ? "" : "s"}
+            <p className="type-caption mt-2 line-clamp-2 text-ink-muted">
+              {redFlag.reasons[0] ?? "Published reasons pending."}
+            </p>
+            <span className="type-caption mt-2 block text-ink-faint">
+              {redFlag.reasons.length} reason{redFlag.reasons.length === 1 ? "" : "s"} · Read more →
             </span>
           </Link>
         </li>

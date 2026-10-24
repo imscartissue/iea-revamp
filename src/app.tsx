@@ -5,7 +5,7 @@ import { ErrorBoundary } from "@/components/site/ErrorBoundary";
 import { IntroGate } from "@/components/intro/IntroGate";
 import { Masthead } from "@/components/site/Masthead";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { ThemeProvider } from "@/hooks/useTheme";
+
 import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 
@@ -49,11 +49,9 @@ const RedFlagPage = lazy(() => import("@/pages/RedFlagPage").then((m) => ({ defa
  */
 export function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <Shell />
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <Shell />
+    </BrowserRouter>
   );
 }
 

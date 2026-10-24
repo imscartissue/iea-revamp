@@ -1,10 +1,6 @@
 @import "tailwindcss";
 @import "./fonts.css";
 
-/* Class-based dark mode. The inline script in index.html sets `.dark` on <html>
-   before first paint, so this never flashes. */
-@custom-variant dark (&:is(.dark *));
-
 /* ==========================================================================
    Palette
 
@@ -58,38 +54,11 @@
   --band-weak: #9a3b34;
 }
 
-.dark {
-  color-scheme: dark;
-
-  --canvas: #0c101c;
-  --surface: #131a2c;
-  --raised: #1b2438;
-  --sunken: #080b14;
-
-  --ink: #f4ecd8;
-  --ink-muted: #a9b0c4;
-  --ink-faint: #7d859b;
-  --ink-inverse: #131a2c;
-
-  --rule: #2b3550;
-  --rule-soft: rgb(244 236 216 / 0.14);
-  --rule-strong: #b08d4c;
-
-  --bronze: #b08d4c;
-  --bronze-soft: #2a2418;
-  --bronze-wash: #1e1c16;
-
-  --band-strong: #5fa37c;
-  --band-fair: #b08d4c;
-  --band-weak: #d0786f;
-}
-
 /* ==========================================================================
    Theme tokens
 
    `inline` makes the generated utilities reference var(--canvas) rather than
-   the resolved value, so overriding a var in `.dark` is enough to retheme the
-   whole site. That is the whole theming mechanism.
+   the resolved value.
    ========================================================================== */
 
 @theme inline {

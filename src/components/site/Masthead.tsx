@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router";
-import { Menu, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router";
+
 
 import { Container } from "@/components/site/Container";
-import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { Wordmark } from "@/components/site/Wordmark";
+import { Monogram } from "@/components/data-display/Monogram";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { bandColor } from "@/lib/scoring";
+import { schools } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 /**
@@ -36,12 +38,18 @@ export function Masthead() {
   const reducedMotion = useReducedMotion();
 
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [scrollY, setScrollY] = useState(0);
   const [stuck, setStuck] = useState(false);
   const [revealed, setRevealed] = useState(false);
 
+  const navigate = useNavigate();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchPanelRef = useRef<HTMLDivElement>(null);
+  const searchButtonRef = useRef<HTMLButtonElement>(null);
   const prevOpen = useRef(false);
 
   // Scroll tracking — rAF-batched, tear-free enough for a boolean UI.
@@ -89,7 +97,48 @@ export function Masthead() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(false);
+    setSearchOpen(false);
+    setSearchQuery("");
   }, [pathname]);
+
+  const searchResults = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (q.length < 1) return [];
+    return schools
+      .filter(
+        (s) =>
+          s.name.toLowerCase().includes(q) ||
+          s.shortName.toLowerCase().includes(q) ||
+          s.location.toLowerCase().includes(q),
+      )
+      .slice(0, 8);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (searchOpen) {
+      const id = requestAnimationFrame(() => searchInputRef.current?.focus());
+      return () => cancelAnimationFrame(id);
+    }
+  }, [searchOpen]);
+
+  useEffect(() => {
+    if (!searchOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSearchOpen(false);
+    };
+    const onPointer = (e: PointerEvent) => {
+      const target = e.target as Node;
+      if (searchPanelRef.current?.contains(target)) return;
+      if (searchButtonRef.current?.contains(target)) return;
+      setSearchOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+    };
+  }, [searchOpen]);
 
   // ESC to close.
   useEffect(() => {
@@ -165,8 +214,35 @@ export function Masthead() {
                 <Wordmark size="sm" />
               </NavLink>
 
-              <div className="flex items-center gap-1 md:gap-2">
-                <ThemeToggle />
+              <div className="flex items-center gap-6 md:gap-8">
+                <button
+                  ref={searchButtonRef}
+                  type="button"
+                  onClick={() => setSearchOpen((v) => !v)}
+                  aria-expanded={searchOpen}
+                  aria-controls="site-search"
+                  aria-label="Open site search"
+                  className="inline-flex h-10 items-center gap-2 rounded-full border border-rule-soft bg-surface px-4 text-ink transition-colors hover:bg-bronze-wash"
+                >
+                  <svg
+                    aria-hidden="true"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="shrink-0"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                  </svg>
+                  <span className="hidden font-sans text-sm font-bold uppercase tracking-[0.14em] sm:inline">
+                    Search
+                  </span>
+                </button>
                 <button
                   ref={triggerRef}
                   type="button"
@@ -174,14 +250,131 @@ export function Masthead() {
                   aria-expanded={open}
                   aria-controls="site-nav"
                   aria-label="Open navigation"
-                  className="inline-flex size-11 items-center justify-center gap-2 rounded-sm text-ink-muted transition-colors hover:text-ink"
+                  className="inline-flex size-10 items-center justify-center rounded-sm text-ink transition-colors hover:text-bronze-ink"
                 >
-                  <Menu aria-hidden="true" className="size-5" />
-                  <span className="hidden font-sans text-sm font-bold uppercase tracking-[0.14em] lg:inline">
-                    Menu
-                  </span>
+                  <svg
+                    aria-hidden="true"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="shrink-0"
+                  >
+                    <line x1="4" y1="6" x2="20" y2="6" />
+                    <line x1="4" y1="12" x2="20" y2="12" />
+                    <line x1="4" y1="18" x2="20" y2="18" />
+                  </svg>
                 </button>
               </div>
+            </div>
+          </Container>
+        </div>
+
+        {/* Backdrop to dim the rest of the site while searching. */}
+        {searchOpen ? (
+          <div
+            aria-hidden="true"
+            onClick={() => setSearchOpen(false)}
+            className="fixed inset-0 z-30 bg-ink/40 backdrop-blur-[2px]"
+          />
+        ) : null}
+
+        {/* Search panel — drops below the brand bar. */}
+        <div
+          id="site-search"
+          ref={searchPanelRef}
+          aria-hidden={!searchOpen}
+          className={cn(
+            "absolute inset-x-0 top-full z-40 border-b border-rule-soft bg-surface shadow-float transition-[opacity,transform] ease-brand",
+            searchOpen
+              ? "translate-y-0 opacity-100"
+              : "pointer-events-none -translate-y-2 opacity-0",
+          )}
+        >
+          <Container>
+            <div className="py-4 md:py-6">
+              <div className="relative">
+                <svg
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-3 top-1/2 size-5 -translate-y-1/2 text-ink-muted"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
+                </svg>
+                <input
+                  ref={searchInputRef}
+                  type="search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && searchResults.length > 0) {
+                      navigate(`/school/${searchResults[0]!.id}`);
+                      setSearchOpen(false);
+                    }
+                  }}
+                  placeholder="Search schools by name or location"
+                  aria-label="Search schools by name or location"
+                  className="w-full rounded-sm border border-rule-soft bg-canvas py-3 pl-11 pr-4 font-sans text-base text-ink placeholder:text-ink-faint focus:border-bronze focus:outline-none"
+                />
+              </div>
+
+              {searchQuery.trim().length > 0 ? (
+                <div className="mt-4">
+                  {searchResults.length === 0 ? (
+                    <p className="type-caption text-ink-faint">
+                      No schools match “{searchQuery}”.
+                    </p>
+                  ) : (
+                    <ul className="flex flex-col divide-y divide-rule-soft">
+                      {searchResults.map((school) => (
+                        <li key={school.id}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              navigate(`/school/${school.id}`);
+                              setSearchOpen(false);
+                            }}
+                            className="flex w-full items-center gap-3 py-3 text-left transition-colors hover:bg-bronze-wash"
+                          >
+                            <Monogram
+                              name={school.name}
+                              label={school.initials}
+                              size="sm"
+                            />
+                            <span className="flex min-w-0 flex-1 flex-col">
+                              <span className="truncate font-serif text-[0.9375rem] font-bold text-ink">
+                                {school.name}
+                              </span>
+                              <span className="truncate type-caption text-ink-faint">
+                                {school.shortName} · {school.location}
+                              </span>
+                            </span>
+                            <span
+                              className={`type-numeric-sm ${bandColor(school.overallScore)}`}
+                            >
+                              {school.overallScore.toFixed(1)}
+                            </span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ) : (
+                <p className="mt-3 type-caption text-ink-faint">
+                  Type a school name, short name, or location.
+                </p>
+              )}
             </div>
           </Container>
         </div>
@@ -216,14 +409,25 @@ export function Masthead() {
           </NavLink>
 
           <div className="flex items-center gap-1 md:gap-2">
-            <ThemeToggle />
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close navigation"
               className="inline-flex size-11 items-center justify-center gap-2 rounded-sm text-ink-inverse/70 transition-colors hover:text-ink-inverse"
             >
-              <X aria-hidden="true" className="size-5" />
+              <svg
+                aria-hidden="true"
+                className="size-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
               <span className="hidden font-sans text-sm font-bold uppercase tracking-[0.14em] lg:inline">
                 Close
               </span>

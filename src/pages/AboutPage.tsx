@@ -39,10 +39,9 @@ export function AboutPage() {
               About this project
             </h1>
             <p className="type-body-lg measure mt-6 text-ink-muted">
-              IEA Institute is an independent, student-sourced ranking of Nepali +2 schools. It
-              exists because choosing a school in Nepal is unusually opaque — brochures are
-              unverifiable, fees are rarely published, and the people with the most direct
-              experience had no way to compare notes.
+              Institute for Educational Accountability is an independent, student-sourced ranking of
+              Nepali +2 schools. We aim to highlight the reality of high schools in Nepal beyond what
+              they advertise.
             </p>
           </Reveal>
         </header>
@@ -70,9 +69,7 @@ export function AboutPage() {
           </StatRow>
 
           <p className="type-body measure mt-8 text-ink-muted">
-            Every figure on this site comes from one anonymous survey. No school submitted its
-            own numbers, no sponsor paid for placement, and no respondent is identifiable in
-            anything published here.
+            All data was collected from anonymous surveys.
           </p>
         </Reveal>
 

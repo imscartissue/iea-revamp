@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { ArrowUpDown, Columns3, Search, SlidersHorizontal, X } from "lucide-react";
+import { ArrowUpDown, Check, Columns3, Copy, Search, SlidersHorizontal, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+
 import { Menu, MenuItem, MenuPanel, MenuTrigger } from "@/components/ui/menu";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -95,6 +95,7 @@ export function RankingsToolbar({
    */
   const [text, setText] = useState(filters.q);
   const [syncedQuery, setSyncedQuery] = useState(filters.q);
+  const [copied, setCopied] = useState(false);
   if (syncedQuery !== filters.q) {
     setSyncedQuery(filters.q);
     setText(filters.q);
@@ -107,6 +108,16 @@ export function RankingsToolbar({
     const id = setTimeout(() => onQuery(text), 150);
     return () => clearTimeout(id);
   }, [text, filters.q, onQuery]);
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* Clipboard unavailable; silently no-op. */
+    }
+  };
 
   /*
     The red-flags view is a curated list with no table, so the search / sort /
@@ -291,16 +302,55 @@ export function RankingsToolbar({
             Clear
           </Button>
         ) : null}
+
+        {/* Share the current view — state is URL-backed, so the link is the view. */}
+        <Button variant="outline" size="sm" onClick={copyLink} className="shrink-0">
+          {copied ? (
+            <>
+              <Check aria-hidden="true" />
+              Copied
+            </>
+          ) : (
+            <>
+              <Copy aria-hidden="true" />
+              Copy link
+            </>
+          )}
+        </Button>
       </div>
 
-      {/* Result count. `aria-live` so a screen-reader user hears the table
-          change after filtering, not just sees it. */}
+      {/* Result count + removable filter chips. `aria-live` so a screen-reader
+          user hears the table change after filtering, not just sees it. */}
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <p aria-live="polite" className="type-caption text-ink-muted">
           Showing <span className="type-numeric-sm text-ink">{shown}</span> of {total} schools
+          {" · "}
+          <span className="text-ink-muted">
+            sorted by {SORTS.find((s) => s.key === sort)?.label ?? "rank"}
+          </span>
         </p>
-        {filters.band !== "all" ? <Badge size="sm">{bandLabel(filters.band)}</Badge> : null}
-        {filters.type !== "all" ? <Badge size="sm">{filters.type}</Badge> : null}
+        {filters.band !== "all" ? (
+          <button
+            type="button"
+            onClick={() => onBand("all")}
+            className="inline-flex items-center gap-1 rounded-sm border border-rule-soft bg-surface px-2 py-0.5 type-caption text-ink-muted transition-colors hover:text-ink"
+            aria-label="Remove band filter"
+          >
+            {bandLabel(filters.band)}
+            <X aria-hidden="true" className="size-3" />
+          </button>
+        ) : null}
+        {filters.type !== "all" ? (
+          <button
+            type="button"
+            onClick={() => onType("all")}
+            className="inline-flex items-center gap-1 rounded-sm border border-rule-soft bg-surface px-2 py-0.5 type-caption text-ink-muted transition-colors hover:text-ink"
+            aria-label="Remove type filter"
+          >
+            {filters.type}
+            <X aria-hidden="true" className="size-3" />
+          </button>
+        ) : null}
       </div>
     </div>
   );

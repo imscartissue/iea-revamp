@@ -5,17 +5,15 @@ import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
+import { Monogram } from "@/components/data-display/Monogram";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { applySeo, redFlagSeo } from "@/lib/seo";
 import { getRedFlag } from "@/lib/data";
+import { meta } from "@/lib/data";
 import type { RedFlag } from "@/lib/types";
 
 /**
  * One flagged school and the reasons for it.
- *
- * A flagged school may not exist in the ranked roster (CCRC College, Kavya),
- * so this page never assumes a score, a rank or a band. An unknown id renders
- * the 404 in place rather than redirecting, keeping the reader's URL intact.
  */
 export function RedFlagPage() {
   const { id } = useParams<{ id: string }>();
@@ -32,100 +30,151 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
   }, [redFlag]);
 
   return (
-    <Container>
-      <div className="animate-route-in">
-        <header className="pt-12 md:pt-24">
-          <Reveal staggerMs={60}>
-            <nav aria-label="Breadcrumb" className="type-caption text-ink-faint">
-            <Link
-              to="/rankings?view=redflags"
-              className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
+    <>
+      {/* Warning banner — the only red surface on the page. */}
+      <div className="bg-band-weak text-ink-inverse">
+        <Container>
+          <div className="flex items-center gap-3 py-3 md:py-4">
+            <span
+              aria-hidden="true"
+              className="inline-flex size-6 shrink-0 items-center justify-center rounded-sm border border-ink-inverse/40 font-serif text-xs font-bold"
             >
-              Red flag schools
-            </Link>
-            <span aria-hidden="true" className="mx-2">
-              /
+              !
             </span>
-            <span aria-current="page">{redFlag.name}</span>
-          </nav>
+            <p className="type-label text-ink-inverse">
+              Red flag — this school has been flagged by IEA
+            </p>
+          </div>
+        </Container>
+      </div>
 
-          <div className="mt-8 md:mt-10">
-            <h1 tabIndex={-1} className="type-title measure-tight text-ink outline-none">
+      {/* Red left rail down the whole content area. */}
+      <div className="border-l-2 border-band-weak">
+        <Container>
+          <div className="animate-route-in pt-10 md:pt-16">
+            <nav aria-label="Breadcrumb" className="type-caption text-ink-faint">
+              <Link
+                to="/rankings?view=redflags"
+                className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
+              >
+                Red flag schools
+              </Link>
+              <span aria-hidden="true" className="mx-2">/</span>
+              <span aria-current="page">{redFlag.name}</span>
+            </nav>
+
+            <div className="relative mt-8 flex items-center gap-4 md:mt-10">
+              <Monogram name={redFlag.name} size="lg" />
+              <span className="type-label text-band-weak">Red flag school</span>
+
+              {/* Rotated stamp. */}
+              <span
+                aria-hidden="true"
+                className="absolute right-0 top-0 hidden -rotate-6 select-none border-2 border-band-weak px-3 py-1 font-sans text-xs font-bold uppercase tracking-[0.2em] text-band-weak md:inline-block"
+              >
+                Flagged
+              </span>
+            </div>
+
+            <h1
+              tabIndex={-1}
+              className="type-display measure-tight mt-6 text-ink outline-none"
+            >
               {redFlag.name}
             </h1>
+
+            <p className="type-caption mt-4 text-ink-faint">
+              Published by IEA · {meta.publicationDate.slice(0, 4)} · Reasons:{" "}
+              {redFlag.reasons.length} · Status: Flagged
+            </p>
+
+            <p className="type-heading mt-6 max-w-[40rem] text-ink">
+              IEA has flagged this school. The reasons are published below.
+            </p>
           </div>
+
+          <Rule tone="rule" className="mt-12 md:mt-16" />
+
+          <Reveal className="py-2 md:py-4" delayMs={60}>
+            <SectionHeader
+              eyebrow="The reasons"
+              title="Why this school is flagged"
+              className="mb-8 md:mb-10 [&_.type-label]:text-band-weak"
+            />
           </Reveal>
-        </header>
-
-        <Rule tone="rule" className="mt-12 md:mt-16" />
-
-        <Reveal className="py-12 md:py-16" delayMs={60}>
-          <SectionHeader
-            eyebrow="Red flag"
-            title="Why this school is flagged"
-            className="mb-8 md:mb-10"
-          />
 
           {redFlag.reasons.length === 0 ? (
             <p className="type-body-lg measure text-ink-muted">
               No specific reasons have been published for this school yet.
             </p>
           ) : (
-            <ol className="mt-6 flex flex-col gap-4">
+            <ol className="flex flex-col">
               {redFlag.reasons.map((reason, i) => (
                 <li
                   key={reason}
-                  className="grid gap-x-8 gap-y-2 border-b border-rule-soft py-6 last:border-b-0 last:pb-0 md:grid-cols-[3rem_minmax(0,1fr)]"
+                  className="grid gap-x-6 gap-y-2 border-b border-band-weak/30 py-6 last:border-b-0 md:grid-cols-[3.5rem_minmax(0,1fr)]"
                 >
                   <span
                     aria-hidden="true"
-                    className="font-serif text-numeric-sm leading-6 text-bronze-ink"
+                    className="font-serif type-numeric leading-none text-band-weak"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="type-body-lg measure-snug font-bold text-ink leading-1.6">
+                  <p className="type-body-lg measure-snug font-bold text-ink">
                     {reason}
                   </p>
                 </li>
               ))}
             </ol>
           )}
-        </Reveal>
 
-        <Rule tone="rule" className="mt-16 md:mt-20" />
+          {/* Source well. */}
+          <Reveal className="mt-12 md:mt-16" delayMs={120}>
+            <div className="border-l-2 border-band-weak bg-sunken px-6 py-6 md:px-8">
+              <p className="type-label text-band-weak">About this flag</p>
+              <p className="type-body-lg measure mt-3 text-ink-muted">
+                IEA received reports of these abuses from student surveys and a
+                detailed research of publicly available data.
+              </p>
+              <p className="type-body-lg measure mt-6 text-ink-muted">
+                If you have any queries, please contact us at{" "}
+                <a
+                  href="mailto:ins.edu.ac@gmail.com"
+                  className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
+                >
+                  ins.edu.ac@gmail.com
+                </a>
+                .
+              </p>
+            </div>
+          </Reveal>
 
-        <Reveal className="py-12 md:py-16" delayMs={120}>
-          <SectionHeader
-            eyebrow="About this flag"
-            title="Where this comes from"
-            className="mb-8 md:mb-10"
-          />
-          <p className="type-body-lg measure text-ink-muted">
-            IEA received reports of these abuses from student surveys and a
-            detailed research of publicly available data.
-          </p>
-          <p className="type-body-lg measure mt-6 text-ink-muted">
-            If you have any queries, please contact us at{" "}
-            <a
-              href="mailto:ins.edu.ac@gmail.com"
-              className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
-            >
-              ins.edu.ac@gmail.com
-            </a>
-            .
-          </p>
-        </Reveal>
+          <Rule tone="rule" className="mt-16 md:mt-20" />
 
-        <Rule className="mt-16 md:mt-20 mb-10" />
-
-        <Reveal delayMs={180}>
-          <div className="flex flex-wrap gap-x-6 gap-y-3">
-            <ButtonLink to="/rankings?view=redflags">See all flagged schools</ButtonLink>
-            <ButtonLink to="/">Back to the home page</ButtonLink>
-          </div>
-        </Reveal>
+          {/* Closing card. */}
+          <Reveal className="py-12 md:py-16" delayMs={180}>
+            <div className="border-t-2 border-band-weak bg-sunken px-6 py-8 md:px-8">
+              <div className="flex flex-wrap gap-4">
+                <ButtonLink to="/rankings?view=redflags">
+                  See all flagged schools →
+                </ButtonLink>
+                <ButtonLink to="/">Back to the home page</ButtonLink>
+              </div>
+              <p className="type-caption mt-6 text-ink-faint">
+                Have information about this school?{" "}
+                <a
+                  href="mailto:ins.edu.ac@gmail.com"
+                  className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
+                >
+                  Contact IEA
+                </a>
+                .
+              </p>
+            </div>
+          </Reveal>
+        </Container>
       </div>
-    </Container>
+    </>
   );
 }
 

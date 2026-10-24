@@ -48,6 +48,7 @@ export function RankingsTable({
   onNavigate: (id: number) => void;
 }) {
   const visible = ALL_COLUMNS.filter((c) => columns.includes(c));
+  const rankVisible = columns.includes("rank");
 
   return (
     <div className="overflow-x-auto">
@@ -58,7 +59,7 @@ export function RankingsTable({
         <thead>
           <tr className="border-y border-rule">
             {visible.map((col) => (
-              <HeadCell key={col} column={col} sort={sort} onSort={onSort} />
+              <HeadCell key={col} column={col} sort={sort} onSort={onSort} rankVisible={rankVisible} />
             ))}
           </tr>
         </thead>
@@ -88,10 +89,12 @@ function HeadCell({
   column,
   sort,
   onSort,
+  rankVisible,
 }: {
   column: ColumnKey;
   sort: SortKey;
   onSort: (key: SortKey) => void;
+  rankVisible: boolean;
 }) {
   const options = SORTS.filter((s) => s.column === column);
   const active = options.find((s) => s.key === sort);
@@ -107,8 +110,12 @@ function HeadCell({
       scope="col"
       aria-sort={active ? (sort.startsWith("-") ? "descending" : "ascending") : "none"}
       className={cn(
-        "px-3 py-3 text-left align-bottom first:pl-0 last:pr-0",
+        "sticky top-0 z-20 bg-canvas px-3 py-3 text-left align-bottom first:pl-0 last:pr-0",
         column === "score" && "text-right",
+        column === "rank" && "sticky left-0 z-30",
+        column === "school" && (rankVisible ? "sticky left-[2.25rem] z-30" : "sticky left-0 z-30"),
+        (column === "rank" || column === "school") &&
+          "shadow-[2px_0_6px_-2px_rgb(19_26_44/0.12)]",
       )}
     >
       {options.length === 0 ? (
@@ -199,7 +206,17 @@ const SchoolRow = memo(function SchoolRow({
       {ALL_COLUMNS.filter((c) => columns.includes(c)).map((col) => (
         <td
           key={col}
-          className={cn("px-3 py-3 align-middle first:pl-0 last:pr-0", col === "score" && "text-right")}
+          className={cn(
+            "px-3 py-3 align-middle first:pl-0 last:pr-0",
+            col === "score" && "text-right",
+            col === "rank" && "sticky left-0 z-10 bg-canvas",
+            col === "school" &&
+              (columns.includes("rank")
+                ? "sticky left-[2.25rem] z-10 bg-canvas"
+                : "sticky left-0 z-10 bg-canvas"),
+            (col === "rank" || col === "school") &&
+              "shadow-[2px_0_6px_-2px_rgb(19_26_44/0.12)]",
+          )}
         >
           {cell(school, col)}
         </td>
