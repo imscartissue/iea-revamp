@@ -98,7 +98,6 @@ export type Meta = {
   gradeRange: string;
   weights: Record<string, number>;
   categories: CategoryMeta[];
-  disclaimer: string;
 };
 
 /**

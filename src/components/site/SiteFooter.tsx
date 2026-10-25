@@ -47,7 +47,7 @@ export function SiteFooter() {
         <Rule className="bg-ink-inverse/15" />
 
         <p className="type-caption measure py-6 text-ink-inverse/50">
-          {meta.disclaimer} Typefaces are Latin Modern (GUST Font License).
+          Typefaces are Latin Modern (GUST Font License).
         </p>
       </Container>
     </footer>

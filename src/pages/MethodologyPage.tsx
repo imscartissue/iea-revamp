@@ -126,8 +126,7 @@ export function MethodologyPage() {
                   <dl className="flex flex-col gap-3">
                     <Datum term="Published" value={formatDate(meta.publicationDate)} iso={meta.publicationDate} />
                     <Datum term="Source" value={meta.source} />
-                    <Datum term="Scope" value={`${meta.location}, ${meta.gradeRange}`} />
-                    <Datum term="Kathmandu Valley" value="NEV/ A levels/ IB students" />
+                    <Datum term="Scope" value="Kathmandu Valley: +2/ A levels/ IB schools" />
                     <Datum term="Responses" value={formatCountPlus(meta.totalResponses)} />
                   </dl>
                 }

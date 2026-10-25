@@ -137,9 +137,7 @@ export function AboutPage() {
 
         {/* --- provenance --------------------------------------------------- */}
         <Reveal className="py-12 md:py-16" delayMs={260}>
-          <p className="type-body measure text-ink-muted">{meta.disclaimer}</p>
-
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+          <div className="flex flex-wrap gap-x-6 gap-y-3">
             <Button asChild variant="outline">
               <Link to="/rankings">See the rankings</Link>
             </Button>

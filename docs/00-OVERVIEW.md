@@ -16,7 +16,7 @@ no sponsors.
 
 Readers comparing `+2` schools in the Kathmandu Valley: students, parents, and
 educators. Scores come from anonymous survey responses, not official
-accreditation — the `/about` page and the data disclaimer say so explicitly.
+accreditation — the FAQ on `/methodology` says so explicitly.
 
 ## Routes
 

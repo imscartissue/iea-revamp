@@ -9,7 +9,7 @@ red-flag list.
 **`meta`**: `publicationDate`, `edition`, `title`, `subtitle`, `source`,
 `totalSchools`, `totalResponses`, `attributedResponses`,
 `unattributedResponses`, `surveyedButUnpublished`, `location`, `gradeRange`,
-`weights`, `categories[]` (`{key, label, blurb}`), `disclaimer`.
+`weights`, `categories[]` (`{key, label, blurb}`).
 
 `totalResponses` is a **floor, not a census** — the survey collected at least
 that many, so it is displayed as "200+" via `formatCountPlus` (`src/lib/format.ts`).
