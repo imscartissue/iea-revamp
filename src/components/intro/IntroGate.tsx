@@ -7,15 +7,9 @@ import { useIntro } from "@/hooks/useIntro";
 import { contributors } from "@/data/contributors";
 import { cn } from "@/lib/utils";
 
-/** First two lines of the org chart: founders (2) + leadership (3). */
+/** First line of the org chart: the founders (2). */
 const firstLine: typeof contributors = contributors.filter((c) =>
-  [
-    "yogeshwor-sharma",
-    "eron-subedi",
-    "aarohan-baral",
-    "tikaram-sharma",
-    "prajjwal-dhakal",
-  ].includes(c.id),
+  ["yogeshwor-sharma", "eron-subedi"].includes(c.id),
 );
 
 /**
@@ -98,14 +92,9 @@ export function IntroGate({ children }: { children: ReactNode }) {
         {/* Brand mark */}
         <IntroMonogram />
 
-        {/* Section eyebrow */}
-        <p className="type-label text-center text-ink-inverse/60 uppercase tracking-[0.2em]">
-          The team
-        </p>
-
-        {/* First two lines of the team: founders row + leadership row (5 names),
-            shown horizontally with smaller type. Photos load when you add them
-            at public/people/<id>.jpg and set `photo` in contributors.ts. */}
+        {/* Founders row (2 names), shown horizontally with smaller type.
+            Photos load when you add them at public/people/<id>.jpg and set
+            `photo` in contributors.ts. */}
         <div className="flex items-center justify-center gap-8 md:gap-12">
           {firstLine.map((person, i) => (
             <div
@@ -134,6 +123,17 @@ export function IntroGate({ children }: { children: ReactNode }) {
                 style={{ animationDelay: `${1250 + i * 60}ms` }}
               >
                 {person.name}
+              </span>
+              <span
+                className={cn(
+                  "type-caption text-center text-ink-inverse/45 normal-case tracking-[0.04em] max-w-[10rem]",
+                  phase === "contributors" || phase === "exiting"
+                    ? "animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+                    : "",
+                )}
+                style={{ animationDelay: `${1310 + i * 60}ms` }}
+              >
+                {person.role}
               </span>
             </div>
           ))}

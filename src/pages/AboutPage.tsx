@@ -134,11 +134,10 @@ export function AboutPage() {
           {/* Founders */}
           <section className="relative mb-14 md:mb-20">
             <div className="absolute inset-0 -z-10 bg-bronze-soft/40 rounded-2xl blur-3xl" />
-            <p className="type-label text-bronze-ink uppercase tracking-[0.2em] text-center mb-6">Founders</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
               <TeamCard
                 name="Yogeshwor Sharma"
-                role="Founder & President Head of Operations"
+                role="Founder, & President Head of Operations"
                 featured
               />
               <TeamCard
@@ -151,7 +150,6 @@ export function AboutPage() {
 
           {/* Leadership — Aarohan, Tikaram, Prajjwal */}
           <section className="mb-14 md:mb-20">
-            <p className="type-label text-bronze-ink uppercase tracking-[0.2em] text-center mb-6">Leadership</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 items-start justify-items-center">
               <TeamCard name="Aarohan Baral" role="Lead Developer" />
               <TeamCard name="Tikaram Sharma" role="Co-Founder & Lead Analyst" />
@@ -161,7 +159,6 @@ export function AboutPage() {
 
           {/* Research Executive */}
           <section className="mb-14 md:mb-20">
-            <p className="type-label text-bronze-ink uppercase tracking-[0.2em] text-center mb-6">Research Executive</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 justify-items-center">
               <TeamCard name="Abinash Poudel" role="Lead of Online Research" />
               <TeamCard name="Nischal Ghimire" role="Research Executive" />
@@ -173,7 +170,6 @@ export function AboutPage() {
 
           {/* Researcher */}
           <section className="mb-4">
-            <p className="type-label text-bronze-ink uppercase tracking-[0.2em] text-center mb-6">Researcher</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center">
               <TeamCard name="Krinjal Timalsina" role="Researcher" />
               <TeamCard name="Aadarsha Pandey" role="Researcher" />
