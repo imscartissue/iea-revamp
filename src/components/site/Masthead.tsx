@@ -211,7 +211,7 @@ export function Masthead() {
                 className="shrink-0 rounded-sm"
                 aria-label="IEA — home"
               >
-                <Wordmark size="sm" />
+                <Wordmark size="md" />
               </NavLink>
 
               <div className="flex items-center gap-6 md:gap-8">
@@ -405,7 +405,7 @@ export function Masthead() {
             aria-label="IEA — home"
             onClick={() => setOpen(false)}
           >
-            <Wordmark size="sm" className="text-ink-inverse" />
+            <Wordmark size="md" className="text-ink-inverse" />
           </NavLink>
 
           <div className="flex items-center gap-1 md:gap-2">

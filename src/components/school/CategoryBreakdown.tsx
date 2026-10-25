@@ -23,18 +23,19 @@ export function CategoryBreakdown({ school }: { school: School }) {
       <SectionHeader eyebrow="Breakdown" title="Where the score comes from" />
 
       <div className="mt-8 grid gap-4 md:grid-cols-2">
-        {meta.categories.map((category) => {
-          const key = category.key as CategoryKey;
-          const value = school.categories[key];
-          return (
-            <MetricCard
-              key={category.key}
-              category={category}
-              score={typeof value === "number" ? value : null}
-              detail={key === "complaint" ? school.complaint : null}
-            />
-          );
-        })}
+        {meta.categories
+          .filter((category) => category.key !== "complaint")
+          .map((category) => {
+            const key = category.key as CategoryKey;
+            const value = school.categories[key];
+            return (
+              <MetricCard
+                key={category.key}
+                category={category}
+                score={typeof value === "number" ? value : null}
+              />
+            );
+          })}
       </div>
     </section>
   );

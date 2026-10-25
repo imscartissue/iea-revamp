@@ -8,10 +8,10 @@ import { SEO, applySeo } from "@/lib/seo";
 /**
  * The annual report.
  *
- * A placeholder until the first report is published. It says the report is
- * coming rather than pretending it exists — a button to a PDF that is not
- * there yet would be a dead end, and a dead end on a page whose only job is
- * to deliver a document is the whole page failing.
+ * A placeholder until the first report is published. It says the research is
+ * underway rather than pretending the document exists — a button to a PDF that
+ * is not there yet would be a dead end, and a dead end on a page whose only job
+ * is to deliver a document is the whole page failing.
  */
 export function AnnualReportPage() {
   useEffect(() => applySeo(SEO.annualReport), []);
@@ -32,7 +32,8 @@ export function AnnualReportPage() {
 
         <Reveal className="py-16 md:py-24" delayMs={60}>
           <p className="type-body-lg measure text-ink-muted">
-            Coming soon — the full report on the 2026 survey is being prepared.
+            Investigation is underway. The research will be completed once the
+            investigations are over.
           </p>
         </Reveal>
       </div>

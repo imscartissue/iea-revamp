@@ -19,12 +19,8 @@ import { formatCount, formatCountPlus, formatDate, isoDate } from "@/lib/format"
  * because a ranking is a statistical claim about named institutions, and the
  * reader is entitled to know who made it, how, and how much to trust it.
  *
- * The "does not mean" column is deliberately longer than the "does" column.
- * A methodology page that only lists strengths is marketing.
- *
- * The FAQ below the photos carries the two things a reader most often wants
- * after seeing a score: what it means, and where the number came from. Both are
- * collapsed by default, so the page does not open with a wall of caveats.
+ * The FAQ below the photos carries where the number came from, collapsed by
+ * default, so the page does not open with a wall of caveats.
  */
 export function AboutPage() {
   useEffect(() => applySeo(SEO.about), []);
@@ -137,7 +133,7 @@ export function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
               <TeamCard
                 name="Yogeshwor Sharma"
-                role="Founder, & President Head of Operations"
+                role="President, & Head of Operations"
                 featured
               />
               <TeamCard
@@ -182,7 +178,7 @@ export function AboutPage() {
         </Reveal>
 
         <p className="type-body measure mt-6 text-ink-muted">
-          And the 200 students who answered the survey, who are the reason any
+          And the 200+ students who answered the survey, who are the reason any
           of this exists. They are not named here, and their individual answers
           are not published — only the aggregate reaches this page.
         </p>
@@ -193,43 +189,6 @@ export function AboutPage() {
         <Reveal className="py-12 md:py-16" delayMs={220}>
           <SectionHeader eyebrow="FAQ" title="What the score means" />
           <div className="mt-8 flex flex-col gap-3">
-            <FaqItem
-              question="What does the score mean — and what does it not mean?"
-              answer={
-                <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
-                  <div className="flex flex-col gap-4">
-                    <h3 className="type-label text-band-strong">What it does tell you</h3>
-                    <ul className="flex flex-col gap-3">
-                      {[
-                        "How students at a school actually rate four things that matter.",
-                        "Where a school sits relative to others rated on the same questions.",
-                        "Which of the four dimensions is carrying a school, and which is holding it back.",
-                      ].map((item) => (
-                        <li key={item} className="type-body measure-snug text-ink-muted">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="flex flex-col gap-4">
-                    <h3 className="type-label text-band-weak">What it does not</h3>
-                    <ul className="flex flex-col gap-3">
-                      {[
-                        "It is not an accreditation, and no school body has approved it.",
-
-                        "It is self-reported, so it reflects who felt able to answer and how they felt on the day.",
-                        "A single score hides tradeoffs. A school strong on benefit and weak on cost is a real school, not a bug.",
-                        "It is not a fit score for your child. That depends on what they need and what you can afford.",
-                      ].map((item) => (
-                        <li key={item} className="type-body measure-snug text-ink-muted">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              }
-            />
             <FaqItem
               question="Where we got the numbers from"
               answer={
