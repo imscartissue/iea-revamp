@@ -4,9 +4,10 @@ import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
+import { FaqItem, Datum } from "@/components/site/FaqItem";
 import { HowToRead } from "@/components/home/HowToRead";
 import { SEO, applySeo } from "@/lib/seo";
-import { formatCountPlus } from "@/lib/format";
+import { formatCountPlus, formatDate } from "@/lib/format";
 import { meta } from "@/lib/data";
 
 /**
@@ -74,6 +75,64 @@ export function MethodologyPage() {
                 <MethodStep key={step.title} n={i + 1} step={step} />
               ))}
             </ol>
+          </section>
+
+          <Rule className="mt-16 md:mt-24" />
+
+          {/* FAQ — what the score means, and where the number came from.
+              Both start closed, so the method never opens as a wall of text. */}
+          <section className="mt-16 md:mt-24">
+            <SectionHeader eyebrow="FAQ" />
+            <div className="mt-8 flex flex-col gap-3">
+              <FaqItem
+                question="What does the score mean — and what does it not mean?"
+                answer={
+                  <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
+                    <div className="flex flex-col gap-4">
+                      <h3 className="type-label text-band-strong">What it does tell you</h3>
+                      <ul className="flex flex-col gap-3">
+                        {[
+                          "How students at a school actually rate four things that matter.",
+                          "Where a school sits relative to others rated on the same questions.",
+                          "Which of the four dimensions is carrying a school, and which is holding it back.",
+                        ].map((item) => (
+                          <li key={item} className="type-body measure-snug text-ink-muted">
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                      <h3 className="type-label text-band-weak">What it does not</h3>
+                      <ul className="flex flex-col gap-3">
+                        {[
+                          "It is not an accreditation, and no school body has approved it.",
+                          "It is self-reported, so it reflects who felt able to answer and how they felt on the day.",
+                          "A single score hides tradeoffs. A school strong on benefit and weak on cost is a real school, not a bug.",
+                          "It is not a fit score for your child. That depends on what they need and what you can afford.",
+                        ].map((item) => (
+                          <li key={item} className="type-body measure-snug text-ink-muted">
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                }
+              />
+              <FaqItem
+                question="Where we got the numbers from"
+                answer={
+                  <dl className="flex flex-col gap-3">
+                    <Datum term="Published" value={formatDate(meta.publicationDate)} iso={meta.publicationDate} />
+                    <Datum term="Source" value={meta.source} />
+                    <Datum term="Scope" value={`${meta.location}, ${meta.gradeRange}`} />
+                    <Datum term="Kathmandu Valley" value="NEV/ A levels/ IB students" />
+                    <Datum term="Responses" value={formatCountPlus(meta.totalResponses)} />
+                  </dl>
+                }
+              />
+            </div>
           </section>
         </Reveal>
 

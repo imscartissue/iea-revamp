@@ -19,7 +19,7 @@ export function SectionHeader({
   /** The lede is capped at 60ch — a standfirst wider than that is unreadable. */
 }: {
   eyebrow?: string;
-  title: string;
+  title?: string;
   lede?: ReactNode;
   action?: ReactNode;
   className?: string;
@@ -33,7 +33,7 @@ export function SectionHeader({
             <span className="type-label text-bronze-ink">{eyebrow}</span>
           </div>
         ) : null}
-        <h2 className="type-heading text-ink">{title}</h2>
+        {title ? <h2 className="type-heading text-ink">{title}</h2> : null}
         {lede ? <p className="type-subheading measure-tight text-ink-muted">{lede}</p> : null}
       </div>
       {action ? <div className="shrink-0">{action}</div> : null}

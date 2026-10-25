@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router";
 
 import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
-import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { StatBlock, StatRow } from "@/components/data-display/StatBlock";
 import { Button } from "@/components/ui/button";
 import { TeamCard } from "@/components/site/TeamCard";
 import { SEO, applySeo } from "@/lib/seo";
 import { bandCounts, meanResponses, meta, totalSchools } from "@/lib/data";
-import { formatCount, formatCountPlus, formatDate, isoDate } from "@/lib/format";
+import { formatCount, formatCountPlus, formatDate } from "@/lib/format";
 
 /**
  * The project, the limitations, and the people.
@@ -18,10 +17,7 @@ import { formatCount, formatCountPlus, formatDate, isoDate } from "@/lib/format"
  * On the live site this page is literally "Information Unavailable". It exists
  * because a ranking is a statistical claim about named institutions, and the
  * reader is entitled to know who made it, how, and how much to trust it. The
- * how lives on `/methodology`, not here.
- *
- * The FAQ below the photos carries where the number came from, collapsed by
- * default, so the page does not open with a wall of caveats.
+ * how — and the FAQ about what the score means — live on `/methodology`.
  */
 export function AboutPage() {
   useEffect(() => applySeo(SEO.about), []);
@@ -131,30 +127,11 @@ export function AboutPage() {
         </Reveal>
 
         <p className="type-body measure mt-6 text-ink-muted">
-          And the 200+ students who answered the survey, who are the reason any
-          of this exists. They are not named here, and their individual answers
-          are not published — only the aggregate reaches this page.
+          We want to show our gratitude to all those who answered the surveys
+          honestly and made this possible. Their name and the individual
+          responses, however, won't be published anywhere to maintain their
+          anonymity.
         </p>
-
-        <Rule />
-
-        {/* --- FAQ --------------------------------------------------------- */}
-        <Reveal className="py-12 md:py-16" delayMs={220}>
-          <SectionHeader eyebrow="FAQ" title="What the score means" />
-          <div className="mt-8 flex flex-col gap-3">
-            <FaqItem
-              question="Where we got the numbers from"
-              answer={
-                <dl className="flex flex-col gap-3">
-                  <Datum term="Published" value={formatDate(meta.publicationDate)} iso={meta.publicationDate} />
-                  <Datum term="Source" value={meta.source} />
-                  <Datum term="Scope" value={`${meta.location}, ${meta.gradeRange}`} />
-                  <Datum term="Responses" value={formatCountPlus(meta.totalResponses)} />
-                </dl>
-              }
-            />
-          </div>
-        </Reveal>
 
         <Rule />
 
@@ -173,56 +150,6 @@ export function AboutPage() {
         </Reveal>
       </div>
     </Container>
-  );
-}
-
-function Datum({ term, value, iso }: { term: string; value: string; iso?: string }) {
-  return (
-    <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1 border-b border-rule-soft pb-3">
-      <dt className="type-label w-24 shrink-0 text-ink-faint md:w-48">{term}</dt>
-      <dd className="type-ui text-ink">{iso ? <time dateTime={isoDate(iso)}>{value}</time> : value}</dd>
-    </div>
-  );
-}
-
-/**
- * A collapsible FAQ item.
- *
- * A `<button>` wrapping the question, with the answer in a region that is hidden
- * until it is opened. `aria-expanded` on the button and `aria-hidden` on the
- * answer keep the state announced; the chevron is decorative.
- *
- * Both items start closed, so the page does not open with a wall of caveats.
- */
-function FaqItem({ question, answer }: { question: string; answer: React.ReactNode }) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="border-b border-rule-soft last:border-b-0">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        className="flex w-full items-baseline gap-4 rounded-sm py-4 text-left transition-colors duration-[120ms] hover:bg-bronze-wash focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
-      >
-        <span className="type-heading flex-1 text-ink">{question}</span>
-        <span
-          aria-hidden="true"
-          className={`type-caption shrink-0 text-ink-faint transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-        >
-          ▾
-        </span>
-      </button>
-
-      <div
-        aria-hidden={!open}
-        className={`grid transition-[grid-template-rows] duration-200 ease-brand ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-      >
-        <div className="overflow-hidden">
-          <div className="pb-6">{answer}</div>
-        </div>
-      </div>
-    </div>
   );
 }
 
