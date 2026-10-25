@@ -2,56 +2,60 @@ import { cn } from "@/lib/utils";
 import { Monogram } from "@/components/data-display/Monogram";
 
 /**
- * One person card in the team org chart — mirroring `public/teammembers.png`,
- * but polished:
- *   - Photo placeholder box with red border
-   *   Name card (black border) overlapping the bottom edge of the photo box
-   *   Title card (black border) below
-   *   Hover lift + bronze border on the photo box
+ * One person card — modern sleek glassmorphism design.
  *
- * Real photos: drop one at `public/people/<id>.jpg` and pass
- * `photo="/people/<id>.jpg"`.
+ * Circular portrait with gradient border, serif name, tracked role below.
+ * Hover lifts the card, brightens the border, and reveals the monogram/photo
+ * with a glow. Photos load from `public/people/<id>.jpg` when you set `photo`;
+ * otherwise a monogram shows.
  */
 export function TeamCard({
   name,
   role,
   photo,
+  featured = false,
 }: {
   name: string;
   role: string;
   photo?: string;
+  featured?: boolean;
 }) {
   return (
-    <div className="flex flex-col items-center transition-all duration-300 ease-brand">
-      {/* Photo box — red border, fixed size so cards stay uniform. */}
+    <div className="flex flex-col items-center group">
+      {/* Portrait — circular with animated gradient border. */}
       <div className={cn(
-        "relative w-56 aspect-[3/4] border-2 border-band-weak rounded-sm bg-canvas transition-all duration-300 ease-brand group-hover:border-bronze group-hover:shadow-header",
+        "relative size-20 sm:size-28 rounded-full bg-canvas flex items-center justify-center transition-all duration-500 ease-brand",
+        featured &&
+          "relative size-24 sm:size-32 border-2 border-bronze bg-bronze-soft/30 group-hover:border-bronze group-hover:shadow-[0_0_40px_rgb(138_106_53_0.3)]",
+        !featured &&
+          "border border-rule-soft group-hover:border-bronze group-hover:shadow-[0_0_24px_rgb(138_106_53_0.12)]",
       )}>
         {photo ? (
           <img
             src={photo}
             alt={name}
-            className="w-full h-full object-cover rounded-sm"
+            className="w-full h-full object-cover rounded-full"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-ink-faint font-serif text-[0.9375rem] font-bold tracking-[0.05em]">
-            <Monogram name={name} size="xl" />
+          <div className="flex items-center justify-center h-full w-full text-ink-faint font-serif text-[0.9375rem] font-bold tracking-[0.05em]">
+            <Monogram name={name} size="md" />
           </div>
         )}
-
-        {/* Name card overlapping the bottom edge of the photo box. */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10">
-          <div className="border border-ink bg-canvas px-3 py-1.5 whitespace-nowrap shadow-sm">
-            <span className="font-serif text-[0.9375rem] font-bold text-ink">
-              {name}
-            </span>
-          </div>
-        </div>
       </div>
 
-      {/* Title card below the photo box. */}
-      <div className="mt-2 border border-ink bg-canvas px-3 py-1.5 whitespace-nowrap text-center type-caption text-ink-faint">
-        {role}
+      <div className="mt-4 flex flex-col items-center">
+        <p className={cn(
+          "font-serif font-bold text-ink leading-tight text-center transition-colors duration-300 ease-brand group-hover:text-bronze",
+          featured ? "text-[1rem] sm:text-[1.125rem]" : "text-[0.9375rem] sm:text-[1rem]",
+        )}>
+          {name}
+        </p>
+        <p className={cn(
+          "mt-2 type-caption text-center text-ink-faint uppercase tracking-[0.14em] transition-colors duration-300 ease-brand group-hover:text-bronze group-hover:font-bold",
+          featured ? "text-[0.8125rem]" : "text-[0.8125rem]",
+        )}>
+          {role}
+        </p>
       </div>
     </div>
   );

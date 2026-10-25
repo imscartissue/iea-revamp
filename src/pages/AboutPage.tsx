@@ -119,45 +119,50 @@ export function AboutPage() {
         <Rule />
 
         {/* --- people ------------------------------------------------------ */}
-        <Reveal className="py-12 md:py-20" delayMs={180}>
-          <SectionHeader
-            eyebrow="The people"
-            title="The team"
-          />
+        <Reveal className="py-8 md:py-20" delayMs={180}>
+          <div className="text-center mb-20 md:mb-28">
+            <p className="type-label text-bronze-ink uppercase tracking-[0.25em] mb-4">The people</p>
+            <h2 className="type-title text-ink mb-6 bg-clip-text text-transparent bg-gradient-to-r from-ink via-bronze to-ink">
+              The team
+            </h2>
+            <p className="type-body measure-tight mx-auto text-center text-ink-muted max-w-[40rem]">
+              The researchers, developers, and analysts who built this ranking —
+              and the students whose voices made it possible.
+            </p>
+          </div>
 
           {/* Founders */}
-          <section className="mt-16 md:mt-20">
-            <p className="type-label text-bronze-ink uppercase tracking-[0.16em] mb-4">Founders</p>
-            <div className="grid gap-12 md:grid-cols-2">
+          <section className="relative mb-14 md:mb-20">
+            <div className="absolute inset-0 -z-10 bg-bronze-soft/40 rounded-2xl blur-3xl" />
+            <p className="type-label text-bronze-ink uppercase tracking-[0.2em] text-center mb-6">Founders</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
               <TeamCard
                 name="Yogeshwor Sharma"
-                role="Founder, President Head of Operations"
+                role="Founder & President Head of Operations"
+                featured
               />
               <TeamCard
                 name="Eron Subedi"
-                role="Founder, Chief Architect, & Chief of Investigations"
+                role="Founder, Chief Architect & Chief of Investigations"
+                featured
               />
             </div>
           </section>
 
-          <Rule className="mt-16 md:mt-20" />
-
-          {/* Leadership */}
-          <section className="mt-12 md:mt-16">
-            <p className="type-label text-bronze-ink uppercase tracking-[0.16em] mb-4">Leadership</p>
-            <div className="grid gap-12 md:grid-cols-3">
+          {/* Leadership — Aarohan, Tikaram, Prajjwal */}
+          <section className="mb-14 md:mb-20">
+            <p className="type-label text-bronze-ink uppercase tracking-[0.2em] text-center mb-6">Leadership</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 items-start justify-items-center">
               <TeamCard name="Aarohan Baral" role="Lead Developer" />
-              <TeamCard name="Tikaram Sharma" role="Co-Founder Lead Analyst" />
+              <TeamCard name="Tikaram Sharma" role="Co-Founder & Lead Analyst" />
               <TeamCard name="Prajjwal Dhakal" role="Co-Founder" />
             </div>
           </section>
 
-          <Rule className="mt-16 md:mt-20" />
-
           {/* Research Executive */}
-          <section className="mt-12 md:mt-16">
-            <p className="type-label text-bronze-ink uppercase tracking-[0.16em] mb-4">Research Executive</p>
-            <div className="grid gap-10 md:gap-12 md:grid-cols-5 sm:grid-cols-3">
+          <section className="mb-14 md:mb-20">
+            <p className="type-label text-bronze-ink uppercase tracking-[0.2em] text-center mb-6">Research Executive</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 justify-items-center">
               <TeamCard name="Abinash Poudel" role="Lead of Online Research" />
               <TeamCard name="Nischal Ghimire" role="Research Executive" />
               <TeamCard name="Kaustuv Rimal" role="Research Executive" />
@@ -166,12 +171,10 @@ export function AboutPage() {
             </div>
           </section>
 
-          <Rule className="mt-16 md:mt-20" />
-
           {/* Researcher */}
-          <section className="mt-12 md:mt-16 mb-20">
-            <p className="type-label text-bronze-ink uppercase tracking-[0.16em] mb-4">Researcher</p>
-            <div className="grid gap-12 md:grid-cols-3 sm:grid-cols-2">
+          <section className="mb-4">
+            <p className="type-label text-bronze-ink uppercase tracking-[0.2em] text-center mb-6">Researcher</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center">
               <TeamCard name="Krinjal Timalsina" role="Researcher" />
               <TeamCard name="Aadarsha Pandey" role="Researcher" />
               <TeamCard name="Piyush Joshi" role="Researcher" />
