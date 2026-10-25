@@ -163,7 +163,7 @@ function setLink(rel: string, href: string) {
  * `EISDIR`. See docs/09-BUGS.md § C3.
  */
 export function headTags(seo: Seo, path: string, origin: string): HeadTag[] {
-  const image = new URL("/og-image.jpg", origin).toString();
+  const image = new URL("/og-image.png", origin).toString();
   const tags: HeadTag[] = [
     { tag: "title", text: seo.title },
     { tag: "meta", attr: "name", key: "description", content: seo.description },

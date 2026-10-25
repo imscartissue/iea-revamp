@@ -23,8 +23,8 @@ The per-school `responses` counts scale to `attributedResponses`, so
 
 **One red flag**: `id` (also the URL slug), `name`, `reasons[]`. A flagged
 school is deliberately **not** a `School`: it has no score, rank or band, and it
-may not exist in the ranked roster (CCRC College and Kavya do not). An empty
-`reasons` array renders a "no reasons published yet" note.
+may not exist in the ranked roster (some do not). An empty `reasons` array
+renders a "no reasons published yet" note.
 
 ## Scoring model
 

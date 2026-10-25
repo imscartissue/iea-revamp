@@ -3,42 +3,40 @@ import type { Contributor } from "@/lib/types";
 /**
  * WHO BUILT THIS SITE.
  * ---------------------------------------------------------------------------
- * The intro sequence and `/about` are built around these entries, and the
- * entries do not exist yet — the names are being supplied by the humans who
- * did the work.
+ * The intro sequence and `/about` are built around these entries.
  *
- * RULES (see docs/AI-HANDOVER.md § 2.8)
+ * Add one entry per person. Give it a stable `id` (their GitHub handle or
+ * initials works) — the id is used as a React key and as the image cache
+ * key, so changing it later re-downloads their photo.
  *
- * 1. NEVER invent a contributor. A fabricated team to fill a component is not
- *    acceptable at any stage, including "just for the demo".
- * 2. An entry with an empty `name` is a RESERVED SLOT, not a bug. The UI
- *    renders blank space of the correct size, so swapping real names in later
- *    causes zero layout shift.
- * 3. `role` is three words maximum, and should be literally what the person
- *    did: "Data & scoring", not "Head of Insights".
- * 4. `links` is optional and at most two. A GitHub URL or a personal site is
- *    enough; a wall of social icons is not.
+ * `role` is three words maximum. `links` is optional and at most two.
  *
- * HOW TO FILL THIS IN
+ * Drop photos in `public/people/<id>.jpg` and set `photo`. They are rendered
+ * as PORTRAITS, not avatars — see `components/data-display/Portrait.tsx`.
+ * Recommended: 3:4 crop, ~600px wide, under 150 kB. The site has no image
+ * pipeline, so optimise these by hand.
  *
- *   - Add an entry per person. Give it a stable `id` (their GitHub handle or
- *     initials works) — the id is used as a React key and as the image cache
- *     key, so changing it later re-downloads their photo.
- *   - Leave `name` and `role` as `""` if you do not have them yet. The layout
- *     holds.
- *   - Drop photos in `public/people/<id>.jpg` and set `photo`. They are
- *     rendered as PORTRAITS, not avatars — see `components/data-display/
- *     Portrait.tsx`. Recommended: 3:4 crop, ~600px wide, under 150 kB.
- *     The site has no image pipeline, so optimise these by hand.
- *
- * Once `contributors` is non-empty, set `SHOW_INTRO_PORTRAITS` to true if the
- * photos are ready to appear in the 2-second intro. Until then the intro uses
- * monograms, which read better at that size anyway.
+ * `photoAlt` is optional alt text for the portrait.
  */
 
-/** Real people, credited. May be empty; entries may have blank `name`/`role`. */
+/** Real people, credited. */
 export const contributors: Contributor[] = [
-  // { id: "…", name: "", role: "", photo: "/people/….jpg", links: { github: "…" } },
+  { id: "yogeshwor-sharma", name: "Yogeshwor Sharma", role: "Founder President Operations" },
+  { id: "eron-subedi", name: "Eron Subedi", role: "Founder Chief Architect" },
+  { id: "aarohan-baral", name: "Aarohan Baral", role: "Lead Developer" },
+  { id: "tikaram-sharma", name: "Tikaram Sharma", role: "Co-Founder Lead Analyst" },
+  { id: "prajjwal-dhakal", name: "Prajjwal Dhakal", role: "Co-Founder" },
+  { id: "abhinash-poudel", name: "Abinash Poudel", role: "Lead Online Research" },
+  { id: "nischal-ghimire", name: "Nischal Ghimire", role: "Research Executive" },
+  { id: "kaustuv-rimal", name: "Kaustuv Rimal", role: "Research Executive" },
+  { id: "aaditya-jha", name: "Aaditya Jha", role: "Research Executive" },
+  { id: "aishani-rai", name: "Aishani Rai", role: "Editorial Lead" },
+  { id: "krinjal-timalsina", name: "Krinjal Timalsina", role: "Researcher" },
+  { id: "aadarsha-pandey", name: "Aadarsha Pandey", role: "Researcher" },
+  { id: "piyush-joshi", name: "Piyush Joshi", role: "Researcher" },
+  { id: "pratyush-neupane", name: "Pratyush Neupane", role: "Researcher" },
+  { id: "sambriddhi-bhattarai", name: "Sambriddhi Bhattarai", role: "Researcher" },
+  { id: "kashyap-shrestha", name: "Kashyap Shrestha", role: "Researcher" },
 ];
 
 /**

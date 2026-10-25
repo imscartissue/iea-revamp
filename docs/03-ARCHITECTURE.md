@@ -57,7 +57,7 @@ sets `noindex`. Canonicals are set at runtime (no static canonical in
 |------|---------|
 | `useRankings` | Rankings state from URL params; memoized `selectSchools`; `replace` commits, reset pushes |
 | `useIntro(enabled)` | Splash phase machine + dismiss |
-| `useTheme` / `ThemeProvider` | Light-default theme, `localStorage`, single writer of `<html.dark>`; toggle cycles light↔dark |
+| `useTheme` / `ThemeProvider` | Light-only theme. No dark mode. |
 | `useMediaQuery` / `useIsMobile` | Tear-free media-query subscription (mobile = `< 48rem`) |
 | `useScrollShadow(threshold)` | Past-scroll boolean driving the masthead's solid state |
 | `useReducedMotion` | `prefers-reduced-motion` wrapper |

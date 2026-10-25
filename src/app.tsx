@@ -24,6 +24,7 @@ import { NotFoundPage } from "@/pages/NotFoundPage";
 const RankingsPage = lazy(() =>
   import("@/pages/RankingsPage").then((m) => ({ default: m.RankingsPage })),
 );
+
 const SchoolPage = lazy(() => import("@/pages/SchoolPage").then((m) => ({ default: m.SchoolPage })));
 const AboutPage = lazy(() => import("@/pages/AboutPage").then((m) => ({ default: m.AboutPage })));
 const MethodologyPage = lazy(() => import("@/pages/MethodologyPage").then((m) => ({ default: m.MethodologyPage })));

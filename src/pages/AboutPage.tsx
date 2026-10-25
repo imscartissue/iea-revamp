@@ -4,11 +4,10 @@ import { Link } from "react-router";
 import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
-import { Portrait } from "@/components/data-display/Portrait";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { StatBlock, StatRow } from "@/components/data-display/StatBlock";
 import { Button } from "@/components/ui/button";
-import { contributors } from "@/data/contributors";
+import { TeamCard } from "@/components/site/TeamCard";
 import { SEO, applySeo } from "@/lib/seo";
 import { bandCounts, meanResponses, meta, totalSchools } from "@/lib/data";
 import { formatCount, formatCountPlus, formatDate, isoDate } from "@/lib/format";
@@ -120,22 +119,74 @@ export function AboutPage() {
         <Rule />
 
         {/* --- people ------------------------------------------------------ */}
-        <Reveal className="py-12 md:py-16" delayMs={180}>
+        <Reveal className="py-12 md:py-20" delayMs={180}>
           <SectionHeader
             eyebrow="The people"
             title="The team"
           />
 
-          <ContributorGrid />
+          {/* Founders */}
+          <section className="mt-16 md:mt-20">
+            <p className="type-label text-bronze-ink uppercase tracking-[0.16em] mb-4">Founders</p>
+            <div className="grid gap-12 md:grid-cols-2">
+              <TeamCard
+                name="Yogeshwor Sharma"
+                role="Founder, President Head of Operations"
+              />
+              <TeamCard
+                name="Eron Subedi"
+                role="Founder, Chief Architect, & Chief of Investigations"
+              />
+            </div>
+          </section>
 
-          <Rule className="mt-10" />
+          <Rule className="mt-16 md:mt-20" />
 
-          <p className="type-body measure mt-6 text-ink-muted">
-            And the {formatCount(meta.attributedResponses)} students who answered the survey,
-            who are the reason any of this exists. They are not named here, and their
-            individual answers are not published — only the aggregate reaches this page.
-          </p>
+          {/* Leadership */}
+          <section className="mt-12 md:mt-16">
+            <p className="type-label text-bronze-ink uppercase tracking-[0.16em] mb-4">Leadership</p>
+            <div className="grid gap-12 md:grid-cols-3">
+              <TeamCard name="Aarohan Baral" role="Lead Developer" />
+              <TeamCard name="Tikaram Sharma" role="Co-Founder Lead Analyst" />
+              <TeamCard name="Prajjwal Dhakal" role="Co-Founder" />
+            </div>
+          </section>
+
+          <Rule className="mt-16 md:mt-20" />
+
+          {/* Research Executive */}
+          <section className="mt-12 md:mt-16">
+            <p className="type-label text-bronze-ink uppercase tracking-[0.16em] mb-4">Research Executive</p>
+            <div className="grid gap-10 md:gap-12 md:grid-cols-5 sm:grid-cols-3">
+              <TeamCard name="Abinash Poudel" role="Lead of Online Research" />
+              <TeamCard name="Nischal Ghimire" role="Research Executive" />
+              <TeamCard name="Kaustuv Rimal" role="Research Executive" />
+              <TeamCard name="Aaditya Jha" role="Research Executive" />
+              <TeamCard name="Aishani Rai" role="Editorial Lead" />
+            </div>
+          </section>
+
+          <Rule className="mt-16 md:mt-20" />
+
+          {/* Researcher */}
+          <section className="mt-12 md:mt-16 mb-20">
+            <p className="type-label text-bronze-ink uppercase tracking-[0.16em] mb-4">Researcher</p>
+            <div className="grid gap-12 md:grid-cols-3 sm:grid-cols-2">
+              <TeamCard name="Krinjal Timalsina" role="Researcher" />
+              <TeamCard name="Aadarsha Pandey" role="Researcher" />
+              <TeamCard name="Piyush Joshi" role="Researcher" />
+              <TeamCard name="Pratyush Neupane" role="Researcher" />
+              <TeamCard name="Sambriddhi Bhattarai" role="Researcher" />
+              <TeamCard name="Kashyap Shrestha" role="Researcher" />
+            </div>
+          </section>
         </Reveal>
+
+        <p className="type-body measure mt-6 text-ink-muted">
+          And the 200 students who answered the survey, who are the reason any
+          of this exists. They are not named here, and their individual answers
+          are not published — only the aggregate reaches this page.
+        </p>
 
         <Rule />
 
@@ -166,7 +217,7 @@ export function AboutPage() {
                     <ul className="flex flex-col gap-3">
                       {[
                         "It is not an accreditation, and no school body has approved it.",
-                        `Samples are small — a mean of about ${meanResponses} responses per school. Some schools have none at all.`,
+
                         "It is self-reported, so it reflects who felt able to answer and how they felt on the day.",
                         "A single score hides tradeoffs. A school strong on benefit and weak on cost is a real school, not a bug.",
                         "It is not a fit score for your child. That depends on what they need and what you can afford.",
@@ -188,8 +239,6 @@ export function AboutPage() {
                   <Datum term="Source" value={meta.source} />
                   <Datum term="Scope" value={`${meta.location}, ${meta.gradeRange}`} />
                   <Datum term="Responses" value={formatCountPlus(meta.totalResponses)} />
-                  <Datum term="Attributed to a school" value={formatCount(meta.attributedResponses)} />
-                  <Datum term="Unattributable" value={formatCount(meta.unattributedResponses)} />
                 </dl>
               }
             />
@@ -266,57 +315,4 @@ function FaqItem({ question, answer }: { question: string; answer: React.ReactNo
   );
 }
 
-/**
- * The people.
- *
- * With no names supplied yet, the grid renders correctly-sized blank slots
- * rather than collapsing — so adding the real list later moves nothing. There
- * is no filler text and no invented team; see `src/data/contributors.ts`.
- */
-function ContributorGrid() {
-  if (!contributors.length) {
-    return (
-      <div className="mt-8 flex flex-col gap-6">
-        <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-4">
-          {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-            <div key={i} className="flex flex-col gap-3">
-              {/* Reserved slot, same size as a real portrait. */}
-              <div aria-hidden="true" className="aspect-[4/5] w-full rounded-md border border-rule-soft bg-sunken" />
-              <div aria-hidden="true" className="h-3 w-24 rounded-sm bg-sunken" />
-              <div aria-hidden="true" className="h-3 w-16 rounded-sm bg-sunken" />
-            </div>
-          ))}
-        </div>
-        <p className="type-caption text-ink-faint">
-          Credits are being added. The space is reserved so nothing shifts when they arrive.
-        </p>
-      </div>
-    );
-  }
 
-  return (
-    <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
-      {contributors.map((person) => (
-        <li key={person.id} className="flex flex-col gap-3">
-          <Portrait contributor={person} size="lg" />
-
-          <div className="flex flex-col gap-1">
-            <span className="type-ui font-bold text-ink">{person.name || "—"}</span>
-            {person.role ? <span className="type-caption text-bronze-ink">{person.role}</span> : null}
-          </div>
-
-          {person.links?.github ? (
-            <a
-              href={person.links.github}
-              className="type-caption w-fit text-bronze-ink underline underline-offset-4 hover:decoration-2"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              GitHub
-            </a>
-          ) : null}
-        </li>
-      ))}
-    </ul>
-  );
-}

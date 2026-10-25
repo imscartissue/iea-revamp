@@ -10,7 +10,7 @@ no sponsors.
 - **200+ student responses**, attributed per school as a `responses` count
 - **4 scored dimensions**: School Environment, Infrastructure, Net Cost, Net Benefit
 - **1 unscored dimension**: Complaint (collected as text, never scored)
-- **10 red-flag schools** in a separate curated list, each with published reasons
+- **9 red-flag schools** in a separate curated list, each with published reasons
 
 ## Who it is for
 

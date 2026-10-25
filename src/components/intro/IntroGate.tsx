@@ -1,10 +1,22 @@
 import { useEffect, type ReactNode } from "react";
 import { useLocation } from "react-router";
 
-import { ContributorStrip } from "@/components/intro/ContributorStrip";
 import { IntroMonogram } from "@/components/intro/IntroMonogram";
+import { Monogram } from "@/components/data-display/Monogram";
 import { useIntro } from "@/hooks/useIntro";
+import { contributors } from "@/data/contributors";
 import { cn } from "@/lib/utils";
+
+/** First two lines of the org chart: founders (2) + leadership (3). */
+const firstLine: typeof contributors = contributors.filter((c) =>
+  [
+    "yogeshwor-sharma",
+    "eron-subedi",
+    "aarohan-baral",
+    "tikaram-sharma",
+    "prajjwal-dhakal",
+  ].includes(c.id),
+);
 
 /**
  * The splash screen: a short credit sequence, then the site.
@@ -22,11 +34,11 @@ import { cn } from "@/lib/utils";
  * `children` is rendered ALWAYS and the overlay is its SIBLING, not a wrapper:
  *
  *   - the page is live and interactive from the first frame, so there is never
- *     a blank screen and a throttled timer cannot produce a broken site
- *   - the overlay starts at `opacity: 0` AND `pointer-events: none`, so it
- *     costs nothing until it fades in and can never swallow a click
- *   - the exit can REVEAL the page (a clip-path wipe upward) instead of
- *     cross-fading two things, which reads as a designed transition
+   *     a blank screen and a throttled timer cannot produce a broken site
+   *   - the overlay starts at `opacity: 0` AND `pointer-events: none`, so it
+   *     costs nothing until it fades in and can never swallow a click
+   *   - the exit can REVEAL the page (a clip-path wipe upward) instead of
+   *     cross-fading two things, which reads as a designed transition
  *
  * Skipped entirely — not shortened — under `prefers-reduced-motion`, with
  * `?skipIntro=1`, or on any interaction.
@@ -74,7 +86,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
         data-intro-phase={phase}
         onClick={dismiss}
         className={cn(
-          "fixed inset-0 z-50 flex flex-col items-center justify-center gap-12 bg-ink px-4",
+          "fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-ink px-6",
           // Never interactive. Kept on during the exit too, so a click lands on
           // the page underneath rather than the overlay.
           "pointer-events-none",
@@ -83,35 +95,60 @@ export function IntroGate({ children }: { children: ReactNode }) {
             : "animate-[intro-overlay-in_300ms_cubic-bezier(0.16,1,0.3,1)_both]",
         )}
       >
-        <IntroMonogram phase={phase} />
-        <ContributorStrip phase={phase} />
+        {/* Brand mark */}
+        <IntroMonogram />
 
-        {/*
-          "Click anywhere to continue".
+        {/* Section eyebrow */}
+        <p className="type-label text-center text-ink-inverse/60 uppercase tracking-[0.2em]">
+          The team
+        </p>
 
-          Decorative text, NOT a button, and that is load-bearing for two
-          reasons. The overlay is `aria-hidden`, and a focusable element inside
-          an `aria-hidden` container is an accessibility violation that screen
-          readers will expose as an unlabelled control. And the overlay is
-          `pointer-events: none`, so a button inside it would not be clickable
-          either. The interaction is the overlay itself, via the global
-          pointerdown/keydown listener in `useIntro`.
+        {/* First two lines of the team: founders row + leadership row (5 names),
+            shown horizontally with smaller type. Photos load when you add them
+            at public/people/<id>.jpg and set `photo` in contributors.ts. */}
+        <div className="flex items-center justify-center gap-8 md:gap-12">
+          {firstLine.map((person, i) => (
+            <div
+              key={person.id}
+              className="flex flex-col items-center gap-1.5"
+              style={{ animationDelay: `${1250 + i * 60}ms` }}
+            >
+              <div className="relative size-14 sm:size-16">
+                {person.photo ? (
+                  <img
+                    src={person.photo}
+                    alt={person.name}
+                    className="w-full h-full object-cover rounded-full border border-ink-inverse/30"
+                  />
+                ) : (
+                  <Monogram name={person.name} size="lg" />
+                )}
+              </div>
+              <span
+                className={cn(
+                  "type-caption text-center text-ink-inverse/70 uppercase tracking-[0.1em]",
+                  phase === "contributors" || phase === "exiting"
+                    ? "animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+                    : "",
+                )}
+                style={{ animationDelay: `${1250 + i * 60}ms` }}
+              >
+                {person.name}
+              </span>
+            </div>
+          ))}
+        </div>
 
-          Pinned to the bottom rather than placed in the flow, so it cannot
-          shift the wordmark or the contributor strip as it appears.
+        <div className="h-px w-full bg-band-weak/40 my-4 md:my-6" aria-hidden="true" />
 
-          It fades in at 1400ms — after the contributor slots have started
-          arriving and before they finish — which is the earliest point that
-          reads naturally and still leaves it on screen for ~600ms of the hold
-          plus the whole 400ms exit. The timing is otherwise unchanged.
-        */}
+        {/* "Click anywhere to continue". */}
         <p
           className={cn(
             "absolute inset-x-0 bottom-8 text-center type-caption sm:bottom-10",
             "px-4 text-ink-inverse/45",
             "animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]",
           )}
-          style={{ animationDelay: "1400ms" }}
+          style={{ animationDelay: "1900ms" }}
         >
           Click anywhere to continue
         </p>

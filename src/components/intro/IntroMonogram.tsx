@@ -1,4 +1,3 @@
-import type { IntroPhase } from "@/hooks/useIntro";
 import { cn } from "@/lib/utils";
 
 /**
@@ -18,7 +17,7 @@ import { cn } from "@/lib/utils";
  * Decorative: the parent overlay is `aria-hidden`, and the real wordmark is in
  * the masthead underneath.
  */
-export function IntroMonogram({ phase }: { phase: IntroPhase }) {
+export function IntroMonogram() {
   const WORDS = "Institute for Educational Accountability".split(" ");
 
   // The last letter must start early enough that its 600ms rise finishes well
@@ -72,11 +71,6 @@ export function IntroMonogram({ phase }: { phase: IntroPhase }) {
         style={{ animationDelay: "1200ms" }}
       />
 
-      {phase === "contributors" || phase === "exiting" ? (
-        <p className="mt-1 text-[0.66rem] tracking-[0.24em] text-ink-inverse/45 uppercase">
-          Built by the people who answered
-        </p>
-      ) : null}
     </div>
   );
 }

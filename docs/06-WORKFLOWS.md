@@ -31,8 +31,7 @@ page teaser read this array; the order in the file is the source order, but the
 list is shuffled on every load so no order is presented as meaningful.
 
 The dispute email is the `RED_FLAG_EMAIL` constant at the top of
-`src/pages/RedFlagPage.tsx`. It is currently a placeholder — set a real address
-before launch.
+`src/pages/RedFlagPage.tsx`.
 
 ## Adding a page
 

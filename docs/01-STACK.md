@@ -11,7 +11,7 @@ react-router 8. No backend; the data file is inlined into the JS bundle.
 | `react-router` | Declarative routing only (`:id` matching, scroll handling, `NavLink`) — no loaders/actions |
 | `radix-ui` | `Slot` (Button, Badge), `Dialog` (Sheet), `Toggle`, `ToggleGroup` |
 | `class-variance-authority`, `clsx`, `tailwind-merge` | Variant + class-name plumbing (`cn()` in `src/lib/utils.ts`) |
-| `lucide-react` | Icons (`X`, search, arrows, sun/moon, sliders) |
+| `lucide-react` | Icons (`X`, search, arrows, sliders) |
 
 Dev-only: `vite`, `@vitejs/plugin-react`, `@tailwindcss/vite`, `typescript`,
 `eslint` + `typescript-eslint` + react plugins, `node-html-parser`
