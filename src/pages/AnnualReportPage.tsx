@@ -32,7 +32,7 @@ export function AnnualReportPage() {
 
         <Reveal className="py-16 md:py-24" delayMs={60}>
           <p className="type-body-lg measure text-ink-muted">
-            Investigation is underway. The research will be completed once the
+            Investigation is underway. The report will be completed once the
             investigations are over.
           </p>
         </Reveal>

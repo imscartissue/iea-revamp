@@ -38,13 +38,6 @@ export function RankingsPage() {
               {view === "redflags" ? "Red flag schools" : "Rankings"}
             </h1>
 
-            {view === "all" ? (
-              <p className="type-body measure-tight mt-4 text-ink-muted">
-                42 schools, ranked by what students reported — not by what schools submitted about
-                themselves.
-              </p>
-            ) : null}
-
             <dl className="type-caption mt-6 flex flex-wrap gap-x-8 gap-y-1 text-ink-faint">
               <div className="flex gap-2">
                 <dt>Published</dt>

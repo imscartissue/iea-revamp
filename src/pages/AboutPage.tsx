@@ -13,11 +13,12 @@ import { bandCounts, meanResponses, meta, totalSchools } from "@/lib/data";
 import { formatCount, formatCountPlus, formatDate, isoDate } from "@/lib/format";
 
 /**
- * The project, the method, the limitations, and the people.
+ * The project, the limitations, and the people.
  *
  * On the live site this page is literally "Information Unavailable". It exists
  * because a ranking is a statistical claim about named institutions, and the
- * reader is entitled to know who made it, how, and how much to trust it.
+ * reader is entitled to know who made it, how, and how much to trust it. The
+ * how lives on `/methodology`, not here.
  *
  * The FAQ below the photos carries where the number came from, collapsed by
  * default, so the page does not open with a wall of caveats.
@@ -70,50 +71,6 @@ export function AboutPage() {
 
         <Rule />
 
-        {/* --- method ------------------------------------------------------ */}
-        <Reveal className="py-12 md:py-16" delayMs={120}>
-          <SectionHeader eyebrow="Method" title="How the score is calculated" />
-          <ol className="mt-8 flex flex-col">
-            {[
-              {
-                title: "Who answered",
-                body: `${formatCountPlus(meta.totalResponses)} students across the ${meta.location}, reached through student networks rather than schools. Each rated the school they or their peers attended.`,
-              },
-              {
-                title: "What was asked",
-                body: "Four scored dimensions, each rated out of 100, plus open-text questions on fees, clubs, discipline and what they would recommend.",
-              },
-              {
-                title: "How it is weighted",
-                body: "School Environment 30%, Net Benefit 30%, Infrastructure 20%, Net Cost 20%. Complaint is collected but weighted at zero, because no usable complaint data came back.",
-              },
-              {
-                title: "The cost inversion",
-                body: "A lower cost burden is better, so the raw cost rating is turned upside down (100 − cost) before it is weighted. Without this, expensive schools would rank higher for being expensive.",
-              },
-              {
-                title: "How a rank is assigned",
-                body: "Schools are sorted by overall score, descending, and given consecutive ranks. Ties break on the published order, so the ranking is reproducible rather than dependent on sort internals.",
-              },
-            ].map((step, i) => (
-              <li
-                key={step.title}
-                className="grid gap-x-8 gap-y-2 border-b border-rule-soft py-6 md:grid-cols-[3rem_minmax(0,1fr)]"
-              >
-                <span className="font-serif text-numeric-sm leading-6 text-bronze-ink">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="flex flex-col gap-2">
-                  <h3 className="type-heading text-ink">{step.title}</h3>
-                  <p className="type-body measure-snug text-ink-muted">{step.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
-
-        <Rule />
-
         {/* --- people ------------------------------------------------------ */}
         <Reveal className="py-8 md:py-20" delayMs={180}>
           <div className="text-center mb-20 md:mb-28">
@@ -121,10 +78,6 @@ export function AboutPage() {
             <h2 className="type-title text-ink mb-6 bg-clip-text text-transparent bg-gradient-to-r from-ink via-bronze to-ink">
               The team
             </h2>
-            <p className="type-body measure-tight mx-auto text-center text-ink-muted max-w-[40rem]">
-              The researchers, developers, and analysts who built this ranking —
-              and the students whose voices made it possible.
-            </p>
           </div>
 
           {/* Founders */}
@@ -133,7 +86,7 @@ export function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
               <TeamCard
                 name="Yogeshwor Sharma"
-                role="President, & Head of Operations"
+                role="Founder, President, & Head of Operations"
                 featured
               />
               <TeamCard

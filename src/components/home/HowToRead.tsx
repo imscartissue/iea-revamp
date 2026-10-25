@@ -47,60 +47,49 @@ export function HowToRead() {
       />
 
       <dl className="mt-10 flex flex-col">
-        {meta.categories.map((category) => {
-          const key = category.key as CategoryKey;
-          const median = medianOf(key);
-          return (
-            <div
-              key={category.key}
-              className="grid gap-x-8 gap-y-3 border-b border-rule-soft py-6 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]"
-            >
-              <div className="flex flex-col gap-2.5">
-                <dt className="type-heading text-ink">
-                  {category.label}
+        {meta.categories
+          .filter((category) => category.key !== "complaint")
+          .map((category) => {
+            const key = category.key as CategoryKey;
+            const median = medianOf(key);
+            return (
+              <div
+                key={category.key}
+                className="grid gap-x-8 gap-y-3 border-b border-rule-soft py-6 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]"
+              >
+                <div className="flex flex-col gap-2.5">
+                  <dt className="type-heading text-ink">
+                    {category.label}
+                    {category.invert ? (
+                      <span className="ml-2 align-middle text-[0.66rem] tracking-[0.12em] text-bronze-ink uppercase">
+                        inverted ↓
+                      </span>
+                    ) : null}
+                  </dt>
+
+                  <ScoreBar
+                    value={median}
+                    size="md"
+                    label={`Median ${category.label.toLowerCase()} score across the survey: ${median.toFixed(1)}`}
+                  />
+                  <span className="type-caption text-ink-faint">
+                    Median in this survey: {median.toFixed(1)}
+                  </span>
+                </div>
+
+                <dd className="type-body measure-snug text-ink-muted">
+                  {category.blurb}
+
                   {category.invert ? (
-                    <span className="ml-2 align-middle text-[0.66rem] tracking-[0.12em] text-bronze-ink uppercase">
-                      inverted ↓
+                    <span className="mt-2 block type-caption text-bronze-ink">
+                      Higher is better, because the raw cost rating is turned upside down before
+                      scoring: a school that costs less to attend ranks higher.
                     </span>
                   ) : null}
-                </dt>
-
-                {category.unscored ? (
-                  <span className="type-caption text-ink-faint">Not scored</span>
-                ) : (
-                  <>
-                    <ScoreBar
-                      value={median}
-                      size="md"
-                      label={`Median ${category.label.toLowerCase()} score across the survey: ${median.toFixed(1)}`}
-                    />
-                    <span className="type-caption text-ink-faint">
-                      Median in this survey: {median.toFixed(1)}
-                    </span>
-                  </>
-                )}
+                </dd>
               </div>
-
-              <dd className="type-body measure-snug text-ink-muted">
-                {category.blurb}
-
-                {category.invert ? (
-                  <span className="mt-2 block type-caption text-bronze-ink">
-                    Higher is better, because the raw cost rating is turned upside down before
-                    scoring: a school that costs less to attend ranks higher.
-                  </span>
-                ) : null}
-
-                {category.unscored ? (
-                  <span className="mt-2 block type-caption text-ink-faint">
-                    Excluded from the overall score — no complaint data was collected, so it
-                    carries no weight.
-                  </span>
-                ) : null}
-              </dd>
-            </div>
-          );
-        })}
+            );
+          })}
       </dl>
 
       <p className="type-caption measure mt-6 text-ink-faint">

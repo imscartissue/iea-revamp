@@ -1,25 +1,52 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
-import { MethodologyTeaser } from "@/components/home/MethodologyTeaser";
+import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { HowToRead } from "@/components/home/HowToRead";
 import { SEO, applySeo } from "@/lib/seo";
+import { formatCountPlus } from "@/lib/format";
+import { meta } from "@/lib/data";
 
 /**
  * The method, in full.
  *
- * This page carries what the home page used to carry: the three steps of how the
- * score is built, and the legend for reading a row. The home page links here
+ * This page carries what the home page used to carry: how the score is
+ * calculated, and the legend for reading a row. The home page links here
  * rather than repeating it, so the landing page is the pitch and this is the
  * proof.
  *
- * The steps are dropdowns rather than an always-open list — see
- * `MethodologyTeaser` for why.
+ * The five steps are the same ones stated on `/about` — stated here as
+ * dropdowns rather than an always-open list, so a reader who wants the method
+ * can open the one step they doubt, and a reader who does not is not handed a
+ * wall of text before the legend.
  */
 export function MethodologyPage() {
   useEffect(() => applySeo(SEO.methodology), []);
+
+  const steps = [
+    {
+      title: "Who answered",
+      body: `${formatCountPlus(meta.totalResponses)} students across the ${meta.location}, reached through student networks rather than schools. Each rated the school they or their peers attended.`,
+    },
+    {
+      title: "What was asked",
+      body: "Four scored dimensions, each rated out of 100, plus open-text questions on fees, clubs, discipline and what they would recommend.",
+    },
+    {
+      title: "How it is weighted",
+      body: "School Environment 30%, Net Benefit 30%, Infrastructure 20%, Net Cost 20%. Complaint is collected but weighted at zero, because no usable complaint data came back.",
+    },
+    {
+      title: "The cost inversion",
+      body: "A lower cost burden is better, so the raw cost rating is turned upside down (100 − cost) before it is weighted. Without this, expensive schools would rank higher for being expensive.",
+    },
+    {
+      title: "How a rank is assigned",
+      body: "Schools are sorted by overall score, descending, and given consecutive ranks. Ties break on the published order, so the ranking is reproducible rather than dependent on sort internals.",
+    },
+  ];
 
   return (
     <Container>
@@ -39,7 +66,15 @@ export function MethodologyPage() {
         <Rule tone="rule" className="mt-10" />
 
         <Reveal className="py-16 md:py-24" delayMs={60}>
-          <MethodologyTeaser />
+          <section className="defer-paint">
+            <SectionHeader eyebrow="Method" title="How the score is calculated" />
+
+            <ol className="mt-10 flex flex-col">
+              {steps.map((step, i) => (
+                <MethodStep key={step.title} n={i + 1} step={step} />
+              ))}
+            </ol>
+          </section>
         </Reveal>
 
         <Rule tone="rule" />
@@ -49,5 +84,53 @@ export function MethodologyPage() {
         </Reveal>
       </div>
     </Container>
+  );
+}
+
+/**
+ * One collapsible step: a `<button>` heading with the body in a region hidden
+ * until it is opened. `aria-expanded` on the button and `aria-hidden` on the
+ * body keep the state announced; the chevron is decorative.
+ *
+ * All steps start closed, so the page does not open with a wall of caveats.
+ */
+function MethodStep({
+  n,
+  step,
+}: {
+  n: number;
+  step: { title: string; body: string };
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <li className="border-b border-rule-soft last:border-b-0">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="flex w-full items-baseline gap-4 rounded-sm py-4 text-left transition-colors duration-[120ms] hover:bg-bronze-wash focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
+      >
+        <span className="font-serif type-numeric leading-none text-bronze-ink">
+          {String(n).padStart(2, "0")}
+        </span>
+        <span className="type-heading flex-1 text-ink">{step.title}</span>
+        <span
+          aria-hidden="true"
+          className={`type-caption shrink-0 text-ink-faint transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        >
+          ▾
+        </span>
+      </button>
+
+      <div
+        aria-hidden={!open}
+        className={`grid transition-[grid-template-rows] duration-200 ease-brand ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      >
+        <div className="overflow-hidden">
+          <p className="type-body measure-snug pb-4 pl-9 text-ink-muted">{step.body}</p>
+        </div>
+      </div>
+    </li>
   );
 }
