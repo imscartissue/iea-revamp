@@ -45,7 +45,7 @@ export const presidentMessage: MessageBlock[] = [
   },
   {
     kind: "p",
-    text: "IEA is not only something I hope to build, but an experience that continues to shape how I understand the world around me. It is a manifestation of my desire to build something that outlives my ideas and serves the common good of the people.",
+    text: "**IEA is not only something I hope to build, but an experience that continues to shape how I understand the world around me. It is a manifestation of my desire to build something that outlives my ideas and serves the common good of the people.**",
   },
   {
     kind: "sign",
