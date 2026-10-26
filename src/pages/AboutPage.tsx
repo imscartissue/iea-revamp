@@ -1,18 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
-import { Rule } from "@/components/site/Rule";
+import { Rule, AccentRule } from "@/components/site/Rule";
 import { StatBlock, StatRow } from "@/components/data-display/StatBlock";
 import { Button } from "@/components/ui/button";
 import { TeamCard } from "@/components/site/TeamCard";
+import { MessageModal } from "@/components/site/MessageModal";
+import { founderMessage, presidentMessage } from "@/data/messages";
 import { SEO, applySeo } from "@/lib/seo";
 import { bandCounts, meanResponses, meta, totalSchools } from "@/lib/data";
 import { formatCount, formatCountPlus, formatDate } from "@/lib/format";
 
 /**
- * The project, the limitations, and the people.
+ * The institute, the numbers, the people.
  *
  * On the live site this page is literally "Information Unavailable". It exists
  * because a ranking is a statistical claim about named institutions, and the
@@ -22,19 +24,59 @@ import { formatCount, formatCountPlus, formatDate } from "@/lib/format";
 export function AboutPage() {
   useEffect(() => applySeo(SEO.about), []);
 
+  /** Which founder letter is open: null, "president", or "founder". */
+  const [letter, setLetter] = useState<"president" | "founder" | null>(null);
+
   return (
     <Container>
       <div className="animate-route-in">
         <header className="pt-12 md:pt-20">
           <Reveal staggerMs={60}>
-            <h1 tabIndex={-1} className="type-title measure-tight text-ink outline-none">
-              About this project
+            <div className="flex items-center gap-3">
+              <AccentRule />
+              <span className="type-label text-bronze-ink">The institute</span>
+            </div>
+
+            <h1
+              tabIndex={-1}
+              className="type-title measure-tight mt-5 text-ink outline-none"
+            >
+              About Us
             </h1>
-            <p className="type-body-lg measure mt-6 text-ink-muted">
-              Institute for Educational Accountability is an independent, student-sourced ranking of
-              Nepali +2 schools. We aim to highlight the reality of high schools in Nepal beyond what
-              they advertise.
-            </p>
+
+            <div className="mt-8 flex flex-col gap-6">
+              <p className="type-body-lg measure text-ink-muted">
+                The{" "}
+                <strong className="font-bold text-ink">
+                  Institute for Educational Accountability (IEA)
+                </strong>{" "}
+                advances transparency and accountability in education through
+                field research, school investigations, online research, student
+                surveys, and evidence-based analysis.
+              </p>
+              <p className="type-body-lg measure text-ink-muted">
+                We seek to highlight institutional shortcomings, not manufacture
+                accusations. Our claims are grounded in evidence, and our
+                conclusions remain proportionate to what that evidence
+                establishes.
+              </p>
+              <p className="type-body-lg measure text-ink-muted">
+                Where necessary, we pursue appropriate institutional and legal
+                avenues to seek meaningful change.
+              </p>
+            </div>
+
+            {/* The principle, set as a pull quote: same type size, but ruled
+                and tinted so it reads as the sentence the page stands on. */}
+            <blockquote className="mt-10 max-w-[46rem] border-l-[3px] border-bronze bg-bronze-soft/30 py-6 pr-6 pl-6 md:pl-8">
+              <p className="type-body-lg text-ink">
+                Guided by the principle that power must be accompanied by
+                accountability, we strive to ensure that educational institutions
+                remain answerable to the students they serve, while holding our
+                own work to the same standards of fairness, evidence, and
+                transparency.
+              </p>
+            </blockquote>
           </Reveal>
         </header>
 
@@ -80,16 +122,32 @@ export function AboutPage() {
           <section className="relative mb-14 md:mb-20">
             <div className="absolute inset-0 -z-10 bg-bronze-soft/40 rounded-2xl blur-3xl" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
-              <TeamCard
-                name="Yogeshwor Sharma"
-                role="Founder, President, & Head of Operations"
-                featured
-              />
-              <TeamCard
-                name="Eron Subedi"
-                role="Founder, Chief Architect & Chief of Investigations"
-                featured
-              />
+              <div className="flex flex-col items-center gap-5">
+                <TeamCard
+                  name="Yogeshwor Sharma"
+                  role="Founder, President, & Head of Operations"
+                  featured
+                />
+                <Button
+                  onClick={() => setLetter("president")}
+                  className="bg-letter text-ink-inverse hover:bg-letter-deep active:bg-letter-deep"
+                >
+                  Message from president
+                </Button>
+              </div>
+              <div className="flex flex-col items-center gap-5">
+                <TeamCard
+                  name="Eron Subedi"
+                  role="Founder, Chief Architect & Chief of Investigations"
+                  featured
+                />
+                <Button
+                  onClick={() => setLetter("founder")}
+                  className="bg-letter text-ink-inverse hover:bg-letter-deep active:bg-letter-deep"
+                >
+                  Message from founder
+                </Button>
+              </div>
             </div>
           </section>
 
@@ -146,6 +204,22 @@ export function AboutPage() {
             </Button>
           </div>
         </Reveal>
+
+        {/* --- founder letters --------------------------------------------- */}
+        <MessageModal
+          open={letter === "president"}
+          onClose={() => setLetter(null)}
+          name="Yogeshwor Sharma"
+          role="Message from the President"
+          blocks={presidentMessage}
+        />
+        <MessageModal
+          open={letter === "founder"}
+          onClose={() => setLetter(null)}
+          name="Eron Subedi"
+          role="Message from the Founder"
+          blocks={founderMessage}
+        />
       </div>
     </Container>
   );

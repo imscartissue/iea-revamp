@@ -74,7 +74,7 @@ export const SEO = {
   ),
   about: build(
     "About",
-    `How the IEA Institute school rankings were built: who answered the survey, what was asked, how the weighted score is calculated, and what the score does not mean.`,
+    `The Institute for Educational Accountability (IEA) advances transparency and accountability in education through field research, school investigations, student surveys, and evidence-based analysis.`,
   ),
   notFound: build(
     "Page not found",
