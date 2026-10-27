@@ -23,8 +23,8 @@ import type { Contributor } from "@/lib/types";
 export const contributors: Contributor[] = [
   { id: "yogeshwor-sharma", name: "Yogeshwor Sharma", role: "Founder, President, & Head of Operations", photo: "/people/yogeshwor-sharma.jpg" },
   { id: "eron-subedi", name: "Eron Subedi", role: "Founder, Chief Architect & Chief of Investigations", photo: "/people/eron-subedi.jpeg" },
-  { id: "aarohan-baral", name: "Aarohan Baral", role: "Lead Developer", photo: "/people/aarohan-baral.jpg" },
-  { id: "tikaram-sharma", name: "Tikaram Sharma", role: "Co-Founder & Statistical Analyst", photo: "/people/tikaram-sharma.jpg" },
+  { id: "aarohan-baral", name: "Aarohan Baral", role: "Lead Developer", },
+  { id: "tikaram-sharma", name: "Tikaram Sharma", role: "Co-Founder & Statistical Analyst",  },
   { id: "prajjwal-dhakal", name: "Prajjwal Dhakal", role: "Co-Founder", photo: "/people/prajjwal-dhakal.jpeg" },
   { id: "abhinash-poudel", name: "Abinash Poudel", role: "Lead Online Research", photo: "/people/abinash-poudel.jpg" },
   { id: "nischal-ghimire", name: "Nischal Ghimire", role: "Research Executive", photo: "/people/nischal-ghimire.JPG" },
