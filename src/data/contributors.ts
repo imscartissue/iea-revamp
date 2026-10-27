@@ -21,22 +21,23 @@ import type { Contributor } from "@/lib/types";
 
 /** Real people, credited. */
 export const contributors: Contributor[] = [
-  { id: "yogeshwor-sharma", name: "Yogeshwor Sharma", role: "Founder, President, & Head of Operations" },
-  { id: "eron-subedi", name: "Eron Subedi", role: "Founder, Chief Architect & Chief of Investigations" },
-  { id: "aarohan-baral", name: "Aarohan Baral", role: "Lead Developer" },
-  { id: "tikaram-sharma", name: "Tikaram Sharma", role: "Co-Founder & Lead Analyst" },
-  { id: "prajjwal-dhakal", name: "Prajjwal Dhakal", role: "Co-Founder" },
-  { id: "abhinash-poudel", name: "Abinash Poudel", role: "Lead Online Research" },
-  { id: "nischal-ghimire", name: "Nischal Ghimire", role: "Research Executive" },
+  { id: "yogeshwor-sharma", name: "Yogeshwor Sharma", role: "Founder, President, & Head of Operations", photo: "/people/yogeshwor-sharma.jpg" },
+  { id: "eron-subedi", name: "Eron Subedi", role: "Founder, Chief Architect & Chief of Investigations", photo: "/people/eron-subedi.jpeg" },
+  { id: "aarohan-baral", name: "Aarohan Baral", role: "Lead Developer", photo: "/people/aarohan-baral.jpg" },
+  { id: "tikaram-sharma", name: "Tikaram Sharma", role: "Co-Founder & Lead Analyst", photo: "/people/tikaram-sharma.jpg" },
+  { id: "prajjwal-dhakal", name: "Prajjwal Dhakal", role: "Co-Founder", photo: "/people/prajjwal-dhakal.jpeg" },
+  { id: "abhinash-poudel", name: "Abinash Poudel", role: "Lead Online Research", photo: "/people/abinash-poudel.jpg" },
+  { id: "nischal-ghimire", name: "Nischal Ghimire", role: "Research Executive", photo: "/people/nischal-ghimire.JPG" },
   { id: "kaustuv-rimal", name: "Kaustuv Rimal", role: "Research Executive" },
-  { id: "aaditya-jha", name: "Aaditya Jha", role: "Research Executive" },
-  { id: "aishani-rai", name: "Aishani Rai", role: "Editorial Lead" },
-  { id: "krinjal-timalsina", name: "Krinjal Timalsina", role: "Researcher" },
-  { id: "aadarsha-pandey", name: "Aadarsha Pandey", role: "Researcher" },
-  { id: "piyush-joshi", name: "Piyush Joshi", role: "Researcher" },
-  { id: "pratyush-neupane", name: "Pratyush Neupane", role: "Researcher" },
-  { id: "sambriddhi-bhattarai", name: "Sambriddhi Bhattarai", role: "Researcher" },
-  { id: "kashyap-shrestha", name: "Kashyap Shrestha", role: "Researcher" },
+  { id: "aaditya-jha", name: "Aaditya Jha", role: "Research Executive", photo: "/people/aaditya-jha.jpg" },
+  { id: "aishani-rai", name: "Aishani Rai", role: "Editorial Lead", photo: "/people/aishani-rai.jpg" },
+  { id: "ashmit-pandey", name: "Ashmit Pandey", role: "Managing Editor and Associate Researcher" },
+  { id: "krinjal-timalsina", name: "Krinjal Timalsina", role: "Research Analyst", photo: "/people/krinjal-timalsina.jpeg" },
+  { id: "aadarsha-pandey", name: "Aadarsha Pandey", role: "Research Analyst" },
+  { id: "piyush-joshi", name: "Piyush Joshi", role: "Research Analyst", photo: "/people/piyush-joshi.jpg" },
+  { id: "pratyush-neupane", name: "Pratyush Neupane", role: "Research Analyst", photo: "/people/pratyush-neupane.jpeg" },
+  { id: "sambriddhi-bhattarai", name: "Sambriddhi Bhattarai", role: "Research Analyst", photo: "/people/sambriddhi-bhattarai.jpg" },
+  { id: "kashyap-shrestha", name: "Kashyap Shrestha", role: "Research Analyst", photo: "/people/kashyap-shrestha.jpeg" },
 ];
 
 /**

@@ -570,6 +570,15 @@
   scrollbar-color: rgb(19 26 44 / 0.25) transparent;
 }
 
+/* Portraits: force the browser to use a contrast-preserving downsampling
+   algorithm when shrinking high-res photos into small circles. Without this,
+   very large JPEGs rendered at ~100px can look pixelated/soft because the
+   browser’s default downsampling drops fine detail. */
+.portrait-img {
+  image-rendering: -webkit-optimize-contrast !important;
+  image-rendering: optimize-contrast !important;
+}
+
 .message-scroll::-webkit-scrollbar {
   width: 6px;
 }

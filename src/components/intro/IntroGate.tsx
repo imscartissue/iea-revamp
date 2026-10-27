@@ -102,12 +102,12 @@ export function IntroGate({ children }: { children: ReactNode }) {
               className="flex flex-col items-center gap-1.5"
               style={{ animationDelay: `${1250 + i * 60}ms` }}
             >
-              <div className="relative size-14 sm:size-16">
+              <div className="relative size-20 sm:size-24">
                 {person.photo ? (
                   <img
                     src={person.photo}
                     alt={person.name}
-                    className="w-full h-full object-cover rounded-full border border-ink-inverse/30"
+                    className="w-full h-full object-cover rounded-full border border-ink-inverse/30 portrait-img"
                   />
                 ) : (
                   <Monogram name={person.name} size="lg" />

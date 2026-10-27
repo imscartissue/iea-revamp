@@ -24,9 +24,9 @@ export function TeamCard({
     <div className="flex flex-col items-center group">
       {/* Portrait — circular with animated gradient border. */}
       <div className={cn(
-        "relative size-20 sm:size-28 rounded-full bg-canvas flex items-center justify-center transition-all duration-500 ease-brand",
+        "relative size-24 sm:size-36 rounded-full bg-canvas flex items-center justify-center transition-all duration-500 ease-brand",
         featured &&
-          "relative size-24 sm:size-32 border-2 border-bronze bg-bronze-soft/30 group-hover:border-bronze group-hover:shadow-[0_0_40px_rgb(138_106_53_0.3)]",
+          "relative size-32 sm:size-40 border-2 border-bronze bg-bronze-soft/30 group-hover:border-bronze group-hover:shadow-[0_0_40px_rgb(138_106_53_0.3)]",
         !featured &&
           "border border-rule-soft group-hover:border-bronze group-hover:shadow-[0_0_24px_rgb(138_106_53_0.12)]",
       )}>
@@ -34,7 +34,7 @@ export function TeamCard({
           <img
             src={photo}
             alt={name}
-            className="w-full h-full object-cover rounded-full"
+            className="w-full h-full object-cover rounded-full portrait-img"
           />
         ) : (
           <div className="flex items-center justify-center h-full w-full text-ink-faint font-serif text-[0.9375rem] font-bold tracking-[0.05em]">

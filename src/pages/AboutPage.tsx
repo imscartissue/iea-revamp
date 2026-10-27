@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { TeamCard } from "@/components/site/TeamCard";
 import { MessageModal } from "@/components/site/MessageModal";
 import { founderMessage, presidentMessage } from "@/data/messages";
+import { contributors } from "@/data/contributors";
 import { SEO, applySeo } from "@/lib/seo";
 import { bandCounts, meanResponses, meta, totalSchools } from "@/lib/data";
 import { formatCount, formatCountPlus, formatDate } from "@/lib/format";
@@ -22,6 +23,10 @@ import { formatCount, formatCountPlus, formatDate } from "@/lib/format";
  * how — and the FAQ about what the score means — live on `/methodology`.
  */
 export function AboutPage() {
+  /** Map member name → photo path, so each TeamCard can show the portrait. */
+  const photoByName = new Map(
+    contributors.map((c) => [c.name, c.photo ?? undefined]),
+  );
   useEffect(() => applySeo(SEO.about), []);
 
   /** Which founder letter is open: null, "president", or "founder". */
@@ -127,6 +132,7 @@ export function AboutPage() {
                   name="Yogeshwor Sharma"
                   role="Founder, President, & Head of Operations"
                   featured
+                  photo={photoByName.get("Yogeshwor Sharma")}
                 />
                 <Button
                   onClick={() => setLetter("president")}
@@ -140,6 +146,7 @@ export function AboutPage() {
                   name="Eron Subedi"
                   role="Founder, Chief Architect & Chief of Investigations"
                   featured
+                  photo={photoByName.get("Eron Subedi")}
                 />
                 <Button
                   onClick={() => setLetter("founder")}
@@ -154,32 +161,33 @@ export function AboutPage() {
           {/* Leadership — Aarohan, Tikaram, Prajjwal */}
           <section className="mb-14 md:mb-20">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 items-start justify-items-center">
-              <TeamCard name="Aarohan Baral" role="Lead Developer" />
-              <TeamCard name="Tikaram Sharma" role="Co-Founder & Lead Analyst" />
-              <TeamCard name="Prajjwal Dhakal" role="Co-Founder" />
+              <TeamCard name="Aarohan Baral" role="Lead Developer" photo={photoByName.get("Aarohan Baral")} />
+              <TeamCard name="Tikaram Sharma" role="Co-Founder & Lead Analyst" photo={photoByName.get("Tikaram Sharma")} />
+              <TeamCard name="Prajjwal Dhakal" role="Co-Founder" photo={photoByName.get("Prajjwal Dhakal")} />
             </div>
           </section>
 
           {/* Research Executive */}
           <section className="mb-14 md:mb-20">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 justify-items-center">
-              <TeamCard name="Abinash Poudel" role="Lead of Online Research" />
-              <TeamCard name="Nischal Ghimire" role="Research Executive" />
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center">
+              <TeamCard name="Abinash Poudel" role="Lead of Online Research" photo={photoByName.get("Abinash Poudel")} />
+              <TeamCard name="Nischal Ghimire" role="Research Executive" photo={photoByName.get("Nischal Ghimire")} />
               <TeamCard name="Kaustuv Rimal" role="Research Executive" />
-              <TeamCard name="Aaditya Jha" role="Research Executive" />
-              <TeamCard name="Aishani Rai" role="Editorial Lead" />
+              <TeamCard name="Aaditya Jha" role="Research Executive" photo={photoByName.get("Aaditya Jha")} />
+              <TeamCard name="Aishani Rai" role="Editorial Lead" photo={photoByName.get("Aishani Rai")} />
+              <TeamCard name="Ashmit Pandey" role="Managing Editor and Associate Researcher" photo={photoByName.get("Ashmit Pandey")} />
             </div>
           </section>
 
-          {/* Researcher */}
-          <section className="mb-4">
+          {/* Research Analyst */}
+          <section className="mb-14 md:mb-20">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center">
-              <TeamCard name="Krinjal Timalsina" role="Researcher" />
-              <TeamCard name="Aadarsha Pandey" role="Researcher" />
-              <TeamCard name="Piyush Joshi" role="Researcher" />
-              <TeamCard name="Pratyush Neupane" role="Researcher" />
-              <TeamCard name="Sambriddhi Bhattarai" role="Researcher" />
-              <TeamCard name="Kashyap Shrestha" role="Researcher" />
+              <TeamCard name="Krinjal Timalsina" role="Research Analyst" photo={photoByName.get("Krinjal Timalsina")} />
+              <TeamCard name="Aadarsha Pandey" role="Research Analyst" />
+              <TeamCard name="Piyush Joshi" role="Research Analyst" photo={photoByName.get("Piyush Joshi")} />
+              <TeamCard name="Pratyush Neupane" role="Research Analyst" photo={photoByName.get("Pratyush Neupane")} />
+              <TeamCard name="Sambriddhi Bhattarai" role="Research Analyst" photo={photoByName.get("Sambriddhi Bhattarai")} />
+              <TeamCard name="Kashyap Shrestha" role="Research Analyst" photo={photoByName.get("Kashyap Shrestha")} />
             </div>
           </section>
         </Reveal>
