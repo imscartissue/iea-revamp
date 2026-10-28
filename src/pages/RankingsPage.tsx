@@ -110,9 +110,9 @@ export function RankingsPage() {
               </ul>
 
               <p className="type-caption measure mt-10 border-t border-rule-soft pt-6 text-ink-faint">
-                Net Cost is inverted: a school that costs less to attend scores higher, so the
-                column reads like every other one. Overall score is a weighted blend of School
-                Environment (30%), Net Benefit (30%), Infrastructure (20%) and Net Cost (20%).
+                Net Cost is shown inverted: the higher the number, the higher the cost — and the
+                redder the cell. Overall score is a weighted blend of School Environment (30%),
+                Net Benefit (30%), Infrastructure (20%) and Net Cost (20%).
               </p>
             </>
           )}

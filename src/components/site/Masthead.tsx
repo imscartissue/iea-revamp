@@ -3,7 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router";
 
 
 import { Container } from "@/components/site/Container";
-import { Wordmark } from "@/components/site/Wordmark";
+import { Logo } from "@/components/site/Logo";
 import { Monogram } from "@/components/data-display/Monogram";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { bandColor } from "@/lib/scoring";
@@ -32,6 +32,12 @@ const LINKS = [
  *   - A full-screen overlay nav triggered by the hamburger, with a staggered
  *     entrance, focus management, ESC-to-close and body scroll lock.
  *   - Overlay-only navigation on every breakpoint.
+ *
+ * Chrome is INK NAVY everywhere, matching the hero's band. On `/` at the very
+ * top the bar goes transparent so the band and the march photo read straight
+ * through it — one continuous block from the top of the viewport down. Every
+ * other state (scrolled, overlay open, any other route) is solid navy, so the
+ * seam never shows and the ivory logo and controls never land on paper.
  */
 export function Masthead() {
   const { pathname } = useLocation();
@@ -182,6 +188,9 @@ export function Masthead() {
 
   const brandHidden = stuck && !revealed && !open;
   const scrolled = scrollY > 8;
+  // Home at the very top: reveal the hero band (navy + march photo) through
+  // the chrome. Anywhere else the bar is solid navy.
+  const revealBand = pathname === "/" && !scrolled && !open;
 
   const duration = reducedMotion ? "duration-0" : "duration-200";
 
@@ -197,21 +206,22 @@ export function Masthead() {
         <div
           className={cn(
             "border-b transition-colors duration-200",
-            scrolled || open
-              ? "bg-surface/95 shadow-header backdrop-blur"
-              : "bg-canvas/0",
-            scrolled || open ? "border-rule-soft" : "border-transparent",
+            revealBand
+              ? "bg-transparent border-transparent"
+              : scrolled || open
+                ? "bg-ink/95 shadow-header backdrop-blur border-ink-inverse/10"
+                : "bg-ink border-ink-inverse/10",
           )}
         >
           <Container>
-            <div className="flex h-16 items-center justify-between gap-6 md:h-20">
+            <div className="flex h-20 items-center justify-between gap-6 md:h-24">
               <NavLink
                 to="/"
                 end
                 className="shrink-0 rounded-sm"
                 aria-label="IEA — home"
               >
-                <Wordmark size="md" />
+                <Logo size="md" variant="dark" />
               </NavLink>
 
               <div className="flex items-center gap-6 md:gap-8">
@@ -222,7 +232,7 @@ export function Masthead() {
                   aria-expanded={searchOpen}
                   aria-controls="site-search"
                   aria-label="Open site search"
-                  className="inline-flex h-10 items-center gap-2 rounded-full border border-rule-soft bg-surface px-4 text-ink transition-colors hover:bg-bronze-wash"
+                  className="inline-flex h-10 items-center gap-2 rounded-full border border-ink-inverse/40 bg-ink-inverse/10 px-4 text-ink-inverse transition-colors hover:bg-ink-inverse/20"
                 >
                   <svg
                     aria-hidden="true"
@@ -250,7 +260,7 @@ export function Masthead() {
                   aria-expanded={open}
                   aria-controls="site-nav"
                   aria-label="Open navigation"
-                  className="inline-flex size-10 items-center justify-center rounded-sm text-ink transition-colors hover:text-bronze-ink"
+                  className="inline-flex size-10 items-center justify-center rounded-sm text-ink-inverse/85 transition-colors hover:text-ink-inverse"
                 >
                   <svg
                     aria-hidden="true"
@@ -397,7 +407,7 @@ export function Masthead() {
         )}
       >
         {/* Overlay top bar */}
-        <div className="flex h-16 items-center justify-between border-b border-ink-inverse/10 px-4 md:h-20 md:px-8">
+        <div className="flex h-20 items-center justify-between border-b border-ink-inverse/10 px-4 md:h-24 md:px-8">
           <NavLink
             to="/"
             end
@@ -405,7 +415,7 @@ export function Masthead() {
             aria-label="IEA — home"
             onClick={() => setOpen(false)}
           >
-            <Wordmark size="md" className="text-ink-inverse" />
+            <Logo size="md" variant="dark" />
           </NavLink>
 
           <div className="flex items-center gap-1 md:gap-2">

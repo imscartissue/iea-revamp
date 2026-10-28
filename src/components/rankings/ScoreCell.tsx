@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils";
  * desktop — always paired with a bar. The number alone is not a comparison; the
  * bar is what makes a column scannable.
  *
- * `invert` marks the cost column. The value shown is always the 0-100
- * *desirability* score, never the raw cost rating, so a higher number always
- * means a better result and the "lower is better" note explains why the raw
- * metric was inverted. Showing the raw rating would make the column sort
- * backwards relative to its own header.
+ * `invert` marks the cost column: the number shown is the inverted cost
+ * score, and the display rule for this one column is "higher the net cost,
+ * the redder it reads" — so its colour and its bar's tone come from the
+ * FLIPPED band (high number → red), while every other column shows a score
+ * where high is good and reads green.
  */
 export function ScoreCell({
   value,
@@ -27,7 +27,7 @@ export function ScoreCell({
   bar?: boolean;
   className?: string;
 }) {
-  const b = band(value);
+  const b = band(invert ? 100 - value : value);
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
       <div className="flex items-baseline gap-1.5">
@@ -47,7 +47,7 @@ export function ScoreCell({
           </span>
         ) : null}
       </div>
-      {bar ? <ScoreBar value={value} size="sm" label={`${value.toFixed(1)} out of 100`} /> : null}
+      {bar ? <ScoreBar value={value} tone={b} size="sm" label={`${value.toFixed(1)} out of 100`} /> : null}
     </div>
   );
 }

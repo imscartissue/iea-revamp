@@ -117,7 +117,6 @@ export function AboutPage() {
         {/* --- people ------------------------------------------------------ */}
         <Reveal className="py-8 md:py-20" delayMs={180}>
           <div className="text-center mb-20 md:mb-28">
-            <p className="type-label text-bronze-ink uppercase tracking-[0.25em] mb-4">The people</p>
             <h2 className="type-title text-ink mb-6 bg-clip-text text-transparent bg-gradient-to-r from-ink via-bronze to-ink">
               The team
             </h2>

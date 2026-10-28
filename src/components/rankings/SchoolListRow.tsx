@@ -68,23 +68,31 @@ export function SchoolListRow({ school }: { school: School }) {
       <dl className="grid grid-cols-4 gap-2 pb-4 pl-[4.75rem] pr-0">
         <Metric label="Env." value={school.categories.environment} />
         <Metric label="Infra" value={school.categories.infrastructure} />
-        <Metric label="Cost" value={school.categories.cost} />
+        <Metric label="Cost" value={school.categories.cost} invert />
         <Metric label="Benefit" value={school.categories.benefit} />
       </dl>
     </li>
   );
 }
 
-function Metric({ label, value }: { label: string; value: number }) {
+/**
+ * One metric, compactly. `invert` marks the cost column: the number shown is
+ * the inverted cost score, and the display rule for it is "higher the net
+ * cost, the redder it reads" — so the colour comes from the flipped band,
+ * while every other metric colours high-is-good.
+ */
+function Metric({ label, value, invert = false }: { label: string; value: number; invert?: boolean }) {
+  const b = band(invert ? 100 - value : value);
+
   return (
     <div className="flex flex-col gap-0.5">
       <dt className="type-caption text-ink-faint">{label}</dt>
       <dd
         className={cn(
           "type-numeric-sm",
-          value >= 75 && "text-band-strong",
-          value >= 50 && value < 75 && "text-band-fair",
-          value < 50 && "text-band-weak",
+          b === "strong" && "text-band-strong",
+          b === "fair" && "text-band-fair",
+          b === "weak" && "text-band-weak",
         )}
       >
         {value.toFixed(0)}

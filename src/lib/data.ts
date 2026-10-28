@@ -78,6 +78,27 @@ export function getRedFlag(id: string | undefined | null): RedFlag | undefined {
   return redFlagById.get(id);
 }
 
+/**
+ * Link a red-flag register entry to its row in the rankings, when it has
+ * one. The register names schools as they are known — short forms ("KMC
+ * Bagbazar"), abbreviations ("GEMS"), curly apostrophes ("St. Mary's") —
+ * so the match runs on slugs and also considers `shortName` and
+ * `initials`, in either prefix direction.
+ *
+ * `undefined` is a valid answer, not an error: the register also
+ * publishes notices for schools outside the ranked roster, which the
+ * red-flag page shows as "Separate notice".
+ */
+export function findRankedSchool(name: string): School | undefined {
+  const needle = slugify(name);
+  if (!needle) return undefined;
+  return schools.find((s) =>
+    [slugify(s.name), slugify(s.shortName), slugify(s.initials)].some(
+      (key) => key === needle || key.startsWith(needle) || needle.startsWith(key),
+    ),
+  );
+}
+
 /** The top N schools. `schools` is already rank-ordered, so this is a slice. */
 export function topSchools(n: number): School[] {
   return schools.slice(0, n);

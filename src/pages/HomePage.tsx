@@ -1,23 +1,17 @@
 import { useEffect } from "react";
 
-import { Container } from "@/components/site/Container";
 import { Hero } from "@/components/home/Hero";
 import { SEO, applySeo } from "@/lib/seo";
 
 /**
  * The landing page.
  *
- * Hero carries the stats, red-flag spotlight and top of the table. The data band
- * breaks out to full width as the single high-contrast anchor.
+ * Hero carries the band, the stats, red-flag spotlight and top of the table —
+ * it manages its own `Container`s, because the navy band has to break out to
+ * full width. The data band breaks out as the single high-contrast anchor.
  */
 export function HomePage() {
   useEffect(() => applySeo(SEO.home), []);
 
-  return (
-    <>
-      <Container>
-        <Hero />
-      </Container>
-    </>
-  );
+  return <Hero />;
 }

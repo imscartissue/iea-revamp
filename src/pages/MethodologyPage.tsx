@@ -85,7 +85,7 @@ export function MethodologyPage() {
             <SectionHeader eyebrow="FAQ" />
             <div className="mt-8 flex flex-col gap-3">
               <FaqItem
-                question="What does the score mean — and what does it not mean?"
+                question="What does the score mean and what does it not mean?"
                 answer={
                   <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
                     <div className="flex flex-col gap-4">

@@ -63,6 +63,14 @@
   --letter: #2f5d7c;
   --letter-deep: #24485f;
   --letter-wash: #e3ebf0;
+
+  /* Gold — the red-flag notice hero's accent, lifted from the register
+   * design. Unlike bronze (a rules-and-fills value), gold is bright enough
+   * for TEXT on the hero's wine-dark ground: ~8:1 against the deep end of
+   * the gradient and ~6:1 against the summary card, so every link, label
+   * and rule that sits on the dark masthead passes AA.
+   */
+  --gold: #c9a45c;
 }
 
 /* ==========================================================================
@@ -100,6 +108,8 @@
   --color-letter: var(--letter);
   --color-letter-deep: var(--letter-deep);
   --color-letter-wash: var(--letter-wash);
+
+  --color-gold: var(--gold);
 
   /* -- shadcn semantic contract -------------------------------------------
    * shadcn primitives are written against semantic names (bg-primary,
@@ -511,6 +521,18 @@
   }
 }
 
+/* The splash's "Click anywhere to continue" hint breathing gently, so it
+   reads as an affordance rather than static text. opacity only. */
+@keyframes intro-hint-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 /* --- founder letter popup ---------------------------------------------- */
 @keyframes message-backdrop-in {
   from {
@@ -795,4 +817,86 @@ html.intro-active {
 
 @utility animate-map-flow {
   animation: map-flow 9s linear infinite;
+}
+
+/* ==========================================================================
+   Red-flag notice hero
+
+   The individual red-flag page opens on a full-bleed wine-dark masthead: a
+   horizontal gradient that starts near-black wine where the type sits and
+   lifts to a translucent claret at the right edge, with the (already
+   palette-duotoned) register photo masked in from the right at 30%. All
+   text is ivory; `gold` carries every accent.
+
+   Component surfaces, so the stops live here rather than in the palette:
+   they are this one band's recipe, mixed from wine tints, not brand
+   values. The summary card's custom properties resolve through the hero,
+   since the card only ever renders inside it.
+   ========================================================================== */
+
+.red-flag-detail-hero {
+  --flag-deep: #140a0ffa; /* 98% — gradient start, under the type */
+  --flag-mid: #270f17f0; /* 94% — body, at 54% */
+  --flag-soft: #3d1620b8; /* 72% — right edge, where the photo bleeds */
+  --flag-card: #130a0f9e; /* 62% — the summary card's ground */
+
+  position: relative;
+  isolation: isolate;
+  padding-block: 2.5rem 3rem;
+  color: var(--ink-inverse);
+  background: linear-gradient(
+    105deg,
+    var(--flag-deep) 0%,
+    var(--flag-mid) 54%,
+    var(--flag-soft) 100%
+  );
+}
+
+/* The register photo. The SVG is duotoned in-file (ink → bronze → cream),
+   so unlike the reference it needs no grayscale/sepia pass — the mask
+   alone slides it in from the right, leaving the type column clean. */
+.red-flag-detail-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.3;
+  pointer-events: none;
+  background: url("/images/red-flag-students.svg") right 38% / cover no-repeat;
+  -webkit-mask-image: linear-gradient(90deg, #0000 0%, #000 40% 100%);
+  mask-image: linear-gradient(90deg, #0000 0%, #000 40% 100%);
+}
+
+.red-flag-summary-card {
+  padding: 1rem 1.125rem;
+  border: 1px solid color-mix(in srgb, var(--gold) 38%, transparent);
+  border-top: 2px solid var(--gold);
+  background: var(--flag-card);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+/* ==========================================================================
+   Site footer — the Madison woodcut, ghosted
+
+   The engraving that opens the site returns at the foot of every page,
+   inverted and dropped to 7% so it reads as texture in the ink rather
+   than as an image (same recipe as the register's madison banner/foot).
+   ========================================================================== */
+
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.07;
+  filter: invert();
+  pointer-events: none;
+  background: url("/images/madison/woodcut.webp") 50% / cover no-repeat;
 }

@@ -6,10 +6,10 @@ import { Reveal } from "@/components/site/Reveal";
 import { Rule } from "@/components/site/Rule";
 import { SectionHeader } from "@/components/data-display/SectionHeader";
 import { Monogram } from "@/components/data-display/Monogram";
+import { NoticeSummary } from "@/components/data-display/NoticeSummary";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { applySeo, redFlagSeo } from "@/lib/seo";
-import { getRedFlag, schools } from "@/lib/data";
-import { meta } from "@/lib/data";
+import { findRankedSchool, getRedFlag, meta } from "@/lib/data";
 import type { RedFlag, School } from "@/lib/types";
 
 /**
@@ -29,13 +29,10 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
     applySeo(redFlagSeo(redFlag));
   }, [redFlag]);
 
-  // Some flagged schools are also in the ranked roster. Match by name (the
-  // red-flag name may be a short form of the ranked name).
-  const matchedSchool: School | undefined = schools.find((s) => {
-    const a = s.name.toLowerCase();
-    const b = redFlag.name.toLowerCase();
-    return a === b || a.startsWith(b) || b.startsWith(a);
-  });
+  // The register may name a ranked school by its short form ("KMC
+  // Bagbazar", "GEMS") or with different punctuation — `findRankedSchool`
+  // handles that. `undefined` means the school is register-only.
+  const matchedSchool: School | undefined = findRankedSchool(redFlag.name);
 
   return (
     <>
@@ -58,12 +55,22 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
       {/* Red left rail down the whole content area. */}
       <div className="border-l-2 border-band-weak">
-        <Container>
-          <div className="animate-route-in pt-10 md:pt-16">
-            <nav aria-label="Breadcrumb" className="type-caption text-ink-faint">
+        {/*
+          THE HERO — a full-bleed wine-dark masthead (see
+          `.red-flag-detail-hero` in the stylesheet): the register photo
+          masked in from the right at 30%, ivory type, gold accents. It
+          spans rail-to-edge; a Container inside re-centres the content
+          on the same 1200px column as everything below.
+        */}
+        <div className="red-flag-detail-hero animate-route-in">
+          <Container>
+            <nav
+              aria-label="Breadcrumb"
+              className="type-caption text-ink-inverse/75"
+            >
               <Link
                 to="/rankings?view=redflags"
-                className="text-bronze-ink underline underline-offset-4 hover:decoration-2"
+                className="text-gold underline underline-offset-4 hover:decoration-2"
               >
                 Red flag schools
               </Link>
@@ -73,12 +80,12 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
             <div className="relative mt-8 flex items-center gap-4 md:mt-10">
               <Monogram name={redFlag.name} size="lg" />
-              <span className="type-label text-band-weak">Red flag school</span>
+              <span className="type-label text-gold">Red flag school</span>
 
               {/* Rotated stamp. */}
               <span
                 aria-hidden="true"
-                className="absolute right-0 top-0 hidden -rotate-6 select-none border-2 border-band-weak px-3 py-1 font-sans text-xs font-bold uppercase tracking-[0.2em] text-band-weak md:inline-block"
+                className="absolute right-0 top-0 hidden -rotate-6 select-none border-2 border-gold/70 px-3 py-1 font-sans text-xs font-bold uppercase tracking-[0.2em] text-gold md:inline-block"
               >
                 Flagged
               </span>
@@ -86,21 +93,35 @@ function RedFlagDetail({ redFlag }: { redFlag: RedFlag }) {
 
             <h1
               tabIndex={-1}
-              className="type-display measure-tight mt-6 text-ink outline-none"
+              className="type-display measure-tight mt-6 text-ink-inverse outline-none"
             >
               {redFlag.name}
             </h1>
 
-            <p className="type-caption mt-4 text-ink-faint">
+            <p className="type-caption mt-4 text-ink-inverse/70">
               Published by IEA · {meta.publicationDate.slice(0, 4)} · Reasons:{" "}
               {redFlag.reasons.length} · Status: Flagged
             </p>
 
-            <p className="type-heading mt-6 max-w-[40rem] text-ink">
-              IEA has flagged this school. The reasons are published below.
-            </p>
-          </div>
+            {/*
+              Statement and summary side by side from md, bottoms aligned —
+              the gold-capped card sits on the photo's side of the band.
+            */}
+            <div className="mt-7 grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(15rem,0.65fr)] md:items-end">
+              <p className="type-heading max-w-[40rem] text-ink-inverse">
+                IEA has flagged this school. The reasons are published below.
+              </p>
 
+              <NoticeSummary
+                reasons={redFlag.reasons.length}
+                rank={matchedSchool?.rank}
+                profileTo={matchedSchool ? `/school/${matchedSchool.id}` : undefined}
+              />
+            </div>
+          </Container>
+        </div>
+
+        <Container>
           <Rule tone="rule" className="mt-12 md:mt-16" />
 
           <Reveal className="py-2 md:py-4" delayMs={60}>

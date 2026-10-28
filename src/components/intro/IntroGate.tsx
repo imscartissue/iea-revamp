@@ -1,8 +1,7 @@
 import { useEffect, type ReactNode } from "react";
 import { useLocation } from "react-router";
 
-import { IntroMonogram } from "@/components/intro/IntroMonogram";
-import { Monogram } from "@/components/data-display/Monogram";
+
 import { useIntro } from "@/hooks/useIntro";
 import { contributors } from "@/data/contributors";
 import { cn } from "@/lib/utils";
@@ -29,10 +28,10 @@ const firstLine: typeof contributors = contributors.filter((c) =>
  *
  *   - the page is live and interactive from the first frame, so there is never
    *     a blank screen and a throttled timer cannot produce a broken site
-   *   - the overlay starts at `opacity: 0` AND `pointer-events: none`, so it
-   *     costs nothing until it fades in and can never swallow a click
-   *   - the exit can REVEAL the page (a clip-path wipe upward) instead of
-   *     cross-fading two things, which reads as a designed transition
+ *   - the overlay starts at `opacity: 0` AND `pointer-events: none`, so it
+ *     costs nothing until it fades in and can never swallow a click
+ *   - the exit can REVEAL the page (a clip-path wipe upward) instead of
+ *     cross-fading two things, which reads as a designed transition
  *
  * Skipped entirely — not shortened — under `prefers-reduced-motion`, with
  * `?skipIntro=1`, or on any interaction.
@@ -80,7 +79,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
         data-intro-phase={phase}
         onClick={dismiss}
         className={cn(
-          "fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-ink px-6",
+          "fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-ink px-6 pb-16",
           // Never interactive. Kept on during the exit too, so a click lands on
           // the page underneath rather than the overlay.
           "pointer-events-none",
@@ -89,48 +88,30 @@ export function IntroGate({ children }: { children: ReactNode }) {
             : "animate-[intro-overlay-in_300ms_cubic-bezier(0.16,1,0.3,1)_both]",
         )}
       >
-        {/* Brand mark */}
-        <IntroMonogram />
+        {/* Brand mark — the stacked logo, ivory on the ink ground. */}
+        <img
+          src="/brand/stacked-dark.webp"
+          alt=""
+          className="block w-56 max-w-full object-contain sm:w-72 md:w-80 animate-[intro-person-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+          style={{ animationDelay: "200ms" }}
+        />
 
-        {/* Founders row (2 names), shown horizontally with smaller type.
-            Photos load when you add them at public/people/<id>.jpg and set
-            `photo` in contributors.ts. */}
+        {/* Founders row — names and roles only; portraits stay on /about, where
+            they are large enough to be portraits. */}
         <div className="flex items-center justify-center gap-8 md:gap-12">
           {firstLine.map((person, i) => (
             <div
               key={person.id}
               className="flex flex-col items-center gap-1.5"
-              style={{ animationDelay: `${1250 + i * 60}ms` }}
             >
-              <div className="relative size-20 sm:size-24">
-                {person.photo ? (
-                  <img
-                    src={person.photo}
-                    alt={person.name}
-                    className="w-full h-full object-cover rounded-full border border-ink-inverse/30 portrait-img"
-                  />
-                ) : (
-                  <Monogram name={person.name} size="lg" />
-                )}
-              </div>
               <span
-                className={cn(
-                  "type-caption text-center text-ink-inverse/70 uppercase tracking-[0.1em]",
-                  phase === "contributors" || phase === "exiting"
-                    ? "animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
-                    : "",
-                )}
+                className="text-center font-serif text-[0.95rem] font-bold uppercase leading-none tracking-[0.05em] text-ink-inverse sm:text-base animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
                 style={{ animationDelay: `${1250 + i * 60}ms` }}
               >
                 {person.name}
               </span>
               <span
-                className={cn(
-                  "type-caption text-center text-ink-inverse/45 normal-case tracking-[0.04em] max-w-[10rem]",
-                  phase === "contributors" || phase === "exiting"
-                    ? "animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
-                    : "",
-                )}
+                className="type-caption text-center text-ink-inverse/50 tracking-[0.04em] max-w-[10rem] animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
                 style={{ animationDelay: `${1310 + i * 60}ms` }}
               >
                 {person.role}
@@ -139,18 +120,49 @@ export function IntroGate({ children }: { children: ReactNode }) {
           ))}
         </div>
 
-        <div className="h-px w-full bg-band-weak/40 my-4 md:my-6" aria-hidden="true" />
+        {/* A short centred bronze rule — the same mark the monogram used to
+            draw, now as the seam between the credits and the epigraph. */}
+        <div className="h-0.5 w-16 bg-bronze my-1 md:my-3 sm:w-24" aria-hidden="true" />
 
-        {/* "Click anywhere to continue". */}
+        {/* The epigraph that names the standard the site holds institutions to. */}
+        <figure className="flex flex-col items-center gap-3 sm:gap-4">
+          <img
+            src="/images/madison/profile-silhouette.png"
+            alt=""
+            className="block h-24 w-auto object-contain sm:h-32 md:h-36 animate-[intro-person-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+            style={{ animationDelay: "1350ms" }}
+          />
+          {/* Brand yellow = `bronze`, not the pale `bronze-soft`.
+              Sized ≥24px on purpose: at 3.46:1 on ink it clears WCAG's
+              3:1 large-text threshold, though it would fail normal text. */}
+          <blockquote
+            className="max-w-[32ch] text-center font-serif text-2xl leading-snug text-bronze md:text-3xl animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+            style={{ animationDelay: "1450ms" }}
+          >
+            “If men were angels, no government would be necessary”.
+          </blockquote>
+          <figcaption
+            className="font-sans text-[0.7rem] font-bold uppercase tracking-[0.2em] text-bronze-soft/70 animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]"
+            style={{ animationDelay: "1550ms" }}
+          >
+            — James Madison, Federalist No. 51
+          </figcaption>
+        </figure>
+
+        {/* "Click anywhere to continue" — breathes so it reads as an
+            affordance. The outer <p> owns the entrance; the inner span owns
+            the pulse, so the two animations never fight over one element. */}
         <p
           className={cn(
             "absolute inset-x-0 bottom-8 text-center type-caption sm:bottom-10",
-            "px-4 text-ink-inverse/45",
+            "px-4 text-ink-inverse/70",
             "animate-[intro-label-in_500ms_cubic-bezier(0.16,1,0.3,1)_both]",
           )}
           style={{ animationDelay: "1900ms" }}
         >
-          Click anywhere to continue
+          <span className="animate-[intro-hint-breathe_2.6s_ease-in-out_infinite]">
+            Click anywhere to continue
+          </span>
         </p>
       </div>
     </>

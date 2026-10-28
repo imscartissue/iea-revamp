@@ -10,6 +10,11 @@ import { cn } from "@/lib/utils";
  * was worth keeping. Everything else about the old card was a shadow and a
  * grey border.
  *
+ * Net Cost follows the rankings table's display rule: "higher the net cost,
+ * the redder it reads". The number shown is the inverted cost score, so the
+ * band driving the WHOLE card — rule, number, bar and label — is taken from
+ * the flipped value. Every other card colours high-is-good.
+ *
  * `complaint` is the odd one out: it is not scored, so it renders text or a
  * plain note rather than a number and a bar. Rendering "0" there would be a
  * lie about the data.
@@ -27,11 +32,23 @@ export function MetricCard({
 }) {
   const unscored = score === null;
 
+  // `band(0)` when unscored only satisfies the type — that branch never
+  // renders it.
+  const b = band(
+    score === null ? 0 : category.key === "cost" ? 100 - score : score,
+  );
+
   return (
     <div
       className={cn(
         "flex flex-col gap-3 border-l-[3px] bg-surface py-5 pr-5 pl-5",
-        unscored ? "border-l-rule-soft" : `border-l-band-${band(score)}`,
+        unscored
+          ? "border-l-rule-soft"
+          : b === "strong"
+            ? "border-l-band-strong"
+            : b === "fair"
+              ? "border-l-band-fair"
+              : "border-l-band-weak",
       )}
     >
       <div className="flex items-baseline justify-between gap-4">
@@ -39,7 +56,14 @@ export function MetricCard({
         {unscored ? (
           <span className="type-caption shrink-0 text-ink-faint">not scored</span>
         ) : (
-          <span className={cn("type-numeric shrink-0", `text-band-${band(score)}`)}>
+          <span
+            className={cn(
+              "type-numeric shrink-0",
+              b === "strong" && "text-band-strong",
+              b === "fair" && "text-band-fair",
+              b === "weak" && "text-band-weak",
+            )}
+          >
             {score.toFixed(1)}
           </span>
         )}
@@ -51,10 +75,10 @@ export function MetricCard({
         </p>
       ) : (
         <>
-          <ScoreBar value={score} size="md" />
+          <ScoreBar value={score} tone={b} size="md" />
           <p className="type-caption measure-snug text-ink-muted">{category.blurb}</p>
           <p className="type-caption text-ink-faint">
-            {BAND_LABEL[band(score)]} · {formatWeight(category.key)} of the overall score
+            {BAND_LABEL[b]} · {formatWeight(category.key)} of the overall score
             {category.invert ? " · cost is inverted, so lower cost ranks higher" : ""}
           </p>
         </>

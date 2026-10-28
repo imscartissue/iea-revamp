@@ -8,11 +8,13 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
  * THE TIMELINE (gzipped — see docs/05-PAGES.md § Intro)
  *
  *   t=0      overlay fades in                              300ms
- *   t=200    "IEA" letters rise, tracking in, 60ms stagger  600ms
- *   t=700    bronze rule scales x from the centre           500ms
- *   t=1200   a single bronze dot fades in                   400ms
- *   t=1250   contributor monograms, 40ms stagger, cap 8     500ms
- *   t=2000   HOLD ENDS. Clip-path wipe up + strip rises     400ms
+ *   t=200    stacked logo mark fades in, rises 8px         500ms
+ *   t=1250   founders' names and roles, 60ms stagger       500ms
+ *   t=1350   Madison silhouette fades in                   500ms
+ *   t=1450   epigraph quote fades in                       500ms
+ *   t=1550   epigraph attribution fades in                 500ms
+ *   t=1900   "Click anywhere to continue" fades in         500ms
+ *   t=2000   HOLD ENDS. Clip-path wipe up                  400ms
  *   t=2080   the page underneath settles, 40ms stagger      420ms
  *   t=2400   overlay unmounts
  *
@@ -44,12 +46,6 @@ const SKIP_PARAM = "skipIntro";
 export const INTRO = {
   /** Overlay begins fading in. */
   start: 0,
-  /** Wordmark letters start. */
-  letters: 200,
-  /** The rule starts drawing. */
-  rule: 700,
-  /** The dot appears; the contributor strip follows shortly after. */
-  dot: 1200,
   /** Hold ends; the wipe begins. */
   hold: 2000,
   /** Exit animation ends; the overlay unmounts. */
