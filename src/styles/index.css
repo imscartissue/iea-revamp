@@ -71,6 +71,13 @@
    * and rule that sits on the dark masthead passes AA.
    */
   --gold: #c9a45c;
+
+  /* Claret — the deep wine red, carried over from the founding-era palette
+   * so `/about` can rule and label its "Notice to schools" callout in
+   * something other than bronze. 9.6:1 on the ivory canvas, so it is one of
+   * the few accents here that is safe as TEXT at label sizes.
+   */
+  --claret: #6b1f2a;
 }
 
 /* ==========================================================================
@@ -110,6 +117,7 @@
   --color-letter-wash: var(--letter-wash);
 
   --color-gold: var(--gold);
+  --color-claret: var(--claret);
 
   /* -- shadcn semantic contract -------------------------------------------
    * shadcn primitives are written against semantic names (bg-primary,
@@ -899,4 +907,167 @@ html.intro-active {
   filter: invert();
   pointer-events: none;
   background: url("/images/madison/woodcut.webp") 50% / cover no-repeat;
+}
+
+/* ==========================================================================
+   About page
+
+   The two treatments that belong to `/about` alone: the framed profile card
+   around each principal founder, and the full-bleed statement band that
+   closes the page. No other route uses these selectors.
+
+   The band's surface is a component recipe rather than palette values, for
+   the same reason as the red-flag hero above: it is one band's mixed tint,
+   not a brand colour, and it is only ever seen with ivory type on it.
+   ========================================================================== */
+
+/* Each principal founder gets a complete frame — portrait, name, role and
+   message button — over a desaturated archival photograph. The photograph is
+   a ghost (grayscale, 38%) and is veiled to paper at the bottom, so it reads
+   as the card's stock rather than as a second portrait. */
+.founder-profile-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  overflow: hidden;
+  padding: 2rem 1.5rem;
+  border: 2px solid var(--letter);
+  background: var(--surface);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.55),
+    0 18px 42px -34px rgb(47 93 124 / 0.62);
+}
+
+/* The inner rule, inset from the frame. */
+.founder-profile-card::before {
+  content: "";
+  position: absolute;
+  inset: 0.5rem;
+  z-index: 1;
+  border: 1.5px solid rgb(47 93 124 / 0.52);
+  box-shadow:
+    0 0 0 0.28rem rgb(47 93 124 / 0.22),
+    inset 0 0 0 1px rgb(255 255 255 / 0.5);
+  pointer-events: none;
+}
+
+.founder-profile-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(251 247 236 / 0.08) 0%,
+      rgb(251 247 236 / 0.34) 40%,
+      var(--surface) 88%
+    ),
+    var(--founder-backdrop) var(--founder-backdrop-position, center 42%) / cover no-repeat;
+  filter: grayscale(1);
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+/* Card content sits above both pseudo-layers. */
+.founder-profile-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.founder-profile-card--president {
+  --founder-backdrop: url("/images/founders/yogeshwor-view.webp");
+  --founder-backdrop-position: center 40%;
+  border-top: 4px solid var(--letter);
+}
+
+.founder-profile-card--liberte {
+  --founder-backdrop: url("/images/founders/eron-liberte.jpg");
+  --founder-backdrop-position: center 44%;
+  border-top: 4px solid var(--letter);
+}
+
+@media (max-width: 48rem) {
+  .founder-profile-card {
+    padding: 1.75rem 1rem;
+  }
+
+  .founder-profile-card::before {
+    inset: 0.42rem;
+  }
+}
+
+/* The closing statement: a framed band that runs edge to edge and keeps the
+   page's own content measure inside it.
+
+   It is rendered OUTSIDE the page Container (see AboutPage) and wraps its
+   own Container, so the bleed is structural — no `100vw` arithmetic, which
+   under a classic scrollbar would overhang the gutter by half the scrollbar
+   and drag a horizontal scrollbar onto the page. */
+.institutional-legal-position {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: 2.75rem;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgb(107 31 42 / 0.55), transparent 48%),
+    linear-gradient(125deg, var(--ink) 0%, #1a1420 58%, #32151e 100%);
+  border-block: 1px solid rgb(201 164 92 / 0.55);
+  color: var(--ink-inverse);
+}
+
+/* The hairline frame, inset from the band's edges. */
+.institutional-legal-position::before {
+  content: "";
+  position: absolute;
+  inset: 0.75rem;
+  z-index: -1;
+  border: 1px solid rgb(201 164 92 / 0.2);
+  pointer-events: none;
+}
+
+.legal-position-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* The § watermark, hung off the same right edge as the page's content.
+   Percentages resolve against the band, which already spans the viewport,
+   so this tracks the Container without needing a viewport unit. */
+.legal-position-mark {
+  position: absolute;
+  top: -3.5rem;
+  right: max(1.5rem, calc((100% - 1200px) / 2 + 1.5rem));
+  z-index: 0;
+  color: var(--gold);
+  font-family: var(--font-serif);
+  font-size: clamp(15rem, 28vw, 26rem);
+  line-height: 1;
+  opacity: 0.055;
+  pointer-events: none;
+  user-select: none;
+}
+
+.legal-position-copy {
+  max-width: 68ch;
+}
+
+@media (max-width: 48rem) {
+  .institutional-legal-position {
+    padding-block: 2rem;
+  }
+
+  .institutional-legal-position::before {
+    inset: 0.45rem;
+  }
+
+  .legal-position-mark {
+    top: -1rem;
+    right: 0.5rem;
+    font-size: 13rem;
+  }
 }
