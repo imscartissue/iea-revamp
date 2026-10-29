@@ -77,7 +77,7 @@ export function AboutPage() {
               <blockquote className="mt-10 max-w-[46rem] border-l-[3px] border-bronze bg-bronze-soft/30 py-6 pr-6 pl-6 md:pl-8">
                 <p className="type-body-lg text-ink">
                   Guided by the principle that power must be accompanied by
-                  accountability we strive to ensure that educational institutions
+                  accountability, we strive to ensure that educational institutions
                   remain answerable to the students they serve, while holding our
                   own work to the same standards of fairness, evidence, and
                   transparency.
